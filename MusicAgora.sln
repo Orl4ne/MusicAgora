@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Users.DAL", "Applicatopn La
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Users.DAL.Tests", "Applicatopn Layer\Users\Users.DAL.Tests\Users.DAL.Tests.csproj", "{50BD7827-053C-4BF3-8B00-7E0F34E1FE3A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicAgora.WebUx.MVC", "Presentation Layer\MusicAgora.WebUx.MVC\MusicAgora.WebUx.MVC.csproj", "{4E7DF038-FFD1-4614-BCA8-69E93D7BAB2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{50BD7827-053C-4BF3-8B00-7E0F34E1FE3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50BD7827-053C-4BF3-8B00-7E0F34E1FE3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50BD7827-053C-4BF3-8B00-7E0F34E1FE3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E7DF038-FFD1-4614-BCA8-69E93D7BAB2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E7DF038-FFD1-4614-BCA8-69E93D7BAB2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E7DF038-FFD1-4614-BCA8-69E93D7BAB2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E7DF038-FFD1-4614-BCA8-69E93D7BAB2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +105,7 @@ Global
 		{172A7590-948D-42BA-91AF-06FF4A5B193D} = {50C31D9B-A722-42F1-84CE-6909AB5F8CC5}
 		{6F856DF3-24F1-4012-A82B-03FCFF360522} = {50C31D9B-A722-42F1-84CE-6909AB5F8CC5}
 		{50BD7827-053C-4BF3-8B00-7E0F34E1FE3A} = {50C31D9B-A722-42F1-84CE-6909AB5F8CC5}
+		{4E7DF038-FFD1-4614-BCA8-69E93D7BAB2E} = {4C6F4449-5E67-4957-9167-7C9DCBB307AA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1DA7A1EF-792E-4EBD-9321-34055C57081D}
