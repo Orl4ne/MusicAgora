@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -10,6 +10,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\MusicAgora.Common\MusicAgora.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UseCases\Musician\" />
+    <Folder Include="UseCases\Chief\" />
+    <Folder Include="UseCases\Librarian\" />
+    <Folder Include="UseCases\Admin\" />
   </ItemGroup>
 
 </Project>

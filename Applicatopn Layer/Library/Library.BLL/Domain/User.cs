@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Library.BLL
+namespace Library.BLL.Domain
 {
     public class User : IdentityUser<int>
     {

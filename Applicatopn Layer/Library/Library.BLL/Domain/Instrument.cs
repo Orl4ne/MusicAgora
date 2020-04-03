@@ -1,4 +1,4 @@
-﻿namespace Library.BLL
+﻿namespace Library.BLL.Domain
 {
     public class Instrument
     {
