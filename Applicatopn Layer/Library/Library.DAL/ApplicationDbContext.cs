@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace MusicAgora.WebUx.MVC.Data
+namespace Library.DAL
 {
     public class ApplicationDbContext : IdentityDbContext
     {
