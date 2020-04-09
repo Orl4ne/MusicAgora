@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Library.BLL.Domain
+namespace Library.DAL.Auth
 {
     public class AccessRight : IdentityRole<int>
     {

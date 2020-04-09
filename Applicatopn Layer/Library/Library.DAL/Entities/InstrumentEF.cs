@@ -1,6 +1,6 @@
-﻿namespace Library.BLL.Domain
+﻿namespace Library.DAL.Entities
 {
-    public class Category
+    public class InstrumentEF
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Library.BLL.Domain;
+using Library.DAL.Auth;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library.DAL
 {
-    public class ApplicationDbContext : IdentityDbContext<User,AccessRight,int> 
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser,AccessRight,int> 
     {
         public ApplicationDbContext()
         {
