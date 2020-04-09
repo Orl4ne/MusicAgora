@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Library.DAL
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser,AccessRight,int> 
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, AccessRight, int> 
     {
         public ApplicationDbContext()
         {
@@ -33,6 +33,9 @@ namespace Library.DAL
         {
             if (modelBuilder is null)
                 throw new ArgumentNullException(nameof(modelBuilder));
+
+            base.OnModelCreating(modelBuilder);
+
         }
        
         public DbSet<CategoryEF> Categories { get; set; }

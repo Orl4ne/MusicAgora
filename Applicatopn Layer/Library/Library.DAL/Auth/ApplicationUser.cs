@@ -9,6 +9,8 @@ namespace Library.DAL.Auth
 {
     public class ApplicationUser : IdentityUser<int>
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         [Required]
         public AccessRight AccessRight { get; set; }
         public List<InstrumentEF> Instruments { get; set; }
