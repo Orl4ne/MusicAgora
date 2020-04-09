@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Library.DAL.Auth;
+using Library.DAL.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,8 +34,10 @@ namespace Library.DAL
             if (modelBuilder is null)
                 throw new ArgumentNullException(nameof(modelBuilder));
         }
-        //entities
-        //public DbSet<Student> Students { get; set; }
-        //public DbSet<Course> Courses { get; set; }
+       
+        public DbSet<CategoryEF> Categories { get; set; }
+        public DbSet<InstrumentEF> Instruments { get; set; }
+        public DbSet<SheetEF> Sheets { get; set; }
+        public DbSet<SheetPartEF> SheetParts { get; set; }
     }
 }
