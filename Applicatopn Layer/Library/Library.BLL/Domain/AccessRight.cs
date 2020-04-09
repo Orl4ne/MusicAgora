@@ -7,7 +7,6 @@ namespace Library.BLL.Domain
 {
     public class AccessRight : IdentityRole<int>
     {
-        public string roleName { get; set; }
     }
 }
 
