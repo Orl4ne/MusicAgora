@@ -8,7 +8,7 @@ namespace Library.DAL.Repositories
 {
     public class InstrumentRepository : IInstrumentRepository
     {
-        public InstrumentTO Add(InstrumentTO Entity)
+        public InstrumentTO Add(InstrumentTO entity)
         {
             throw new NotImplementedException();
         }
@@ -33,7 +33,7 @@ namespace Library.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public InstrumentTO Update(InstrumentTO Entity)
+        public InstrumentTO Update(InstrumentTO entity)
         {
             throw new NotImplementedException();
         }

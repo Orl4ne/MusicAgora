@@ -8,7 +8,7 @@ namespace Library.DAL.Repositories
 {
     public class SheetPartRepository : ISheetPartRepository
     {
-        public SheetPartTO Add(SheetPartTO Entity)
+        public SheetPartTO Add(SheetPartTO entity)
         {
             throw new NotImplementedException();
         }
@@ -33,7 +33,7 @@ namespace Library.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public SheetPartTO Update(SheetPartTO Entity)
+        public SheetPartTO Update(SheetPartTO entity)
         {
             throw new NotImplementedException();
         }

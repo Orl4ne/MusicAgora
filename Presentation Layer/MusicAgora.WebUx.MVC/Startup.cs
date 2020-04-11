@@ -53,8 +53,7 @@ namespace MusicAgora.WebUx.MVC
                 options.Password.RequireUppercase = true;
                 options.User.RequireUniqueEmail = true;
                 options.SignIn.RequireConfirmedEmail = true;
-            })//.AddDefaultUI(UIFramework.Bootstrap4)  J'ai commenté car ça me met une erreur et je ne sais pas de quoi il s'agit- A check plus tard
-                .AddDefaultTokenProviders()
+            })
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
               .AddDefaultTokenProviders();

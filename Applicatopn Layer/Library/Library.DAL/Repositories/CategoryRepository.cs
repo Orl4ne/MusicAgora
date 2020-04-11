@@ -8,8 +8,18 @@ namespace Library.DAL.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        public CategoryTO Add(CategoryTO Entity)
+        private ApplicationDbContext libraryContext;
+
+        public CategoryRepository(ApplicationDbContext libraryContext)
         {
+            this.libraryContext = libraryContext;
+        }
+        public CategoryTO Add(CategoryTO entity)
+        {
+            if (entity is null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
             throw new NotImplementedException();
         }
 
@@ -25,6 +35,10 @@ namespace Library.DAL.Repositories
 
         public bool Remove(CategoryTO entity)
         {
+            if (entity is null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
             throw new NotImplementedException();
         }
 
@@ -33,7 +47,7 @@ namespace Library.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public CategoryTO Update(CategoryTO Entity)
+        public CategoryTO Update(CategoryTO entity)
         {
             throw new NotImplementedException();
         }

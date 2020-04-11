@@ -11,7 +11,7 @@ namespace MusicAgora.Common.AccessHelpers
         bool Remove(TIdType Id);
         IEnumerable<TType> GetAll();
         TType GetById(TIdType Id);
-        TType Add(TType Entity);
-        TType Update(TType Entity);
+        TType Add(TType entity);
+        TType Update(TType entity);
     }
 }
