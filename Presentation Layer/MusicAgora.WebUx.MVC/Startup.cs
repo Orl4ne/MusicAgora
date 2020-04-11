@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Library.DAL;
 using Microsoft.AspNetCore.Http;
 using Library.DAL.Auth;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace MusicAgora.WebUx.MVC
 {
@@ -36,22 +37,26 @@ namespace MusicAgora.WebUx.MVC
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
+
             //Stuf added from KarParts project
-            services.AddIdentity<ApplicationUser, AccessRight>(options => {
+            services.AddIdentity<ApplicationUser, AccessRight>(options =>
+            {
                 options.Password.RequiredLength = 8;
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireUppercase = true;
                 options.User.RequireUniqueEmail = true;
                 options.SignIn.RequireConfirmedEmail = true;
             })//.AddDefaultUI(UIFramework.Bootstrap4)  J'ai commenté car ça me met une erreur et je ne sais pas de quoi il s'agit- A check plus tard
-              .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
               .AddDefaultTokenProviders();
         }
 
