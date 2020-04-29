@@ -1,7 +1,10 @@
-﻿using MusicAgora.Common.Library.Interfaces.IRepositories;
+﻿using Library.DAL.Extensions;
+using Microsoft.EntityFrameworkCore;
+using MusicAgora.Common.Library.Interfaces.IRepositories;
 using MusicAgora.Common.Library.TransferObjects;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Library.DAL.Repositories
@@ -16,35 +19,45 @@ namespace Library.DAL.Repositories
         }
         public CategoryTO Add(CategoryTO entity)
         {
-            if (entity is null)
+            if (entity.Id!=0)
             {
-                throw new ArgumentNullException(nameof(entity));
+                return entity;
             }
-            throw new NotImplementedException();
+            return libraryContext.Categories.Add(entity.ToEF()).Entity.ToTransferObject();
         }
 
         public IEnumerable<CategoryTO> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+            => libraryContext.Categories
+                .AsNoTracking()
+                .Select(x => x.ToTransferObject())
+                .ToList();
 
         public CategoryTO GetById(int Id)
-        {
-            throw new NotImplementedException();
-        }
+            => libraryContext.Categories
+                .AsNoTracking()
+                .FirstOrDefault(x => x.Id == Id)
+                .ToTransferObject();
 
         public bool Remove(CategoryTO entity)
-        {
-            if (entity is null)
-            {
-                throw new ArgumentNullException(nameof(entity));
-            }
-            throw new NotImplementedException();
-        }
+            => Remove(entity.Id);
 
         public bool Remove(int Id)
         {
-            throw new NotImplementedException();
+            var category = libraryContext.Categories.FirstOrDefault(x => x.Id == Id);
+
+            if (category is null)
+            {
+                throw new KeyNotFoundException();
+            }
+            try
+            {
+                libraryContext.Categories.Remove(category);
+                return true;
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
         }
 
         public CategoryTO Update(CategoryTO entity)
