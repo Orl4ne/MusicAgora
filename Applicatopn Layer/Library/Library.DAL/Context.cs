@@ -52,5 +52,6 @@ namespace Library.DAL
         public DbSet<InstrumentEF> Instruments { get; set; }
         public DbSet<SheetEF> Sheets { get; set; }
         public DbSet<SheetPartEF> SheetParts { get; set; }
+        public DbSet<UserInstrumentEF> UserInstruments { get; set; }
     }
 }
