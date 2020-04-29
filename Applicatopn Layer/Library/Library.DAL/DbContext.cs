@@ -8,12 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Library.DAL
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, AccessRight, int> 
+    public class DbContext : IdentityDbContext<User, AccessRight, int> 
     {
-        public ApplicationDbContext()
+        public DbContext()
         {
         }
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public DbContext(DbContextOptions<DbContext> options)
             : base(options)
         {
         }
@@ -35,7 +35,17 @@ namespace Library.DAL
                 throw new ArgumentNullException(nameof(modelBuilder));
 
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<UserInstrumentEF>().HasKey(sc => new { sc.UserID, sc.InstrumentId });
 
+            modelBuilder.Entity<UserInstrumentEF>()
+                .HasOne<User>(ui => ui.User)
+                .WithMany(u => u.UserInstrument)
+                .HasForeignKey(ui => ui.UserID);
+
+            modelBuilder.Entity<UserInstrumentEF>()
+                .HasOne<InstrumentEF>(ui => ui.Instrument)
+                .WithMany(i => i.UserInstrument)
+                .HasForeignKey(ui => ui.InstrumentId);
         }
        
         public DbSet<CategoryEF> Categories { get; set; }

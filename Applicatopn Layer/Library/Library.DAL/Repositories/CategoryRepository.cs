@@ -8,9 +8,9 @@ namespace Library.DAL.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private ApplicationDbContext libraryContext;
+        private DbContext libraryContext;
 
-        public CategoryRepository(ApplicationDbContext libraryContext)
+        public CategoryRepository(DbContext libraryContext)
         {
             this.libraryContext = libraryContext;
         }

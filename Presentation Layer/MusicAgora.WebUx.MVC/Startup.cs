@@ -38,7 +38,7 @@ namespace MusicAgora.WebUx.MVC
             });
 
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<DbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
 
@@ -46,7 +46,7 @@ namespace MusicAgora.WebUx.MVC
             services.AddRazorPages();
 
             //Stuf added from KarParts project
-            services.AddIdentity<ApplicationUser, AccessRight>(options =>
+            services.AddIdentity<User, AccessRight>(options =>
             {
                 options.Password.RequiredLength = 8;
                 options.Password.RequireNonAlphanumeric = true;
@@ -55,7 +55,7 @@ namespace MusicAgora.WebUx.MVC
                 options.SignIn.RequireConfirmedEmail = true;
             })
                 .AddDefaultUI()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<DbContext>()
               .AddDefaultTokenProviders();
         }
 
