@@ -49,7 +49,7 @@ namespace Library.DAL.Tests.RepositoriesTests.CategoryRepositoryTests
         }
 
         [TestMethod]
-        public void AddCategory_AddExistingCategory_ReturnEntity()
+        public void AddCategory_AddExistingCategory_DoNotInsertTwiceInDb()
         {//Arrange
             var options = new DbContextOptionsBuilder<LibraryContext>()
                  .UseInMemoryDatabase(databaseName: MethodBase.GetCurrentMethod().Name)
