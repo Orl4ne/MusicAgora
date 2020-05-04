@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Library.DAL.Migrations
 {
-    [DbContext(typeof(Context))]
+    [DbContext(typeof(LibraryContext))]
     [Migration("20200429134028_Initial")]
     partial class Initial
     {

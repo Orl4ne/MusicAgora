@@ -11,14 +11,18 @@ namespace Library.DAL.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private Context libraryContext;
+        private LibraryContext libraryContext;
 
-        public CategoryRepository(Context libraryContext)
+        public CategoryRepository(LibraryContext libraryContext)
         {
             this.libraryContext = libraryContext;
         }
         public CategoryTO Add(CategoryTO entity)
         {
+            if(entity is null)
+            {
+                throw new ArgumentNullException();
+            }
             if (entity.Id!=0)
             {
                 return entity;

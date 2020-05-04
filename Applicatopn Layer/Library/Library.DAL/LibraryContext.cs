@@ -8,12 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Library.DAL
 {
-    public class Context : IdentityDbContext<User, AccessRight, int> 
+    public class LibraryContext : IdentityDbContext<User, AccessRight, int> 
     {
-        public Context()
+        public LibraryContext()
         {
         }
-        public Context(DbContextOptions<Context> options)
+        public LibraryContext(DbContextOptions<LibraryContext> options)
             : base(options)
         {
         }
