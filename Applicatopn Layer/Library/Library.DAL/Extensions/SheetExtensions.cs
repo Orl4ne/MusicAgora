@@ -18,7 +18,6 @@ namespace Library.DAL.Extensions
             {
                 Id = Sheet.Id,
                 Name = Sheet.Name,
-                SheetParts = Sheet.SheetParts.Select(x=> x.ToTransferObject()).ToList(),
                 Arranger = Sheet.Arranger,
                 Category = Sheet.Category.ToTransferObject(),
                 Composer = Sheet.Composer,
@@ -37,7 +36,6 @@ namespace Library.DAL.Extensions
             {
                 Id = Sheet.Id,
                 Name = Sheet.Name,
-                SheetParts = Sheet.SheetParts.Select(x => x.ToEF()).ToList(),
                 Arranger = Sheet.Arranger,
                 Category = Sheet.Category.ToEF(),
                 Composer = Sheet.Composer,

@@ -8,7 +8,6 @@ namespace MusicAgora.Common.Library.TransferObjects
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<SheetPartTO> SheetParts { get; set; }
         public bool IsCurrent { get; set; }
         public string Composer { get; set; }
         public string Arranger { get; set; }

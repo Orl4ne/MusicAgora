@@ -10,7 +10,6 @@ namespace Library.DAL.Entities
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public List<SheetPartEF> SheetParts { get; set; }
         public bool IsCurrent { get; set; }
         public string Composer { get; set; }
         public string Arranger { get; set; }
