@@ -87,7 +87,6 @@ namespace Library.DAL.Repositories
             }
             
             return editedEntity.ToTransferObject();
-
         }
     }
 }
