@@ -15,12 +15,6 @@ namespace Library.DAL.Tests.RepositoriesTests.CategoryRepositoryTests
     public class RemoveCategoryTests
     {
         [TestMethod]
-        public void RemoveCategoryByTransferObject_ProvidingNonExistingCategory_ThrowException()
-        {
-
-        }
-
-        [TestMethod]
         public void RemoveCategoryByTransferObject_ProvidingNull_ThrowException()
         {
             //Arrange
