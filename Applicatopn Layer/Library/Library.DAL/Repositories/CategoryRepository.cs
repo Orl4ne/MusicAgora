@@ -1,4 +1,5 @@
-﻿using Library.DAL.Extensions;
+﻿using Library.DAL.Entities;
+using Library.DAL.Extensions;
 using Microsoft.EntityFrameworkCore;
 using MusicAgora.Common.Library.Interfaces.IRepositories;
 using MusicAgora.Common.Library.TransferObjects;
@@ -66,7 +67,27 @@ namespace Library.DAL.Repositories
 
         public CategoryTO Update(CategoryTO entity)
         {
-            throw new NotImplementedException();
+            if (entity is null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+            if (entity.Id <= 0)
+            {
+                throw new ArgumentException("Category To Update Invalid Id");
+            }
+            if (!libraryContext.Categories.Any(x => x.Id == entity.Id))
+            {
+                throw new KeyNotFoundException($"Update(CategoryTO) Can't find category to update.");
+            }
+            
+            var editedEntity = libraryContext.Categories.FirstOrDefault(e => e.Id == entity.Id);
+            if (editedEntity != default)
+            {
+                editedEntity = entity.ToEF();
+            }
+            
+            return editedEntity.ToTransferObject();
+
         }
     }
 }
