@@ -68,7 +68,6 @@ namespace Library.DAL.Tests.RepositoriesTests.CategoryRepositoryTests
             Assert.IsNotNull(result);
             Assert.AreEqual(categoryRepository.GetAll().Count(), 1);
             Assert.AreEqual(result.Name, "Musique de films");
-
         }
     }
 }

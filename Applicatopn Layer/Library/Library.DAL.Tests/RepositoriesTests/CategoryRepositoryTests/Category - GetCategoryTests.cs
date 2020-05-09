@@ -77,14 +77,6 @@ namespace Library.DAL.Tests.RepositoriesTests.CategoryRepositoryTests
             using var context = new LibraryContext(options);
             ICategoryRepository categoryRepository = new CategoryRepository(context);
 
-            var category = new CategoryTO { Name = "Musique de films" };
-            var category2 = new CategoryTO { Name = "Musique Classique" };
-            var category3 = new CategoryTO { Name = "Musique Contemporaine" };
-            var AddedCategory = categoryRepository.Add(category);
-            var AddedCategory2 = categoryRepository.Add(category2);
-            var AddedCategory3 = categoryRepository.Add(category3);
-            context.SaveChanges();
-
             //Act & Assert
             Assert.ThrowsException<ArgumentNullException>(() => categoryRepository.GetById(14));
         }
