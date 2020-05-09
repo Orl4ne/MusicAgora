@@ -35,6 +35,7 @@ namespace Library.DAL.Repositories
         public IEnumerable<SheetTO> GetAll()
             => libraryContext.Sheets
                 .AsNoTracking()
+                .Include(c =>c.Category)
                 .Select(x => x.ToTransferObject())
                 .ToList();
 
