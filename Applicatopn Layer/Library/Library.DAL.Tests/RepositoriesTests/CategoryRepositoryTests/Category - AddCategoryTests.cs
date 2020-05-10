@@ -37,7 +37,8 @@ namespace Library.DAL.Tests.RepositoriesTests.CategoryRepositoryTests
 
         [TestMethod]
         public void AddCategory_AddNull_ThrowException()
-        {   //Arrange
+        {   
+            //Arrange
             var options = new DbContextOptionsBuilder<LibraryContext>()
                  .UseInMemoryDatabase(databaseName: MethodBase.GetCurrentMethod().Name)
                  .Options;
@@ -50,7 +51,8 @@ namespace Library.DAL.Tests.RepositoriesTests.CategoryRepositoryTests
 
         [TestMethod]
         public void AddCategory_AddExistingCategory_DoNotInsertTwiceInDb()
-        {//Arrange
+        {
+            //Arrange
             var options = new DbContextOptionsBuilder<LibraryContext>()
                  .UseInMemoryDatabase(databaseName: MethodBase.GetCurrentMethod().Name)
                  .Options;
@@ -66,8 +68,7 @@ namespace Library.DAL.Tests.RepositoriesTests.CategoryRepositoryTests
 
             //Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(categoryRepository.GetAll().Count(), 1);
-            Assert.AreEqual(result.Name, "Musique de films");
+            Assert.AreEqual(1, categoryRepository.GetAll().Count());
         }
     }
 }

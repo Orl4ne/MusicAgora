@@ -81,13 +81,11 @@ namespace Library.DAL.Repositories
             {
                 throw new KeyNotFoundException($"Update(SheetTO) Can't find sheet to update.");
             }
-
             var editedEntity = libraryContext.Sheets.FirstOrDefault(e => e.Id == entity.Id);
             if (editedEntity != default)
             {
                 editedEntity = entity.ToEF();
             }
-
             return editedEntity.ToTransferObject();
         }
     }
