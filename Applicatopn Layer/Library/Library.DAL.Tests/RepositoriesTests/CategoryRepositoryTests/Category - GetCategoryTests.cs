@@ -15,7 +15,7 @@ namespace Library.DAL.Tests.RepositoriesTests.CategoryRepositoryTests
     public class GetCategoryTests
     {
         [TestMethod]
-        public void GetAll_Successful()
+        public void GetAllCategories_Successful()
         { 
             //Arrange
             var options = new DbContextOptionsBuilder<LibraryContext>()

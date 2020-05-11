@@ -15,7 +15,7 @@ namespace Library.DAL.Tests.RepositoriesTests.SheetRepositoryTests
     public class GetSheetTests
     {
         [TestMethod]
-        public void GetAll_Successful()
+        public void GetAllSheets_Successful()
         {
             //Arrange
             var options = new DbContextOptionsBuilder<LibraryContext>()
