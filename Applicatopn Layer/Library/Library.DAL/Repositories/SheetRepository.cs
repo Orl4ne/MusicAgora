@@ -42,6 +42,7 @@ namespace Library.DAL.Repositories
         public SheetTO GetById(int Id)
             => libraryContext.Sheets
                 .AsNoTracking()
+                //.Include(c => c.Category)
                 .FirstOrDefault(x => x.Id == Id)
                 .ToTransferObject();
 

@@ -19,7 +19,7 @@ namespace Library.DAL.Extensions
                 Id = Sheet.Id,
                 Name = Sheet.Name,
                 Arranger = Sheet.Arranger,
-                Category = Sheet.Category.ToTransferObject(),
+                //Category = Sheet.Category.ToTransferObject(),
                 Composer = Sheet.Composer,
                 IsCurrent = Sheet.IsCurrent,
                 IsGarde = Sheet.IsGarde,
