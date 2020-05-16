@@ -47,6 +47,7 @@ namespace Library.DAL.Tests.RepositoriesTests.SheetRepositoryTests
             Assert.AreEqual(2, sheetRepository.GetAll().Count());
             Assert.AreEqual("Old Mozart", test.Name);
         }
+
         [TestMethod]
         public void UpdateSheet_ProvidingNonExistingSheet_ThrowException()
         {
@@ -60,7 +61,6 @@ namespace Library.DAL.Tests.RepositoriesTests.SheetRepositoryTests
 
             //Act & Assert
             Assert.ThrowsException<ArgumentException>(() => sheetRepository.Update(sheet));
-
         }
     }
 }

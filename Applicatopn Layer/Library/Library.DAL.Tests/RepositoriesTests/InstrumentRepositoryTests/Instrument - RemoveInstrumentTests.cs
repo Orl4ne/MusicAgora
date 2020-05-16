@@ -6,7 +6,7 @@ using System.Text;
 namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
 {
     [TestClass]
-    public class AddInstrumentTests
+    public class RemoveInstrumentTests
     {
     }
 }
