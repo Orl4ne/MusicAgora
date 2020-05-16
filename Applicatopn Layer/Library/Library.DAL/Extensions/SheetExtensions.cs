@@ -9,7 +9,7 @@ namespace Library.DAL.Extensions
 {
     public static class SheetExtensions
     {
-        public static SheetTO ToTransferObject (this SheetEF Sheet)
+        public static SheetTO ToTransferObject(this SheetEF Sheet)
         {
             if (Sheet is null)
                 throw new ArgumentNullException(nameof(Sheet));
@@ -19,7 +19,7 @@ namespace Library.DAL.Extensions
                 Id = Sheet.Id,
                 Name = Sheet.Name,
                 Arranger = Sheet.Arranger,
-                //Category = Sheet.Category.ToTransferObject(),
+                Category = new CategoryTO { Name = Sheet.Category.Name, Id = Sheet.Category.Id },
                 Composer = Sheet.Composer,
                 IsCurrent = Sheet.IsCurrent,
                 IsGarde = Sheet.IsGarde,
@@ -27,7 +27,7 @@ namespace Library.DAL.Extensions
             };
         }
 
-        public static SheetEF ToEF (this SheetTO Sheet)
+        public static SheetEF ToEF(this SheetTO Sheet)
         {
             if (Sheet is null)
                 throw new ArgumentNullException(nameof(Sheet));
@@ -37,7 +37,7 @@ namespace Library.DAL.Extensions
                 Id = Sheet.Id,
                 Name = Sheet.Name,
                 Arranger = Sheet.Arranger,
-                Category = Sheet.Category.ToEF(),
+                Category = new CategoryEF { Name = Sheet.Category.Name, Id = Sheet.Category.Id },
                 Composer = Sheet.Composer,
                 IsCurrent = Sheet.IsCurrent,
                 IsGarde = Sheet.IsGarde,

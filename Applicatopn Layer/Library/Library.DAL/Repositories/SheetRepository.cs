@@ -42,7 +42,7 @@ namespace Library.DAL.Repositories
         public SheetTO GetById(int Id)
             => libraryContext.Sheets
                 .AsNoTracking()
-                //.Include(c => c.Category)
+                .Include(c => c.Category)
                 .FirstOrDefault(x => x.Id == Id)
                 .ToTransferObject();
 
@@ -82,7 +82,7 @@ namespace Library.DAL.Repositories
             {
                 throw new KeyNotFoundException($"Update(SheetTO) Can't find sheet to update.");
             }
-            var editedEntity = libraryContext.Sheets.FirstOrDefault(e => e.Id == entity.Id);
+            var editedEntity = libraryContext.Sheets.AsNoTracking().FirstOrDefault(e => e.Id == entity.Id);
             if (editedEntity != default)
             {
                 editedEntity = entity.ToEF();

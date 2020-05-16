@@ -56,10 +56,10 @@ namespace Library.DAL.Tests.RepositoriesTests.SheetRepositoryTests
             using var context = new LibraryContext(options);
             ISheetRepository sheetRepository = new SheetRepository(context);
 
-            //var category = new CategoryTO { Name = "Musique de films" };
+            var sheet = new SheetTO { Name = "BestOf", Arranger = "Jean-Luc", Category = new CategoryTO { Id = 1 }, Composer = "Morricone", IsCurrent = false, IsGarde = false, IsIndependance = true };
 
-            ////Act & Assert
-            //Assert.ThrowsException<ArgumentException>(() => categoryRepository.Update(category));
+            //Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => sheetRepository.Update(sheet));
 
         }
     }
