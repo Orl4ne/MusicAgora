@@ -93,7 +93,6 @@ namespace Library.DAL.Tests.RepositoriesTests.CategoryRepositoryTests
 
         }
 
-
         [TestMethod]
         public void RemoveCategoryById_Successful()
         {
