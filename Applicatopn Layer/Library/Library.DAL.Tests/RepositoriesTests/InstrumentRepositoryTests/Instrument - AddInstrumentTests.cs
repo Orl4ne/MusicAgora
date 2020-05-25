@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MusicAgora.Common.Library.Interfaces.IRepositories;
+using MusicAgora.Common.Library.TransferObjects;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -22,14 +24,14 @@ namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
             using var context = new LibraryContext(options);
             IInstrumentRepository instrumentRepository = new InstrumentRepository(context);
 
-            ////Act
-            //var category = new CategoryTO { Name = "Musique de films" };
-            //var result = categoryRepository.Add(category);
-            //context.SaveChanges();
+            //Act
+            var instru = new InstrumentTO {Name = "Saxophone" };
+            var result = instrumentRepository.Add(instru);
+            context.SaveChanges();
 
-            ////Assert
-            //Assert.IsNotNull(result);
-            //Assert.AreEqual(result.Name, "Musique de films");
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.Name, "Saxophone");
         }
 
         [TestMethod]
@@ -56,16 +58,14 @@ namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
             using var context = new LibraryContext(options);
             IInstrumentRepository instrumentRepository = new InstrumentRepository(context);
 
-            ////Act
-            //var category = new CategoryTO { Name = "Musique de films" };
-            //var result = categoryRepository.Add(category);
-            //var category2 = new CategoryTO { Name = "Musique de films", Id = 1 };
-            //var result2 = categoryRepository.Add(category2);
-            //context.SaveChanges();
+            //Act
+            var instru = new InstrumentTO { Name = "Saxophone" };
+            var result = instrumentRepository.Add(instru);
+            context.SaveChanges();
 
-            ////Assert
-            //Assert.IsNotNull(result);
-            //Assert.AreEqual(1, categoryRepository.GetAll().Count());
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, instrumentRepository.GetAll().Count());
         }
     }
 }

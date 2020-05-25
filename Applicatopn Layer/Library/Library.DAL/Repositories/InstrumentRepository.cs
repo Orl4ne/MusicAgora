@@ -74,7 +74,7 @@ namespace Library.DAL.Repositories
             {
                 throw new ArgumentException("Instrument To Update Invalid Id");
             }
-            if (!libraryContext.Categories.Any(x => x.Id == entity.Id))
+            if (!libraryContext.Instruments.Any(x => x.Id == entity.Id))
             {
                 throw new KeyNotFoundException($"Update(InstrumentTO) Can't find instrument to update.");
             }

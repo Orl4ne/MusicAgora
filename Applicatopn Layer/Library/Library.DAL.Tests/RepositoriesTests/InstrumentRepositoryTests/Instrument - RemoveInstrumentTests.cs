@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MusicAgora.Common.Library.Interfaces.IRepositories;
+using MusicAgora.Common.Library.TransferObjects;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -20,13 +22,13 @@ namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
                  .UseInMemoryDatabase(databaseName: MethodBase.GetCurrentMethod().Name)
                  .Options;
             using var context = new LibraryContext(options);
-            IInstrumentRepository instrument = new InstrumentRepository(context);
+            IInstrumentRepository instrumentRepository = new InstrumentRepository(context);
 
-            //var category = new CategoryTO { Name = "Musique de films" };
-            //context.SaveChanges();
+            var category = new InstrumentTO { Name = "Saxophone" };
+            context.SaveChanges();
 
-            ////Act & Assert
-            //Assert.ThrowsException<KeyNotFoundException>(() => categoryRepository.Remove(category));
+            //Act & Assert
+            Assert.ThrowsException<KeyNotFoundException>(() => instrumentRepository.Remove(category));
         }
 
         [TestMethod]
@@ -39,19 +41,19 @@ namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
             using var context = new LibraryContext(options);
             IInstrumentRepository instrumentRepository = new InstrumentRepository(context);
 
-            //var category = new CategoryTO { Name = "Musique de films" };
-            //var category2 = new CategoryTO { Name = "Musique Classique" };
-            //var category3 = new CategoryTO { Name = "Musique Contemporaine" };
-            //var AddedCategory = categoryRepository.Add(category);
-            //var AddedCategory2 = categoryRepository.Add(category2);
-            //var AddedCategory3 = categoryRepository.Add(category3);
-            //context.SaveChanges();
+            var instru = new InstrumentTO { Name = "Saxophone" };
+            var instru2 = new InstrumentTO { Name = "Trumpet" };
+            var instru3 = new InstrumentTO { Name = "Flute" };
+            var AddedInstru = instrumentRepository.Add(instru);
+            var AddedInstru2 = instrumentRepository.Add(instru2);
+            var AddedInstru3 = instrumentRepository.Add(instru3);
+            context.SaveChanges();
 
-            ////Act
-            //var result = categoryRepository.Remove(AddedCategory);
-            //context.SaveChanges();
-            ////Assert
-            //Assert.AreEqual(2, categoryRepository.GetAll().Count());
+            //Act
+            var result = instrumentRepository.Remove(AddedInstru);
+            context.SaveChanges();
+            //Assert
+            Assert.AreEqual(2, instrumentRepository.GetAll().Count());
         }
 
         [TestMethod]
@@ -64,11 +66,11 @@ namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
             using var context = new LibraryContext(options);
             IInstrumentRepository instrumentRepository = new InstrumentRepository(context);
 
-            //var category = new CategoryTO { Name = "Musique de films" };
-            //context.SaveChanges();
+            var instru = new InstrumentTO { Name = "Saxophone" };
+            context.SaveChanges();
 
-            ////Act & Assert
-            //Assert.ThrowsException<KeyNotFoundException>(() => categoryRepository.Remove(14));
+            //Act & Assert
+            Assert.ThrowsException<KeyNotFoundException>(() => instrumentRepository.Remove(14));
         }
 
         [TestMethod]
@@ -81,11 +83,11 @@ namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
             using var context = new LibraryContext(options);
             IInstrumentRepository instrumentRepository = new InstrumentRepository(context);
 
-            //var category = new CategoryTO { Name = "Musique de films" };
-            //context.SaveChanges();
+            var instru = new InstrumentTO { Name = "Saxophone" };
+            context.SaveChanges();
 
-            ////Act & Assert
-            //Assert.ThrowsException<NullReferenceException>(() => categoryRepository.Remove(null));
+            //Act & Assert
+            Assert.ThrowsException<NullReferenceException>(() => instrumentRepository.Remove(null));
         }
 
         [TestMethod]
@@ -98,19 +100,19 @@ namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
             using var context = new LibraryContext(options);
             IInstrumentRepository instrumentRepository = new InstrumentRepository(context);
 
-        //    var category = new CategoryTO { Name = "Musique de films" };
-        //    var category2 = new CategoryTO { Name = "Musique Classique" };
-        //    var category3 = new CategoryTO { Name = "Musique Contemporaine" };
-        //    var AddedCategory = categoryRepository.Add(category);
-        //    var AddedCategory2 = categoryRepository.Add(category2);
-        //    var AddedCategory3 = categoryRepository.Add(category3);
-        //    context.SaveChanges();
+            var instru = new InstrumentTO { Name = "Saxophone" };
+            var instru2 = new InstrumentTO { Name = "Trumpet" };
+            var instru3 = new InstrumentTO { Name = "Flute" };
+            var AddedInstru = instrumentRepository.Add(instru);
+            var AddedInstru2 = instrumentRepository.Add(instru2);
+            var AddedInstru3 = instrumentRepository.Add(instru3);
+            context.SaveChanges();
 
-        //    //Act
-        //    var result = categoryRepository.Remove(1);
-        //    context.SaveChanges();
-        //    //Assert
-        //    Assert.AreEqual(2, categoryRepository.GetAll().Count());
+            //Act
+            var result = instrumentRepository.Remove(1);
+            context.SaveChanges();
+            //Assert
+            Assert.AreEqual(2, instrumentRepository.GetAll().Count());
         }
     }
 }

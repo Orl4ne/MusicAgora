@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MusicAgora.Common.Library.Interfaces.IRepositories;
+using MusicAgora.Common.Library.TransferObjects;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -22,22 +24,22 @@ namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
             using var context = new LibraryContext(options);
             IInstrumentRepository instrumentRepository = new InstrumentRepository(context);
 
-            //var category = new CategoryTO { Name = "Musiq de flims" };
-            //var category2 = new CategoryTO { Name = "Musique Classique" };
-            //var category3 = new CategoryTO { Name = "Musique Contemporaine" };
-            //var AddedCategory = categoryRepository.Add(category);
-            //var AddedCategory2 = categoryRepository.Add(category2);
-            //var AddedCategory3 = categoryRepository.Add(category3);
-            //context.SaveChanges();
+            var instru = new InstrumentTO { Name = "Saxophone" };
+            var instru2 = new InstrumentTO { Name = "Trumpet" };
+            var instru3 = new InstrumentTO { Name = "Flute" };
+            var AddedInstru = instrumentRepository.Add(instru);
+            var AddedInstru2 = instrumentRepository.Add(instru2);
+            var AddedInstru3 = instrumentRepository.Add(instru3);
+            context.SaveChanges();
 
-            ////Act
-            //AddedCategory.Name = "Musique de films";
-            //var test = categoryRepository.Update(AddedCategory);
-            //context.SaveChanges();
+            //Act
+            AddedInstru.Name = "PouetPouet";
+            var test = instrumentRepository.Update(AddedInstru);
+            context.SaveChanges();
 
-            ////Assert
-            //Assert.AreEqual(3, categoryRepository.GetAll().Count());
-            //Assert.AreEqual("Musique de films", test.Name);
+            //Assert
+            Assert.AreEqual(3, instrumentRepository.GetAll().Count());
+            Assert.AreEqual("PouetPouet", test.Name);
         }
         
         [TestMethod]
@@ -49,10 +51,10 @@ namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
             using var context = new LibraryContext(options);
             IInstrumentRepository instrumentRepository = new InstrumentRepository(context);
 
-            //var category = new CategoryTO { Name = "Musique de films" };
+            var instru = new InstrumentTO { Name = "Saxophone" };
 
-            ////Act & Assert
-            //Assert.ThrowsException<ArgumentException>(() => categoryRepository.Update(category));
+            //Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => instrumentRepository.Update(instru));
         }
     }
 }
