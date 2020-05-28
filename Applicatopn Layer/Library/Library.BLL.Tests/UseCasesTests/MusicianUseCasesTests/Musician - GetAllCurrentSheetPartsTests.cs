@@ -80,17 +80,16 @@ namespace Library.BLL.Tests.UseCasesTests.MusicianUseCasesTests
             var addedSheetPart3 = context.Add(sheetPart3);
             var addedSheetPart4 = context.Add(sheetPart4);
             context.SaveChanges();
-
             //ACT
             var musician = new Musician();
             var result = musician.GetAllCurrentSheetParts(1);
             var result2 = musician.GetAllCurrentSheetParts(2);
             var result3 = musician.GetAllCurrentSheetParts(3);
 
-            //var expectedResult1 = new List<SheetPartTO>() { sheetPart.ToTransferObject(),sheetPart3.ToTransferObject() };
-            
+            var expectedResult1 = new List<SheetPartTO>() { sheetPart.ToTransferObject(), sheetPart3.ToTransferObject() };
+
             //ASSERT
-            //Assert.AreEqual(expectedResult1,result);
+            Assert.AreEqual(expectedResult1, result);
         }
     }
 }
