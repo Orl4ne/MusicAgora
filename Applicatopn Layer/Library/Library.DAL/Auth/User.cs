@@ -13,7 +13,7 @@ namespace Library.DAL.Auth
         public string LastName { get; set; }
         [Required]
         public AccessRight AccessRight { get; set; }
-        public List<UserInstrumentEF> UserInstrument { get; set; }
+        public List<UserInstrumentEF> UserInstruments { get; set; }
         public bool IsIndependance { get; set; }
         public bool IsGarde { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using Library.DAL.Repositories;
+﻿using Library.DAL.Entities;
+using Library.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MusicAgora.Common.Library.Interfaces.IRepositories;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
@@ -22,13 +24,11 @@ namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
                  .UseInMemoryDatabase(databaseName: MethodBase.GetCurrentMethod().Name)
                  .Options;
             using var context = new LibraryContext(options);
-            IInstrumentRepository instrumentRepository = new InstrumentRepository(context);
 
-            var category = new InstrumentTO { Name = "Saxophone" };
-            context.SaveChanges();
+            var instrument = new InstrumentEF { Name = "Saxophone" };
 
             //Act & Assert
-            Assert.ThrowsException<KeyNotFoundException>(() => instrumentRepository.Remove(category));
+            Assert.ThrowsException<ArgumentNullException>(() => context.Instruments.Remove(null));
         }
 
         [TestMethod]
@@ -39,21 +39,20 @@ namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
                  .UseInMemoryDatabase(databaseName: MethodBase.GetCurrentMethod().Name)
                  .Options;
             using var context = new LibraryContext(options);
-            IInstrumentRepository instrumentRepository = new InstrumentRepository(context);
 
-            var instru = new InstrumentTO { Name = "Saxophone" };
-            var instru2 = new InstrumentTO { Name = "Trumpet" };
-            var instru3 = new InstrumentTO { Name = "Flute" };
-            var AddedInstru = instrumentRepository.Add(instru);
-            var AddedInstru2 = instrumentRepository.Add(instru2);
-            var AddedInstru3 = instrumentRepository.Add(instru3);
+            var instru = new InstrumentEF { Name = "Saxophone" };
+            var instru2 = new InstrumentEF { Name = "Trumpet" };
+            var instru3 = new InstrumentEF { Name = "Flute" };
+            var AddedInstru = context.Instruments.Add(instru);
+            var AddedInstru2 = context.Instruments.Add(instru2);
+            var AddedInstru3 = context.Instruments.Add(instru3);
             context.SaveChanges();
 
             //Act
-            var result = instrumentRepository.Remove(AddedInstru);
+            var result = context.Instruments.Remove(instru);
             context.SaveChanges();
             //Assert
-            Assert.AreEqual(2, instrumentRepository.GetAll().Count());
+            Assert.AreEqual(2, context.Instruments.Count());
         }
 
         [TestMethod]
@@ -64,13 +63,14 @@ namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
                  .UseInMemoryDatabase(databaseName: MethodBase.GetCurrentMethod().Name)
                  .Options;
             using var context = new LibraryContext(options);
-            IInstrumentRepository instrumentRepository = new InstrumentRepository(context);
 
             var instru = new InstrumentTO { Name = "Saxophone" };
             context.SaveChanges();
 
+            var entity = context.Instruments.Find(14);
+
             //Act & Assert
-            Assert.ThrowsException<KeyNotFoundException>(() => instrumentRepository.Remove(14));
+            Assert.ThrowsException<ArgumentNullException>(() => context.Instruments.Remove(entity));
         }
 
         [TestMethod]
@@ -81,13 +81,12 @@ namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
                  .UseInMemoryDatabase(databaseName: MethodBase.GetCurrentMethod().Name)
                  .Options;
             using var context = new LibraryContext(options);
-            IInstrumentRepository instrumentRepository = new InstrumentRepository(context);
 
             var instru = new InstrumentTO { Name = "Saxophone" };
             context.SaveChanges();
 
             //Act & Assert
-            Assert.ThrowsException<NullReferenceException>(() => instrumentRepository.Remove(null));
+            Assert.ThrowsException<ArgumentNullException>(() => context.Instruments.Remove(null));
         }
 
         [TestMethod]
@@ -98,21 +97,22 @@ namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
                  .UseInMemoryDatabase(databaseName: MethodBase.GetCurrentMethod().Name)
                  .Options;
             using var context = new LibraryContext(options);
-            IInstrumentRepository instrumentRepository = new InstrumentRepository(context);
 
-            var instru = new InstrumentTO { Name = "Saxophone" };
-            var instru2 = new InstrumentTO { Name = "Trumpet" };
-            var instru3 = new InstrumentTO { Name = "Flute" };
-            var AddedInstru = instrumentRepository.Add(instru);
-            var AddedInstru2 = instrumentRepository.Add(instru2);
-            var AddedInstru3 = instrumentRepository.Add(instru3);
+            var instru = new InstrumentEF { Name = "Saxophone" };
+            var instru2 = new InstrumentEF { Name = "Trumpet" };
+            var instru3 = new InstrumentEF { Name = "Flute" };
+            var AddedInstru = context.Add(instru);
+            var AddedInstru2 = context.Add(instru2);
+            var AddedInstru3 = context.Add(instru3);
             context.SaveChanges();
+
+            var entity = context.Instruments.Find(1);
 
             //Act
-            var result = instrumentRepository.Remove(1);
+            var result = context.Instruments.Remove(entity);
             context.SaveChanges();
             //Assert
-            Assert.AreEqual(2, instrumentRepository.GetAll().Count());
+            Assert.AreEqual(2, context.Instruments.Count());
         }
     }
 }

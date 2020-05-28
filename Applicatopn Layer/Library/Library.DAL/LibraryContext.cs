@@ -39,12 +39,12 @@ namespace Library.DAL
 
             modelBuilder.Entity<UserInstrumentEF>()
                 .HasOne<User>(ui => ui.User)
-                .WithMany(u => u.UserInstrument)
+                .WithMany(u => u.UserInstruments)
                 .HasForeignKey(ui => ui.UserID);
 
             modelBuilder.Entity<UserInstrumentEF>()
                 .HasOne<InstrumentEF>(ui => ui.Instrument)
-                .WithMany(i => i.UserInstrument)
+                .WithMany(i => i.UserInstruments)
                 .HasForeignKey(ui => ui.InstrumentId);
         }
        

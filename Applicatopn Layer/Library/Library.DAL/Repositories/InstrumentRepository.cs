@@ -39,6 +39,7 @@ namespace Library.DAL.Repositories
         public InstrumentTO GetById(int Id)
             => libraryContext.Instruments
                 .AsNoTracking()
+                .Include(u => u.UserInstruments)
                 .FirstOrDefault(x => x.Id == Id)
                 .ToTransferObject();
 
@@ -47,7 +48,8 @@ namespace Library.DAL.Repositories
 
         public bool Remove(int Id)
         {
-            var instrument = libraryContext.Instruments.FirstOrDefault(x => x.Id == Id);
+            var instrument = libraryContext.Instruments
+                             .FirstOrDefault(x => x.Id == Id);
 
             if (instrument is null)
             {
@@ -55,8 +57,8 @@ namespace Library.DAL.Repositories
             }
             try
             {
-                libraryContext.Instruments.Remove(instrument);
-                return true;
+               libraryContext.Instruments.Remove(instrument);
+               return true;
             }
             catch (ArgumentException)
             {
