@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Library.BLL.Services.Admin
+namespace Library.BLL.Services.LibrarianUC
 {
-    public partial class Admin
+    public partial class Librarian
     {
     }
 }
