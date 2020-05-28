@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MusicAgora.Common.Library.TransferObjects;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -65,7 +66,7 @@ namespace Library.BLL.Tests.UseCasesTests.MusicianUseCasesTests
 
             //Creating and Adding Sheet
             var sheet = new SheetEF { IsCurrent = true, Name = "Medley trop bien" };
-            var sheet2 = new SheetEF { IsCurrent = false, Name = "Morceau de Grand-mère" };
+            var sheet2 = new SheetEF { IsCurrent = true, Name = "Morceau de Grand-mère" };
             var addedSheet = context.Add(sheet);
             var addedSheet2 = context.Add(sheet2);
             context.SaveChanges();
@@ -83,13 +84,13 @@ namespace Library.BLL.Tests.UseCasesTests.MusicianUseCasesTests
             //ACT
             var musician = new Musician(context);
             var result = musician.GetAllCurrentSheetParts(1);
-            //var result2 = musician.GetAllCurrentSheetParts(2);
-            //var result3 = musician.GetAllCurrentSheetParts(3);
-
-            var expectedResult1 = new List<SheetPartTO>() { sheetPart.ToTransferObject(), sheetPart3.ToTransferObject() };
+            var result2 = musician.GetAllCurrentSheetParts(2);
+            var result3 = musician.GetAllCurrentSheetParts(3);
 
             //ASSERT
-            Assert.AreEqual(expectedResult1, result);
+            Assert.AreEqual(2, result.Count());
+            Assert.AreEqual(2, result2.Count());
+            Assert.AreEqual(4, result3.Count());
         }
     }
 }
