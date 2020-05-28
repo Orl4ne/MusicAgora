@@ -3,8 +3,6 @@ using Library.DAL.Entities;
 using Library.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MusicAgora.Common.Library.Interfaces.IRepositories;
-using MusicAgora.Common.Library.TransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;

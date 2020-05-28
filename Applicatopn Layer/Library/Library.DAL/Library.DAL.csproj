@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Library.BLL\Library.BLL.csproj" />
+    <ProjectReference Include="..\..\..\Common\MusicAgora.Common\MusicAgora.Common.csproj" />
   </ItemGroup>
 
 </Project>

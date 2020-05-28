@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\MusicAgora.Common\MusicAgora.Common.csproj" />
+    <ProjectReference Include="..\Library.DAL\Library.DAL.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,20 +3,18 @@ using System;
 using Library.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Library.DAL.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20200429134028_Initial")]
-    partial class Initial
+    partial class LibraryContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3");
+                .HasAnnotation("ProductVersion", "3.1.4");
 
             modelBuilder.Entity("Library.DAL.Auth.AccessRight", b =>
                 {
@@ -354,7 +352,7 @@ namespace Library.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("Library.DAL.Entities.SheetEF", "Sheet")
-                        .WithMany("SheetParts")
+                        .WithMany()
                         .HasForeignKey("SheetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -363,13 +361,13 @@ namespace Library.DAL.Migrations
             modelBuilder.Entity("Library.DAL.Entities.UserInstrumentEF", b =>
                 {
                     b.HasOne("Library.DAL.Entities.InstrumentEF", "Instrument")
-                        .WithMany("UserInstrument")
+                        .WithMany("UserInstruments")
                         .HasForeignKey("InstrumentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Library.DAL.Auth.User", "User")
-                        .WithMany("UserInstrument")
+                        .WithMany("UserInstruments")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

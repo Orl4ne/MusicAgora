@@ -10,6 +10,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.BLL", "Applicatopn Layer\Library\Library.BLL\Library.BLL.csproj", "{320A0083-8375-446D-9D28-9898F20B8C12}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.DAL", "Applicatopn Layer\Library\Library.DAL\Library.DAL.csproj", "{736F2248-D9DC-4047-868D-6BBA35F4E2B2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EA68C65-110A-42D4-B1FB-C4B011565F5D} = {3EA68C65-110A-42D4-B1FB-C4B011565F5D}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.BLL.Tests", "Applicatopn Layer\Library\Library.BLL.Tests\Library.BLL.Tests.csproj", "{D1325550-D64A-48CE-B65D-1EE6A7257DE8}"
 EndProject
