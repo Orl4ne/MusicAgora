@@ -81,10 +81,10 @@ namespace Library.BLL.Tests.UseCasesTests.MusicianUseCasesTests
             var addedSheetPart4 = context.Add(sheetPart4);
             context.SaveChanges();
             //ACT
-            var musician = new Musician();
+            var musician = new Musician(context);
             var result = musician.GetAllCurrentSheetParts(1);
-            var result2 = musician.GetAllCurrentSheetParts(2);
-            var result3 = musician.GetAllCurrentSheetParts(3);
+            //var result2 = musician.GetAllCurrentSheetParts(2);
+            //var result3 = musician.GetAllCurrentSheetParts(3);
 
             var expectedResult1 = new List<SheetPartTO>() { sheetPart.ToTransferObject(), sheetPart3.ToTransferObject() };
 

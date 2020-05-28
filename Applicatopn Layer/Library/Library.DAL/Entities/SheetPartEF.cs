@@ -5,9 +5,9 @@ namespace Library.DAL.Entities
     public class SheetPartEF
     {
         public int Id { get; set; }
-        [Required]
+        //[Required]
         public InstrumentEF Instrument { get; set; }
-        [Required]
+        //[Required]
         public string Path { get; set; }
         [Required]
         public SheetEF Sheet { get; set; }

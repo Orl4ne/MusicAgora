@@ -9,5 +9,9 @@ namespace Library.BLL.Services.MusicianUC
     public partial class Musician : IMusicianUC
     {
         private LibraryContext context;
+        public Musician (LibraryContext libraryContext)
+        {
+            context = libraryContext;
+        }
     }
 }
