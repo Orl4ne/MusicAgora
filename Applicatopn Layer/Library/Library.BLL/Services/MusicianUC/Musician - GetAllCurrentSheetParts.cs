@@ -1,7 +1,6 @@
 ﻿using Library.DAL;
 using Library.DAL.Entities;
 using Library.DAL.Extensions;
-using Microsoft.AspNet.Identity;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
 using MusicAgora.Common.Library.Interfaces.IRepositories;
