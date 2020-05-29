@@ -48,7 +48,7 @@ namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
         }
         
         [TestMethod]
-        public void UpdateInstrument_ProvidingNonExistingCategory_ThrowException()
+        public void UpdateInstrument_ProvidingNonExistingInstrument_ThrowException()
         {
             var options = new DbContextOptionsBuilder<LibraryContext>()
                 .UseInMemoryDatabase(databaseName: MethodBase.GetCurrentMethod().Name)
