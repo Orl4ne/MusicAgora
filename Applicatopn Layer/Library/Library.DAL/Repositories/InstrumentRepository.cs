@@ -12,11 +12,10 @@ namespace Library.DAL.Repositories
     public class InstrumentRepository : IInstrumentRepository
     {
         private LibraryContext libraryContext;
-        // For Instruments, I am not using Repository Pattern anymore
-        //public InstrumentRepository(LibraryContext libraryContext)
-        //{
-        //    this.libraryContext = libraryContext;
-        //}
+        public InstrumentRepository(LibraryContext libraryContext)
+        {
+            this.libraryContext = libraryContext;
+        }
         public InstrumentTO Add(InstrumentTO entity)
         {
             if (entity is null)
@@ -57,8 +56,8 @@ namespace Library.DAL.Repositories
             }
             try
             {
-               libraryContext.Instruments.Remove(instrument);
-               return true;
+                libraryContext.Instruments.Remove(instrument);
+                return true;
             }
             catch (ArgumentException)
             {
