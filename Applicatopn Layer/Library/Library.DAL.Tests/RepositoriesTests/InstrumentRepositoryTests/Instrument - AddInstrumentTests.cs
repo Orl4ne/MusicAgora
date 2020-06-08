@@ -1,5 +1,4 @@
-﻿using Library.DAL.Auth;
-using Library.DAL.Entities;
+﻿using Library.DAL.Entities;
 using Library.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -30,7 +29,7 @@ namespace Library.DAL.Tests.RepositoriesTests.InstrumentRepositoryTests
             var result = context.Add(instru);
             context.SaveChanges();
 
-            var user = new User { FirstName = "Jean-Claude", IsIndependance = true, 
+            var user = new LibraryUserEF { FirstName = "Jean-Claude", IsIndependance = true, 
                 UserInstruments=new List<UserInstrumentEF>() { 
                     new UserInstrumentEF {
                     InstrumentId = 1} } };

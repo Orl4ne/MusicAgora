@@ -1,6 +1,5 @@
 ﻿using Library.BLL.Services.MusicianUC;
 using Library.DAL;
-using Library.DAL.Auth;
 using Library.DAL.Entities;
 using Library.DAL.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +33,7 @@ namespace Library.BLL.Tests.UseCasesTests.MusicianUseCasesTests
             context.SaveChanges();
 
             //Creating and Adding User to DB
-            var user = new User
+            var user = new LibraryUserEF
             {
                 FirstName = "Jean-Claude",
                 IsIndependance = true,
@@ -42,7 +41,7 @@ namespace Library.BLL.Tests.UseCasesTests.MusicianUseCasesTests
                     new UserInstrumentEF {
                     InstrumentId = 1} }
             };
-            var user2 = new User
+            var user2 = new LibraryUserEF
             {
                 FirstName = "Sophie",
                 IsIndependance = true,
@@ -50,7 +49,7 @@ namespace Library.BLL.Tests.UseCasesTests.MusicianUseCasesTests
                     new UserInstrumentEF {
                     InstrumentId = 2} }
             };
-            var user3 = new User
+            var user3 = new LibraryUserEF
             {
                 FirstName = "Paulette",
                 IsIndependance = true,

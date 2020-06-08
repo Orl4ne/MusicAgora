@@ -1,6 +1,5 @@
 ﻿using System;
 using Library.DAL;
-using Library.DAL.Auth;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;

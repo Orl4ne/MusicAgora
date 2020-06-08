@@ -1,5 +1,4 @@
-﻿using Library.DAL.Auth;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Library.DAL.Entities
 {

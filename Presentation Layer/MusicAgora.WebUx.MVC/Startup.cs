@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Library.DAL;
 using Microsoft.AspNetCore.Http;
-using Library.DAL.Auth;
+using Identity.DAL;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace MusicAgora.WebUx.MVC
@@ -46,7 +46,7 @@ namespace MusicAgora.WebUx.MVC
             services.AddRazorPages();
 
             //Stuf added from KarParts project
-            services.AddIdentity<User, AccessRight>(options =>
+            services.AddIdentity<ApplicationUser, AccessRight>(options =>
             {
                 options.Password.RequiredLength = 8;
                 options.Password.RequireNonAlphanumeric = true;

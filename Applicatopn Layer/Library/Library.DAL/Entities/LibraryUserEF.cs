@@ -5,14 +5,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Library.DAL.Auth
+namespace Library.DAL.Entities
 {
-    public class User : IdentityUser<int>
+    public class LibraryUserEF
     {
+        public int UserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         [Required]
-        public AccessRight AccessRight { get; set; }
+        public LibraryAccessEF AccessRight { get; set; }
         public List<UserInstrumentEF> UserInstruments { get; set; }
         public bool IsIndependance { get; set; }
         public bool IsGarde { get; set; }
