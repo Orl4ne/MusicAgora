@@ -24,7 +24,6 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Applicatopn Layer\Library\Library.DAL\Library.DAL.csproj" />
     <ProjectReference Include="..\..\Identity.DAL\Identity.DAL.csproj" />
   </ItemGroup>
 
