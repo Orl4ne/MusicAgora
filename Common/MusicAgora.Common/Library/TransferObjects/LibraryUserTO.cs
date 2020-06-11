@@ -11,7 +11,7 @@ namespace MusicAgora.Common.Library.TransferObjects
         public string FirstName { get; set; }
         public string LastName { get; set; }
         [Required]
-        public LibraryAccessTO AccessRight { get; set; }
+        public LibraryAccessRightTO AccessRight { get; set; }
         public List<int> InstrumentIds { get; set; }
         public bool IsIndependance { get; set; }
         public bool IsGarde { get; set; }

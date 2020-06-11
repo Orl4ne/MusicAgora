@@ -52,6 +52,6 @@ namespace Library.DAL
         public DbSet<SheetEF> Sheets { get; set; }
         public DbSet<SheetPartEF> SheetParts { get; set; }
         public DbSet<UserInstrumentEF> UserInstruments { get; set; }
-        public DbSet<LibraryAccessEF> LibraryAccessRights { get; set; }
+        public DbSet<LibraryAccessRightEF> LibraryAccessRights { get; set; }
     }
 }

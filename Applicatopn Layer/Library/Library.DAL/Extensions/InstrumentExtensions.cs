@@ -11,8 +11,8 @@ namespace Library.DAL.Extensions
     {
         public static InstrumentTO ToTransferObject(this InstrumentEF Instrument)
         {
-            //if (Instrument is null)
-            //    throw new ArgumentNullException(nameof(Instrument));
+            if (Instrument is null)
+                throw new ArgumentNullException(nameof(Instrument));
 
             return new InstrumentTO
             {
@@ -24,8 +24,8 @@ namespace Library.DAL.Extensions
 
         public static InstrumentEF ToEF(this InstrumentTO Instrument)
         {
-            //if (Instrument is null)
-            //    throw new ArgumentNullException(nameof(Instrument));
+            if (Instrument is null)
+                throw new ArgumentNullException(nameof(Instrument));
 
             var instruEf = new InstrumentEF
             {

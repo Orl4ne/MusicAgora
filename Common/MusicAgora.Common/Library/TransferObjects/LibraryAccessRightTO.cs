@@ -4,8 +4,9 @@ using System.Text;
 
 namespace MusicAgora.Common.Library.TransferObjects
 {
-    public class LibraryAccessTO
+    public class LibraryAccessRightTO
     {
+        public int Id { get; set; }
         public string Accessor { get; set; }
     }
 }

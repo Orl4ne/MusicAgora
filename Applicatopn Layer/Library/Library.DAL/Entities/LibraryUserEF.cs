@@ -9,11 +9,12 @@ namespace Library.DAL.Entities
 {
     public class LibraryUserEF
     {
+        [Key]
         public int UserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         [Required]
-        public LibraryAccessEF AccessRight { get; set; }
+        public LibraryAccessRightEF AccessRight { get; set; }
         public List<UserInstrumentEF> UserInstruments { get; set; }
         public bool IsIndependance { get; set; }
         public bool IsGarde { get; set; }

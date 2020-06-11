@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MusicAgora.Common.Library.Interfaces.IRepositories
 {
-    public interface ILibraryAccessRepository : IRepository<LibraryAccessTO, int>
+    public interface ILibraryAccessRepository : IRepository<LibraryAccessRightTO, int>
     {
     }
 }
