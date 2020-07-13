@@ -26,13 +26,12 @@ namespace Library.DAL
                 optionsBuilder.EnableSensitiveDataLogging();
             }
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             if (modelBuilder is null)
                 throw new ArgumentNullException(nameof(modelBuilder));
         }
-       
+
         public DbSet<CategoryEF> Categories { get; set; }
         public DbSet<InstrumentEF> Instruments { get; set; }
         public DbSet<SheetEF> Sheets { get; set; }
