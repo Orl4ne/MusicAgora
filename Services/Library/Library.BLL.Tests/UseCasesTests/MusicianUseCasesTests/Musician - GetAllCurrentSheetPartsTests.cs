@@ -1,4 +1,4 @@
-﻿using Library.BLL.Services.MusicianUC;
+﻿using Library.BLL.UseCases;
 using Library.DAL;
 using Library.DAL.Entities;
 using Library.DAL.Extensions;
@@ -50,7 +50,7 @@ namespace Library.BLL.Tests.UseCasesTests.MusicianUseCasesTests
             var addedSheetPart4 = context.Add(sheetPart4);
             context.SaveChanges();
             //ACT
-            var musician = new Musician(context);
+            var musician = new MusicianUC(context);
             var result = musician.GetAllCurrentSheetParts(1);
             var result2 = musician.GetAllCurrentSheetParts(2);
             var result3 = musician.GetAllCurrentSheetParts(3);

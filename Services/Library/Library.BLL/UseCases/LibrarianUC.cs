@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Library.BLL.Services.LibrarianUC
+namespace Library.BLL.UseCases
 {
-    public partial class Librarian
+    class LibrarianUC
     {
     }
 }

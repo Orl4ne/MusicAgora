@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Library.BLL.Services.Chief
+namespace Library.BLL.UseCases
 {
-    public partial class Chief
+    class AdminUC
     {
     }
 }
