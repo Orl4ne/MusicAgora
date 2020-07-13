@@ -19,13 +19,7 @@ namespace Library.BLL.Services.MusicianUC
     {
         public List<SheetPartTO> GetAllCurrentSheetParts(int userId)
         {
-            var Instruments = context.UserInstruments.Where(x => x.UserID == userId).Select(x => x.Instrument);
-            // Selecting the currentSheetparts for each instrument of the user
-            return context.SheetParts
-                    .Where(s => Instruments.Contains(s.Instrument) && s.Sheet.IsCurrent == true)
-                    .Select(s => s.ToTransferObject())
-                    .ToList();
+            throw new NotImplementedException();
         }
-
     }
 }

@@ -38,7 +38,6 @@ namespace Library.DAL.Repositories
         public InstrumentTO GetById(int Id)
             => libraryContext.Instruments
                 .AsNoTracking()
-                .Include(u => u.UserInstruments)
                 .FirstOrDefault(x => x.Id == Id)
                 .ToTransferObject();
 

@@ -19,10 +19,7 @@ namespace Library.DAL.Extensions
                 Id = Sheet.Id,
                 Name = Sheet.Name,
                 Arranger = Sheet.Arranger,
-                Category = 
-                    Sheet.Category != null 
-                    ? new CategoryTO { Name = Sheet.Category.Name, Id = Sheet.Category.Id }
-                    : null,
+                CategoryId = Sheet.CategoryId,
                 Composer = Sheet.Composer,
                 IsCurrent = Sheet.IsCurrent,
                 IsGarde = Sheet.IsGarde,
@@ -40,7 +37,7 @@ namespace Library.DAL.Extensions
                 Id = Sheet.Id,
                 Name = Sheet.Name,
                 Arranger = Sheet.Arranger,
-                Category = new CategoryEF { Name = Sheet.Category.Name, Id = Sheet.Category.Id },
+                CategoryId = Sheet.CategoryId,
                 Composer = Sheet.Composer,
                 IsCurrent = Sheet.IsCurrent,
                 IsGarde = Sheet.IsGarde,

@@ -36,26 +36,28 @@ namespace MusicAgora.WebUx.MVC
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
-            services.AddDbContext<DbContext>(options =>
+            // Configuring Contexts
+            services.AddDbContext<IdentityContext>(options =>
                 options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("")));
 
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            //Stuf added from KarParts project
+            //Configuring Identity
             services.AddIdentity<ApplicationUser, AccessRight>(options =>
             {
                 options.Password.RequiredLength = 8;
-                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = true;
                 options.User.RequireUniqueEmail = true;
                 options.SignIn.RequireConfirmedEmail = true;
             })
                 .AddDefaultUI()
-                .AddEntityFrameworkStores<DbContext>()
-              .AddDefaultTokenProviders();
+                .AddEntityFrameworkStores<IdentityContext>()
+                .AddDefaultTokenProviders();
+
+            //Put dependency injections here
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

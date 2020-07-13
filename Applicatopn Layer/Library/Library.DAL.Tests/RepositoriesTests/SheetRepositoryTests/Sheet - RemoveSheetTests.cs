@@ -31,8 +31,8 @@ namespace Library.DAL.Tests.RepositoriesTests.SheetRepositoryTests
             var addedCategory2 = categoryRepository.Add(category2);
             context.SaveChanges();
 
-            var sheet = new SheetTO { Name = "BestOf", Arranger = "Jean-Luc", Category = addedCategory, Composer = "Morricone", IsCurrent = false, IsGarde = false, IsIndependance = true };
-            var sheet2 = new SheetTO { Name = "Young Amadeus", Arranger = "Jan de Haan", Category = addedCategory2, Composer = "Mozart", IsCurrent = true, IsGarde = false, IsIndependance = true };
+            var sheet = new SheetTO { Name = "BestOf", Arranger = "Jean-Luc", CategoryId = 1, Composer = "Morricone", IsCurrent = false, IsGarde = false, IsIndependance = true };
+            var sheet2 = new SheetTO { Name = "Young Amadeus", Arranger = "Jan de Haan", CategoryId = 2, Composer = "Mozart", IsCurrent = true, IsGarde = false, IsIndependance = true };
 
             //Act & Assert
             Assert.ThrowsException<KeyNotFoundException>(() => sheetRepository.Remove(sheet));
@@ -56,8 +56,8 @@ namespace Library.DAL.Tests.RepositoriesTests.SheetRepositoryTests
             var addedCategory2 = categoryRepository.Add(category2);
             context.SaveChanges();
 
-            var sheet = new SheetTO { Name = "BestOf", Arranger = "Jean-Luc", Category = addedCategory, Composer = "Morricone", IsCurrent = false, IsGarde = false, IsIndependance = true };
-            var sheet2 = new SheetTO { Name = "Young Amadeus", Arranger = "Jan de Haan", Category = addedCategory2, Composer = "Mozart", IsCurrent = true, IsGarde = false, IsIndependance = true };
+            var sheet = new SheetTO { Name = "BestOf", Arranger = "Jean-Luc", CategoryId = 1, Composer = "Morricone", IsCurrent = false, IsGarde = false, IsIndependance = true };
+            var sheet2 = new SheetTO { Name = "Young Amadeus", Arranger = "Jan de Haan", CategoryId = 2, Composer = "Mozart", IsCurrent = true, IsGarde = false, IsIndependance = true };
             var addedSheet = sheetRepository.Add(sheet);
             var addedSheet2 = sheetRepository.Add(sheet2);
             context.SaveChanges();
@@ -116,8 +116,8 @@ namespace Library.DAL.Tests.RepositoriesTests.SheetRepositoryTests
             var addedCategory2 = categoryRepository.Add(category2);
             context.SaveChanges();
 
-            var sheet = new SheetTO { Name = "BestOf", Arranger = "Jean-Luc", Category = addedCategory, Composer = "Morricone", IsCurrent = false, IsGarde = false, IsIndependance = true };
-            var sheet2 = new SheetTO { Name = "Young Amadeus", Arranger = "Jan de Haan", Category = addedCategory2, Composer = "Mozart", IsCurrent = true, IsGarde = false, IsIndependance = true };
+            var sheet = new SheetTO { Name = "BestOf", Arranger = "Jean-Luc", CategoryId = 1, Composer = "Morricone", IsCurrent = false, IsGarde = false, IsIndependance = true };
+            var sheet2 = new SheetTO { Name = "Young Amadeus", Arranger = "Jan de Haan", CategoryId = 2, Composer = "Mozart", IsCurrent = true, IsGarde = false, IsIndependance = true };
             var addedSheet = sheetRepository.Add(sheet);
             var addedSheet2 = sheetRepository.Add(sheet2);
             context.SaveChanges();

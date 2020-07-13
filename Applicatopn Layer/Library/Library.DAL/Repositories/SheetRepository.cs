@@ -26,23 +26,23 @@ namespace Library.DAL.Repositories
             if (entity.Id != 0)
                 return entity;
 
-            var sheet = entity.ToEF();
-            sheet.Category = libraryContext.Categories.First(x => x.Id == entity.Category.Id);
+            var sheetEF = entity.ToEF();
 
-            return libraryContext.Sheets.Add(sheet).Entity.ToTransferObject();
+            var result = libraryContext.Sheets.Add(sheetEF);
+            libraryContext.SaveChanges();
+
+            return result.Entity.ToTransferObject();
         }
 
         public IEnumerable<SheetTO> GetAll()
             => libraryContext.Sheets
                 .AsNoTracking()
-                .Include(c => c.Category)
                 .Select(x => x.ToTransferObject())
                 .ToList();
 
         public SheetTO GetById(int Id)
             => libraryContext.Sheets
                 .AsNoTracking()
-                .Include(c => c.Category)
                 .FirstOrDefault(x => x.Id == Id)
                 .ToTransferObject();
 

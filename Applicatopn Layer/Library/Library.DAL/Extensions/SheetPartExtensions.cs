@@ -17,8 +17,8 @@ namespace Library.DAL.Extensions
             {
                 Id = SheetPart.Id,
                 Path = SheetPart.Path,
-                Sheet = SheetPart.Sheet.ToTransferObject(),
-                Instrument = SheetPart.Instrument.ToTransferObject(),
+                SheetId = SheetPart.SheetId,
+                InstrumentId = SheetPart.InstrumentId,
             }; 
         }
 
@@ -31,8 +31,8 @@ namespace Library.DAL.Extensions
             {
                 Id = SheetPart.Id,
                 Path = SheetPart.Path,
-                Sheet = SheetPart.Sheet.ToEF(),
-                Instrument = SheetPart.Instrument.ToEF(),
+                SheetId = SheetPart.SheetId,
+                InstrumentId = SheetPart.InstrumentId,
             };
         }
     }

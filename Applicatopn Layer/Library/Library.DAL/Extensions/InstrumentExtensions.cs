@@ -18,7 +18,7 @@ namespace Library.DAL.Extensions
             {
                 Id = Instrument.Id,
                 Name = Instrument.Name,
-                UserIds = Instrument.UserInstruments.Where(u => u.InstrumentId == Instrument.Id).Select(u => u.UserID).ToList(),
+                UserIds = Instrument.UserIds,
             };
         }
 
@@ -31,13 +31,12 @@ namespace Library.DAL.Extensions
             {
                 Id = Instrument.Id,
                 Name = Instrument.Name,
-                
+                UserIds = Instrument.UserIds,
             };
             if (Instrument.UserIds == null)
             {
                 return instruEf;
             }
-            instruEf.UserInstruments = new List<UserInstrumentEF>();
 
             return instruEf;
         }

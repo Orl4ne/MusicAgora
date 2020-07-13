@@ -7,6 +7,10 @@ namespace Identity.DAL
 {
     public class AccessRight : IdentityRole<int>
     {
+        public AccessRight() : base()
+        { }
+        public AccessRight(string roleName) : base(roleName)
+        { }
     }
 }
 

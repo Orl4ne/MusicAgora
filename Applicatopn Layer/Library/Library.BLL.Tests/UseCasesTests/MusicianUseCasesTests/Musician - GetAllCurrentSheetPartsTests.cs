@@ -26,41 +26,10 @@ namespace Library.BLL.Tests.UseCasesTests.MusicianUseCasesTests
             
             //ARRANGE
             //Creating and Add Instrument to DB
-            var instru = new InstrumentEF { Name = "Saxophone", UserInstruments = new List<UserInstrumentEF>() };
-            var instru2 = new InstrumentEF { Name = "Flute", UserInstruments = new List<UserInstrumentEF>() };
+            var instru = new InstrumentEF { Name = "Saxophone"};
+            var instru2 = new InstrumentEF { Name = "Flute"};
             var addedInstru = context.Add(instru);
             var addedInstru2 = context.Add(instru2);
-            context.SaveChanges();
-
-            //Creating and Adding User to DB
-            var user = new LibraryUserEF
-            {
-                FirstName = "Jean-Claude",
-                IsIndependance = true,
-                UserInstruments = new List<UserInstrumentEF>() {
-                    new UserInstrumentEF {
-                    InstrumentId = 1} }
-            };
-            var user2 = new LibraryUserEF
-            {
-                FirstName = "Sophie",
-                IsIndependance = true,
-                UserInstruments = new List<UserInstrumentEF>() {
-                    new UserInstrumentEF {
-                    InstrumentId = 2} }
-            };
-            var user3 = new LibraryUserEF
-            {
-                FirstName = "Paulette",
-                IsIndependance = true,
-                UserInstruments = new List<UserInstrumentEF>()
-                {
-                    new UserInstrumentEF {InstrumentId = 2},new UserInstrumentEF{InstrumentId = 1}
-                }
-            };
-            var addedUser = context.Add(user);
-            var addedUser2 = context.Add(user2);
-            var addedUser3 = context.Add(user3);
             context.SaveChanges();
 
             //Creating and Adding Sheet
@@ -71,10 +40,10 @@ namespace Library.BLL.Tests.UseCasesTests.MusicianUseCasesTests
             context.SaveChanges();
 
             //Creating and Adding SheetParts
-            var sheetPart = new SheetPartEF { Instrument = instru, Sheet = sheet };
-            var sheetPart2 = new SheetPartEF { Instrument = instru2, Sheet = sheet };
-            var sheetPart3 = new SheetPartEF { Instrument = instru, Sheet = sheet2 };
-            var sheetPart4 = new SheetPartEF { Instrument = instru2, Sheet = sheet2 };
+            var sheetPart = new SheetPartEF { InstrumentId = 1, SheetId = 1 };
+            var sheetPart2 = new SheetPartEF { InstrumentId = 2, SheetId = 1 };
+            var sheetPart3 = new SheetPartEF { InstrumentId = 1, SheetId = 2 };
+            var sheetPart4 = new SheetPartEF { InstrumentId = 2, SheetId = 2 };
             var addedSheetPart = context.Add(sheetPart);
             var addedSheetPart2 = context.Add(sheetPart2);
             var addedSheetPart3 = context.Add(sheetPart3);

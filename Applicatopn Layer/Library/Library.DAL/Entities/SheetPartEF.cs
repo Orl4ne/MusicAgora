@@ -6,10 +6,10 @@ namespace Library.DAL.Entities
     {
         public int Id { get; set; }
         //[Required]
-        public InstrumentEF Instrument { get; set; }
+        public int InstrumentId { get; set; }
         //[Required]
         public string Path { get; set; }
         [Required]
-        public SheetEF Sheet { get; set; }
+        public int SheetId { get; set; }
     }
 }
