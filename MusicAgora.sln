@@ -3,20 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application Layer", "Application Layer", "{489958B7-CA17-4FC5-AB0B-0BBDA4A71A08}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{489958B7-CA17-4FC5-AB0B-0BBDA4A71A08}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{92DD4A4A-F2CF-49C7-B26E-3D4549D73BFC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.BLL", "Applicatopn Layer\Library\Library.BLL\Library.BLL.csproj", "{320A0083-8375-446D-9D28-9898F20B8C12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.BLL", "Services\Library\Library.BLL\Library.BLL.csproj", "{320A0083-8375-446D-9D28-9898F20B8C12}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.DAL", "Applicatopn Layer\Library\Library.DAL\Library.DAL.csproj", "{736F2248-D9DC-4047-868D-6BBA35F4E2B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.DAL", "Services\Library\Library.DAL\Library.DAL.csproj", "{736F2248-D9DC-4047-868D-6BBA35F4E2B2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3EA68C65-110A-42D4-B1FB-C4B011565F5D} = {3EA68C65-110A-42D4-B1FB-C4B011565F5D}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.BLL.Tests", "Applicatopn Layer\Library\Library.BLL.Tests\Library.BLL.Tests.csproj", "{D1325550-D64A-48CE-B65D-1EE6A7257DE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.BLL.Tests", "Services\Library\Library.BLL.Tests\Library.BLL.Tests.csproj", "{D1325550-D64A-48CE-B65D-1EE6A7257DE8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.DAL.Tests", "Applicatopn Layer\Library\Library.DAL.Tests\Library.DAL.Tests.csproj", "{EE9B377D-C272-488E-AD75-6F4A6D1A94CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.DAL.Tests", "Services\Library\Library.DAL.Tests\Library.DAL.Tests.csproj", "{EE9B377D-C272-488E-AD75-6F4A6D1A94CB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{D26382B7-E977-4400-8FFB-A23F31AF34A0}"
 EndProject
@@ -32,9 +32,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicAgora.WebUx.MVC", "Pre
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{15AA8456-7D86-4898-831E-851D03725C7A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.DAL", "Identity.DAL\Identity.DAL.csproj", "{E9D02486-1384-4580-BF00-80372D4BD0FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.DAL", "Services\Identity\Identity.DAL\Identity.DAL.csproj", "{E9D02486-1384-4580-BF00-80372D4BD0FE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.DAL.Tests", "Identity.DAL.Tests\Identity.DAL.Tests.csproj", "{A6698A1D-E6E6-4665-8264-CB4780F45FC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.DAL.Tests", "Services\Identity\Identity.DAL.Tests\Identity.DAL.Tests.csproj", "{A6698A1D-E6E6-4665-8264-CB4780F45FC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
