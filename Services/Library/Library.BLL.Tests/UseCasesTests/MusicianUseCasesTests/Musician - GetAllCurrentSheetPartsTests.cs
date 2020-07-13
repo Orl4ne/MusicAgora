@@ -40,10 +40,10 @@ namespace Library.BLL.Tests.UseCasesTests.MusicianUseCasesTests
             context.SaveChanges();
 
             //Creating and Adding SheetParts
-            var sheetPart = new SheetPartEF { InstrumentId = 1, SheetId = 1 };
-            var sheetPart2 = new SheetPartEF { InstrumentId = 2, SheetId = 1 };
-            var sheetPart3 = new SheetPartEF { InstrumentId = 1, SheetId = 2 };
-            var sheetPart4 = new SheetPartEF { InstrumentId = 2, SheetId = 2 };
+            var sheetPart = new SheetPartEF { Instrument = instru, Sheet = sheet };
+            var sheetPart2 = new SheetPartEF { Instrument = instru2, Sheet = sheet };
+            var sheetPart3 = new SheetPartEF { Instrument = instru, Sheet = sheet2 };
+            var sheetPart4 = new SheetPartEF { Instrument = instru2, Sheet = sheet2 };
             var addedSheetPart = context.Add(sheetPart);
             var addedSheetPart2 = context.Add(sheetPart2);
             var addedSheetPart3 = context.Add(sheetPart3);

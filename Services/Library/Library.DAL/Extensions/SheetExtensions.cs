@@ -19,7 +19,7 @@ namespace Library.DAL.Extensions
                 Id = Sheet.Id,
                 Name = Sheet.Name,
                 Arranger = Sheet.Arranger,
-                CategoryId = Sheet.CategoryId,
+                Category = Sheet.Category.ToTransferObject(),
                 Composer = Sheet.Composer,
                 IsCurrent = Sheet.IsCurrent,
                 IsGarde = Sheet.IsGarde,
@@ -37,12 +37,31 @@ namespace Library.DAL.Extensions
                 Id = Sheet.Id,
                 Name = Sheet.Name,
                 Arranger = Sheet.Arranger,
-                CategoryId = Sheet.CategoryId,
+                Category = Sheet.Category.ToEF(),
                 Composer = Sheet.Composer,
                 IsCurrent = Sheet.IsCurrent,
                 IsGarde = Sheet.IsGarde,
                 IsIndependance = Sheet.IsIndependance,
             };
+        }
+
+        public static SheetEF ToTrackedEF(this SheetTO Sheet, SheetEF SheetToModify)
+        {
+            if (SheetToModify is null)
+                throw new ArgumentNullException(nameof(SheetToModify));
+            if (Sheet is null)
+                throw new ArgumentNullException(nameof(Sheet));
+
+            SheetToModify.Id = Sheet.Id;
+            SheetToModify.Name = Sheet.Name;
+            SheetToModify.Arranger = Sheet.Arranger;
+            SheetToModify.Category = Sheet.Category.ToTrackedEF(SheetToModify.Category);
+            SheetToModify.Composer = Sheet.Composer;
+            SheetToModify.IsCurrent = Sheet.IsCurrent;
+            SheetToModify.IsGarde = Sheet.IsGarde;
+            SheetToModify.IsIndependance = Sheet.IsIndependance;
+
+            return SheetToModify;
         }
     }
 }

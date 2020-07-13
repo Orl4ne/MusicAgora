@@ -32,5 +32,18 @@ namespace Library.DAL.Extensions
             };
         }
 
+        public static CategoryEF ToTrackedEF(this CategoryTO Category, CategoryEF CategoryToModify)
+        {
+            if (CategoryToModify is null)
+                throw new ArgumentNullException(nameof(CategoryToModify));
+            if (Category is null)
+                throw new ArgumentNullException(nameof(Category));
+
+            CategoryToModify.Id = Category.Id;
+            CategoryToModify.Name = Category.Name;
+
+            return CategoryToModify;
+        }
+
     }
 }

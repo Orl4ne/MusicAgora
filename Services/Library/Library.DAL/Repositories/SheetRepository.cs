@@ -21,51 +21,59 @@ namespace Library.DAL.Repositories
         {
 
             if (entity is null)
-                throw new ArgumentNullException(nameof(entity));
-
+            {
+                throw new ArgumentNullException();
+            }
             if (entity.Id != 0)
+            {
                 return entity;
+            }
+            var entityEF = entity.ToEF();
+            entityEF.Category = libraryContext.Categories.First(x => x.Id == entity.Category.Id);
 
-            var sheetEF = entity.ToEF();
-
-            var result = libraryContext.Sheets.Add(sheetEF);
+            var result = libraryContext.Sheets.Add(entityEF);
             libraryContext.SaveChanges();
 
             return result.Entity.ToTransferObject();
         }
 
-        public IEnumerable<SheetTO> GetAll()
-            => libraryContext.Sheets
-                .AsNoTracking()
-                .Select(x => x.ToTransferObject())
-                .ToList();
-
-        public SheetTO GetById(int Id)
-            => libraryContext.Sheets
-                .AsNoTracking()
-                .FirstOrDefault(x => x.Id == Id)
-                .ToTransferObject();
-
-        public bool Remove(SheetTO entity)
-            => Remove(entity.Id);
-
-        public bool Remove(int Id)
+        public bool Delete(SheetTO entity)
         {
-            var sheet = libraryContext.Sheets.FirstOrDefault(x => x.Id == Id);
-
-            if (sheet is null)
+            if (entity is null)
             {
                 throw new KeyNotFoundException();
             }
-            try
+            if (entity.Id <= 0)
             {
-                libraryContext.Sheets.Remove(sheet);
-                return true;
+                throw new ArgumentException("Sheet To Delete Invalid Id");
             }
-            catch (ArgumentException)
+
+            var sheet = libraryContext.Sheets.FirstOrDefault(x => x.Id == entity.Id);
+            libraryContext.Sheets.Remove(sheet);
+            libraryContext.SaveChanges();
+            return true;
+        }
+
+        public IEnumerable<SheetTO> GetAll()
+        {
+            var list = libraryContext.Sheets
+                .Include(x => x.Category)
+                ?.Select(x => x.ToTransferObject())
+                .ToList();
+            if (!list.Any())
             {
-                return false;
+                throw new ArgumentNullException("There is no Sheet in DB");
             }
+            return list;
+        }
+
+        public SheetTO GetById(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException("Sheet not found, invalid Id");
+            }
+            return libraryContext.Sheets.FirstOrDefault(x => x.Id == id).ToTransferObject();
         }
 
         public SheetTO Update(SheetTO entity)
@@ -82,11 +90,13 @@ namespace Library.DAL.Repositories
             {
                 throw new KeyNotFoundException($"Update(SheetTO) Can't find sheet to update.");
             }
-            var editedEntity = libraryContext.Sheets.AsNoTracking().FirstOrDefault(e => e.Id == entity.Id);
+            var editedEntity = libraryContext.Sheets.FirstOrDefault(e => e.Id == entity.Id);
             if (editedEntity != default)
             {
-                editedEntity = entity.ToEF();
+                entity.ToTrackedEF(editedEntity);
             }
+            libraryContext.SaveChanges();
+
             return editedEntity.ToTransferObject();
         }
     }

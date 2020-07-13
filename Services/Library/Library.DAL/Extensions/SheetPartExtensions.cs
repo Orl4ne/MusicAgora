@@ -17,8 +17,8 @@ namespace Library.DAL.Extensions
             {
                 Id = SheetPart.Id,
                 Path = SheetPart.Path,
-                SheetId = SheetPart.SheetId,
-                InstrumentId = SheetPart.InstrumentId,
+                Sheet = SheetPart.Sheet.ToTransferObject(),
+                Instrument = SheetPart.Instrument.ToTransferObject(),
             }; 
         }
 
@@ -31,9 +31,24 @@ namespace Library.DAL.Extensions
             {
                 Id = SheetPart.Id,
                 Path = SheetPart.Path,
-                SheetId = SheetPart.SheetId,
-                InstrumentId = SheetPart.InstrumentId,
+                Sheet = SheetPart.Sheet.ToEF(),
+                Instrument = SheetPart.Instrument.ToEF(),
             };
+        }
+
+        public static SheetPartEF ToTrackedEF(this SheetPartTO SheetPart, SheetPartEF SheetPartToModify)
+        {
+            if (SheetPartToModify is null)
+                throw new ArgumentNullException(nameof(SheetPartToModify));
+            if (SheetPart is null)
+                throw new ArgumentNullException(nameof(SheetPart));
+
+            SheetPartToModify.Id = SheetPart.Id;
+            SheetPartToModify.Sheet = SheetPart.Sheet.ToTrackedEF(SheetPartToModify.Sheet);
+            SheetPartToModify.Instrument = SheetPart.Instrument.ToTrackedEF(SheetPartToModify.Instrument);
+            SheetPartToModify.Path = SheetPart.Path;
+
+            return SheetPartToModify;
         }
     }
 }

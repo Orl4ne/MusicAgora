@@ -31,11 +31,10 @@ namespace Library.DAL.Tests.RepositoriesTests.SheetRepositoryTests
             var addedCategory2 = categoryRepository.Add(category2);
             context.SaveChanges();
 
-            var sheet = new SheetTO { Name = "BestOf", Arranger = "Jean-Luc", CategoryId = 1, Composer = "Morricone", IsCurrent = false, IsGarde = false, IsIndependance = true };
-            var sheet2 = new SheetTO { Name = "Young Amadeus", Arranger = "Jan de Haan", CategoryId = 2, Composer = "Mozart", IsCurrent = true, IsGarde = false, IsIndependance = true };
-
+            var sheet = new SheetTO { Name = "BestOf", Arranger = "Jean-Luc", Category = addedCategory, Composer = "Morricone", IsCurrent = false, IsGarde = false, IsIndependance = true };
+            var sheet2 = new SheetTO { Name = "Young Amadeus", Arranger = "Jan de Haan", Category = addedCategory2, Composer = "Mozart", IsCurrent = true, IsGarde = false, IsIndependance = true };
             //Act & Assert
-            Assert.ThrowsException<KeyNotFoundException>(() => sheetRepository.Remove(sheet));
+            Assert.ThrowsException<KeyNotFoundException>(() => sheetRepository.Delete(sheet));
         }
 
         [TestMethod]
@@ -56,32 +55,17 @@ namespace Library.DAL.Tests.RepositoriesTests.SheetRepositoryTests
             var addedCategory2 = categoryRepository.Add(category2);
             context.SaveChanges();
 
-            var sheet = new SheetTO { Name = "BestOf", Arranger = "Jean-Luc", CategoryId = 1, Composer = "Morricone", IsCurrent = false, IsGarde = false, IsIndependance = true };
-            var sheet2 = new SheetTO { Name = "Young Amadeus", Arranger = "Jan de Haan", CategoryId = 2, Composer = "Mozart", IsCurrent = true, IsGarde = false, IsIndependance = true };
+            var sheet = new SheetTO { Name = "BestOf", Arranger = "Jean-Luc", Category = addedCategory, Composer = "Morricone", IsCurrent = false, IsGarde = false, IsIndependance = true };
+            var sheet2 = new SheetTO { Name = "Young Amadeus", Arranger = "Jan de Haan", Category = addedCategory2, Composer = "Mozart", IsCurrent = true, IsGarde = false, IsIndependance = true };
             var addedSheet = sheetRepository.Add(sheet);
             var addedSheet2 = sheetRepository.Add(sheet2);
             context.SaveChanges();
 
             //Act
-            var result = sheetRepository.Remove(addedSheet);
+            var result = sheetRepository.Delete(addedSheet);
             context.SaveChanges();
             //Assert
             Assert.AreEqual(1, sheetRepository.GetAll().Count());
-        }
-
-        [TestMethod]
-        public void RemoveSheetById_ProvidingNonExistingId_ThrowException()
-        {
-            //Arrange
-            var options = new DbContextOptionsBuilder<LibraryContext>()
-                  .UseInMemoryDatabase(databaseName: MethodBase.GetCurrentMethod().Name)
-                  .Options;
-            using var context = new LibraryContext(options);
-            ISheetRepository sheetRepository = new SheetRepository(context);
-
-            //Act & Assert
-            Assert.ThrowsException<KeyNotFoundException>(() => sheetRepository.Remove(14));
-
         }
 
         [TestMethod]
@@ -95,7 +79,7 @@ namespace Library.DAL.Tests.RepositoriesTests.SheetRepositoryTests
             ISheetRepository sheetRepository = new SheetRepository(context);
 
             //Act & Assert
-            Assert.ThrowsException<NullReferenceException>(() => sheetRepository.Remove(null));
+            Assert.ThrowsException<NullReferenceException>(() => sheetRepository.Delete(null));
         }
 
         [TestMethod]
@@ -116,14 +100,14 @@ namespace Library.DAL.Tests.RepositoriesTests.SheetRepositoryTests
             var addedCategory2 = categoryRepository.Add(category2);
             context.SaveChanges();
 
-            var sheet = new SheetTO { Name = "BestOf", Arranger = "Jean-Luc", CategoryId = 1, Composer = "Morricone", IsCurrent = false, IsGarde = false, IsIndependance = true };
-            var sheet2 = new SheetTO { Name = "Young Amadeus", Arranger = "Jan de Haan", CategoryId = 2, Composer = "Mozart", IsCurrent = true, IsGarde = false, IsIndependance = true };
+            var sheet = new SheetTO { Name = "BestOf", Arranger = "Jean-Luc", Category = addedCategory, Composer = "Morricone", IsCurrent = false, IsGarde = false, IsIndependance = true };
+            var sheet2 = new SheetTO { Name = "Young Amadeus", Arranger = "Jan de Haan", Category = addedCategory2, Composer = "Mozart", IsCurrent = true, IsGarde = false, IsIndependance = true };
             var addedSheet = sheetRepository.Add(sheet);
             var addedSheet2 = sheetRepository.Add(sheet2);
             context.SaveChanges();
 
             //Act
-            var result = sheetRepository.Remove(1);
+            var result = sheetRepository.Delete(sheet);
             context.SaveChanges();
             //Assert
             Assert.AreEqual(1, sheetRepository.GetAll().Count());

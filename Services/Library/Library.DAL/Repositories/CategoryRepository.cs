@@ -20,50 +20,60 @@ namespace Library.DAL.Repositories
         }
         public CategoryTO Add(CategoryTO entity)
         {
-            if(entity is null)
+            if (entity is null)
             {
                 throw new ArgumentNullException();
             }
-            if (entity.Id!=0)
+            if (entity.Id != 0)
             {
                 return entity;
             }
-            return libraryContext.Categories.Add(entity.ToEF()).Entity.ToTransferObject();
+
+            var entityEF = entity.ToEF();
+            var result = libraryContext.Categories.Add(entityEF);
+            libraryContext.SaveChanges();
+
+            return result.Entity.ToTransferObject();
         }
 
         public IEnumerable<CategoryTO> GetAll()
-            => libraryContext.Categories
-                .AsNoTracking()
-                .Select(x => x.ToTransferObject())
-                .ToList();
-
-        public CategoryTO GetById(int Id)
-            => libraryContext.Categories
-                .AsNoTracking()
-                .FirstOrDefault(x => x.Id == Id)
-                .ToTransferObject();
-
-        public bool Remove(CategoryTO entity)
-            => Remove(entity.Id);
-
-        public bool Remove(int Id)
         {
-            var category = libraryContext.Categories.FirstOrDefault(x => x.Id == Id);
+            var list = libraryContext.Categories.AsEnumerable()
+                 ?.Select(x => x.ToTransferObject())
+                 .ToList();
+            if (!list.Any())
+            {
+                throw new ArgumentNullException("There is no Category in DB");
+            }
+            return list;
+        }
 
-            if (category is null)
+        public CategoryTO GetById(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException("Category not found, invalid Id");
+            }
+            return libraryContext.Categories.FirstOrDefault(x => x.Id == id).ToTransferObject();
+        }
+
+        public bool Delete(CategoryTO entity)
+        {
+            if (entity is null)
             {
                 throw new KeyNotFoundException();
             }
-            try
+            if (entity.Id <= 0)
             {
-                libraryContext.Categories.Remove(category);
-                return true;
+                throw new ArgumentException("Category To Delete Invalid Id");
             }
-            catch (ArgumentException)
-            {
-                return false;
-            }
+
+            var category = libraryContext.Categories.FirstOrDefault(x => x.Id == entity.Id);
+            libraryContext.Categories.Remove(category);
+            libraryContext.SaveChanges();
+            return true;
         }
+
 
         public CategoryTO Update(CategoryTO entity)
         {
@@ -79,13 +89,14 @@ namespace Library.DAL.Repositories
             {
                 throw new KeyNotFoundException($"Update(CategoryTO) Can't find category to update.");
             }
-            
+
             var editedEntity = libraryContext.Categories.FirstOrDefault(e => e.Id == entity.Id);
             if (editedEntity != default)
             {
-                editedEntity = entity.ToEF();
+                entity.ToTrackedEF(editedEntity);
             }
-            
+            libraryContext.SaveChanges();
+
             return editedEntity.ToTransferObject();
         }
     }

@@ -11,7 +11,7 @@ namespace MusicAgora.Common.Library.TransferObjects
         public bool IsCurrent { get; set; }
         public string Composer { get; set; }
         public string Arranger { get; set; }
-        public int CategoryId { get; set; }
+        public CategoryTO Category { get; set; }
         public bool IsIndependance { get; set; }
         public bool IsGarde { get; set; }
     }

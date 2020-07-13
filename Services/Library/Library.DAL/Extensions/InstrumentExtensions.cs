@@ -40,5 +40,19 @@ namespace Library.DAL.Extensions
 
             return instruEf;
         }
+
+        public static InstrumentEF ToTrackedEF(this InstrumentTO Instrument, InstrumentEF InstrumentToModify)
+        {
+            if (InstrumentToModify is null)
+                throw new ArgumentNullException(nameof(InstrumentToModify));
+            if (Instrument is null)
+                throw new ArgumentNullException(nameof(Instrument));
+
+            InstrumentToModify.Id = Instrument.Id;
+            InstrumentToModify.Name = Instrument.Name;
+            InstrumentToModify.UserIds = Instrument.UserIds;
+
+            return InstrumentToModify;
+        }
     }
 }

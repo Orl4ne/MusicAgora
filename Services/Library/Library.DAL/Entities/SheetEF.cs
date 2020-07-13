@@ -13,7 +13,7 @@ namespace Library.DAL.Entities
         public bool IsCurrent { get; set; }
         public string Composer { get; set; }
         public string Arranger { get; set; }
-        public int CategoryId { get; set; }
+        public CategoryEF Category { get; set; }
         [Required]
         public bool IsIndependance { get; set; }
         [Required]

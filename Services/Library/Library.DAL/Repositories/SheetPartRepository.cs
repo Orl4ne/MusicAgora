@@ -27,41 +27,54 @@ namespace Library.DAL.Repositories
             {
                 return entity;
             }
-            return libraryContext.SheetParts.Add(entity.ToEF()).Entity.ToTransferObject();
+            var entityEF = entity.ToEF();
+            entityEF.Instrument = libraryContext.Instruments.First(x => x.Id == entity.Instrument.Id);
+            entityEF.Sheet = libraryContext.Sheets.First(x => x.Id == entity.Sheet.Id);
+
+            var result = libraryContext.SheetParts.Add(entityEF);
+            libraryContext.SaveChanges();
+
+            return result.Entity.ToTransferObject();
         }
 
-        public IEnumerable<SheetPartTO> GetAll()
-            => libraryContext.SheetParts
-                .AsNoTracking()
-                .Select(x => x.ToTransferObject())
-                .ToList();
-
-        public SheetPartTO GetById(int Id)
-            => libraryContext.SheetParts
-                .AsNoTracking()
-                .FirstOrDefault(x => x.Id == Id)
-                .ToTransferObject();
-
-        public bool Remove(SheetPartTO entity)
-            => Remove(entity.Id);
-
-        public bool Remove(int Id)
+        public bool Delete(SheetPartTO entity)
         {
-            var sheetPart = libraryContext.SheetParts.FirstOrDefault(x => x.Id == Id);
-
-            if (sheetPart is null)
+            if (entity is null)
             {
                 throw new KeyNotFoundException();
             }
-            try
+            if (entity.Id <= 0)
             {
-                libraryContext.SheetParts.Remove(sheetPart);
-                return true;
+                throw new ArgumentException("SheetPart To Delete Invalid Id");
             }
-            catch (ArgumentException)
+
+            var sheetPart = libraryContext.SheetParts.FirstOrDefault(x => x.Id == entity.Id);
+            libraryContext.SheetParts.Remove(sheetPart);
+            libraryContext.SaveChanges();
+            return true;
+        }
+
+        public IEnumerable<SheetPartTO> GetAll()
+        {
+            var list = libraryContext.SheetParts
+                .Include(x => x.Sheet)
+                .Include(x => x.Instrument)
+                ?.Select(x => x.ToTransferObject())
+                .ToList();
+            if (!list.Any())
             {
-                return false;
+                throw new ArgumentNullException("There is no SheetPart in DB");
             }
+            return list;
+        }
+
+        public SheetPartTO GetById(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException("SheetPart not found, invalid Id");
+            }
+            return libraryContext.SheetParts.FirstOrDefault(x => x.Id == id).ToTransferObject();
         }
 
         public SheetPartTO Update(SheetPartTO entity)
@@ -82,8 +95,9 @@ namespace Library.DAL.Repositories
             var editedEntity = libraryContext.SheetParts.FirstOrDefault(e => e.Id == entity.Id);
             if (editedEntity != default)
             {
-                editedEntity = entity.ToEF();
+                entity.ToTrackedEF(editedEntity);
             }
+            libraryContext.SaveChanges();
 
             return editedEntity.ToTransferObject();
         }

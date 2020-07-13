@@ -26,43 +26,51 @@ namespace Library.DAL.Repositories
             {
                 return entity;
             }
-            return libraryContext.Instruments.Add(entity.ToEF()).Entity.ToTransferObject();
+            var entityEF = entity.ToEF();
+            var result = libraryContext.Instruments.Add(entityEF);
+            libraryContext.SaveChanges();
+
+            return result.Entity.ToTransferObject();
         }
 
-        public IEnumerable<InstrumentTO> GetAll()
-            => libraryContext.Instruments
-                .AsNoTracking()
-                .Select(x => x.ToTransferObject())
-                .ToList();
-
-        public InstrumentTO GetById(int Id)
-            => libraryContext.Instruments
-                .AsNoTracking()
-                .FirstOrDefault(x => x.Id == Id)
-                .ToTransferObject();
-
-        public bool Remove(InstrumentTO entity)
-            => Remove(entity.Id);
-
-        public bool Remove(int Id)
+        public bool Delete(InstrumentTO entity)
         {
-            var instrument = libraryContext.Instruments
-                             .FirstOrDefault(x => x.Id == Id);
-
-            if (instrument is null)
+            if (entity is null)
             {
                 throw new KeyNotFoundException();
             }
-            try
+            if (entity.Id <= 0)
             {
-                libraryContext.Instruments.Remove(instrument);
-                return true;
+                throw new ArgumentException("Instrument To Delete Invalid Id");
             }
-            catch (ArgumentException)
-            {
-                return false;
-            }
+
+            var instrument = libraryContext.Instruments.FirstOrDefault(x => x.Id == entity.Id);
+            libraryContext.Instruments.Remove(instrument);
+            libraryContext.SaveChanges();
+            return true;
         }
+
+        public IEnumerable<InstrumentTO> GetAll()
+        {
+            var list = libraryContext.Instruments.AsEnumerable()
+                 ?.Select(x => x.ToTransferObject())
+                 .ToList();
+            if (!list.Any())
+            {
+                throw new ArgumentNullException("There is no Instrument in DB");
+            }
+            return list;
+        }
+
+        public InstrumentTO GetById(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException("Instrument not found, invalid Id");
+            }
+            return libraryContext.Instruments.FirstOrDefault(x => x.Id == id).ToTransferObject();
+        }
+
 
         public InstrumentTO Update(InstrumentTO entity)
         {
@@ -82,8 +90,10 @@ namespace Library.DAL.Repositories
             var editedEntity = libraryContext.Instruments.FirstOrDefault(e => e.Id == entity.Id);
             if (editedEntity != default)
             {
-                editedEntity = entity.ToEF();
+                entity.ToTrackedEF(editedEntity);
             }
+            libraryContext.SaveChanges();
+
             return editedEntity.ToTransferObject();
         }
     }
