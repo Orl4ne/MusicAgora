@@ -12,10 +12,10 @@ using System.Text;
 namespace Library.DAL.Tests.RepositoriesTests.SheetRepositoryTests
 {
     [TestClass]
-    public class RemoveSheetTests
+    public class DeleteSheetTests
     {
         [TestMethod]
-        public void RemoveSheetByTransferObject_ProvidingNull_ThrowException()
+        public void DeleteSheet_ProvidingNull_ThrowException()
         {
             //Arrange
             var options = new DbContextOptionsBuilder<LibraryContext>()
@@ -38,7 +38,7 @@ namespace Library.DAL.Tests.RepositoriesTests.SheetRepositoryTests
         }
 
         [TestMethod]
-        public void RemoveSheetByTransferObject_Successful()
+        public void DeleteSheet_Successful()
         {
             //Arrange
             var options = new DbContextOptionsBuilder<LibraryContext>()
@@ -68,49 +68,5 @@ namespace Library.DAL.Tests.RepositoriesTests.SheetRepositoryTests
             Assert.AreEqual(1, sheetRepository.GetAll().Count());
         }
 
-        [TestMethod]
-        public void RemoveSheetById_ProvidingNullId_ThrowException()
-        {
-            //Arrange
-            var options = new DbContextOptionsBuilder<LibraryContext>()
-                 .UseInMemoryDatabase(databaseName: MethodBase.GetCurrentMethod().Name)
-                 .Options;
-            using var context = new LibraryContext(options);
-            ISheetRepository sheetRepository = new SheetRepository(context);
-
-            //Act & Assert
-            Assert.ThrowsException<NullReferenceException>(() => sheetRepository.Delete(null));
-        }
-
-        [TestMethod]
-        public void RemoveSheetById_Successful()
-        {
-            //Arrange
-            var options = new DbContextOptionsBuilder<LibraryContext>()
-                 .UseInMemoryDatabase(databaseName: MethodBase.GetCurrentMethod().Name)
-                 .Options;
-            using var context = new LibraryContext(options);
-            ISheetRepository sheetRepository = new SheetRepository(context);
-            ICategoryRepository categoryRepository = new CategoryRepository(context);
-
-            //Act
-            var category = new CategoryTO { Name = "Musique de films" };
-            var addedCategory = categoryRepository.Add(category);
-            var category2 = new CategoryTO { Name = "Musique de classique" };
-            var addedCategory2 = categoryRepository.Add(category2);
-            context.SaveChanges();
-
-            var sheet = new SheetTO { Name = "BestOf", Arranger = "Jean-Luc", Category = addedCategory, Composer = "Morricone", IsCurrent = false, IsGarde = false, IsIndependance = true };
-            var sheet2 = new SheetTO { Name = "Young Amadeus", Arranger = "Jan de Haan", Category = addedCategory2, Composer = "Mozart", IsCurrent = true, IsGarde = false, IsIndependance = true };
-            var addedSheet = sheetRepository.Add(sheet);
-            var addedSheet2 = sheetRepository.Add(sheet2);
-            context.SaveChanges();
-
-            //Act
-            var result = sheetRepository.Delete(sheet);
-            context.SaveChanges();
-            //Assert
-            Assert.AreEqual(1, sheetRepository.GetAll().Count());
-        }
     }
 }
