@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Services\Identity\Identity.DAL\Identity.DAL.csproj" />
+    <ProjectReference Include="..\..\Services\Library\Library.DAL\Library.DAL.csproj" />
   </ItemGroup>
 
 </Project>

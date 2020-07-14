@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
 using Identity.DAL;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Library.DAL;
 
 namespace MusicAgora.WebUx.MVC
 {
@@ -38,6 +39,10 @@ namespace MusicAgora.WebUx.MVC
 
             // Configuring Contexts
             services.AddDbContext<IdentityContext>(options =>
+                options.UseSqlite(
+                    Configuration.GetConnectionString("")));
+
+            services.AddDbContext<LibraryContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("")));
 
