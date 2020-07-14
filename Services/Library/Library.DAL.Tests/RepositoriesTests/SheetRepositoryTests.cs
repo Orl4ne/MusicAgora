@@ -110,7 +110,7 @@ namespace Library.DAL.Tests.RepositoriesTests
             var sheet = new SheetTO { Name = "BestOf", Arranger = "Jean-Luc", Category = addedCategory, Composer = "Morricone", IsCurrent = false, IsGarde = false, IsIndependance = true };
             var sheet2 = new SheetTO { Name = "Young Amadeus", Arranger = "Jan de Haan", Category = addedCategory2, Composer = "Mozart", IsCurrent = true, IsGarde = false, IsIndependance = true };
             //Act & Assert
-            Assert.ThrowsException<KeyNotFoundException>(() => sheetRepository.Delete(sheet));
+            Assert.ThrowsException<ArgumentException>(() => sheetRepository.Delete(sheet));
         }
 
         [TestMethod]

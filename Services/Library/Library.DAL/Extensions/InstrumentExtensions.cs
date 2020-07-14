@@ -18,7 +18,7 @@ namespace Library.DAL.Extensions
             {
                 Id = Instrument.Id,
                 Name = Instrument.Name,
-                LibUsers = Instrument.UserInstruments.Select(x => x.LibUser.ToTransferObject()).ToList(),
+                LibUsers = Instrument.UserInstruments?.Select(x => x.LibUser.ToTransferObject()).ToList(),
             };
         }
 

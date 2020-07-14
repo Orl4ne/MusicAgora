@@ -84,7 +84,7 @@ namespace Library.DAL.Tests.RepositoriesTests
             context.SaveChanges();
 
             //Act & Assert
-            Assert.ThrowsException<KeyNotFoundException>(() => instrumentRepository.Delete(category));
+            Assert.ThrowsException<ArgumentException>(() => instrumentRepository.Delete(category));
         }
 
         [TestMethod]
