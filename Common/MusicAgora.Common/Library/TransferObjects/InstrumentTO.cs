@@ -7,7 +7,7 @@ namespace MusicAgora.Common.Library.TransferObjects
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<int> UserIds { get; set; }
+        public List<int> LibUserIds { get; set; }
         public List<ApplicationUser> Users { get; set; }
     }
 }

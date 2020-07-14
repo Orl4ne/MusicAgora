@@ -35,7 +35,6 @@ namespace Library.DAL.Tests.RepositoriesTests
             Assert.AreEqual(result.Name, "Musique de films");
         }
 
-
         [TestMethod]
         public void AddCategory_AddNull_ThrowException()
         {

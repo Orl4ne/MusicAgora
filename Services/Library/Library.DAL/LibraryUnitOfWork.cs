@@ -31,6 +31,10 @@ namespace Library.DAL
         public ISheetPartRepository SheetPartRepository
             => sheetPartRepository ??= new SheetPartRepository(libraryContext);
 
+        private ILibUserRepository libUserRepository;
+        public ILibUserRepository LibUserRepository
+            => libUserRepository ??= new LibUserRepository(libraryContext);
+
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing)

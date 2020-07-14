@@ -16,6 +16,7 @@ namespace Library.BLL.Tests.UseCasesTests.MusicianUseCasesTests
     [TestClass]
     public class GetAllCurrentSheetPartsTests
     {
+        [Ignore]
         [TestMethod]
         public void GetAllCurrentSheetPartsTests_Successful()
         {

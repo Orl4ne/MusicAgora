@@ -12,5 +12,6 @@ namespace MusicAgora.Common.Library.Interfaces
         IInstrumentRepository InstrumentRepository { get; }
         ISheetRepository SheetRepository { get; }
         ISheetPartRepository SheetPartRepository { get; }
+        ILibUserRepository LibUserRepository { get; }
     }
 }

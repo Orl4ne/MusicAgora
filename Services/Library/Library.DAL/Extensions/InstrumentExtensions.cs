@@ -18,7 +18,7 @@ namespace Library.DAL.Extensions
             {
                 Id = Instrument.Id,
                 Name = Instrument.Name,
-                UserIds = Instrument.UserIds,
+                UserIds = Instrument.UserInstruments.U,
             };
         }
 
