@@ -1,6 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Library.DAL.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MusicAgora.Common.Library.Interfaces.IRepositories;
+using MusicAgora.Common.Library.TransferObjects;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Library.DAL.Tests.RepositoriesTests
@@ -12,7 +18,25 @@ namespace Library.DAL.Tests.RepositoriesTests
         [TestMethod]
         public void AddLibUser_Successful()
         {
+            var options = new DbContextOptionsBuilder<LibraryContext>()
+                .UseInMemoryDatabase(databaseName: MethodBase.GetCurrentMethod().Name)
+                .Options;
+            using var context = new LibraryContext(options);
+            ILibUserRepository libUserRepository = new LibUserRepository(context);
+            IInstrumentRepository instrumentRepository = new InstrumentRepository(context);
 
+            //Act
+
+            var instru = new InstrumentTO { Name = "Saxophone" };
+            var addedInstru = instrumentRepository.Add(instru);
+            context.SaveChanges();
+            var libUser = new LibUserTO { IdentityUserId = 23, InstrumentIds = new List<int> { 1 } };
+            var result = libUserRepository.Add(libUser);
+            context.SaveChanges();
+
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.InstrumentIds.First(), 1);
         }
 
 

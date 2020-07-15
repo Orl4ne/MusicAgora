@@ -18,7 +18,7 @@ namespace Library.DAL.Extensions
             {
                 Id = LibUser.Id,
                 IdentityUserId = LibUser.IdentityUserId,
-                Instruments = LibUser.UserInstruments?.Select(x => x.Instrument.ToTransferObject()).ToList(),
+                InstrumentIds = LibUser.UserInstruments?.Select(x => x.InstrumentId).ToList(),
             };
         }
 
@@ -33,12 +33,10 @@ namespace Library.DAL.Extensions
                 IdentityUserId = LibUser.IdentityUserId,
             };
 
-            libUserEF.UserInstruments = LibUser.Instruments?.Select(x => new UserInstruEF
+            libUserEF.UserInstruments = LibUser.InstrumentIds?.Select(x => new UserInstruEF
             {
-                LibUser = libUserEF,
                 LibUserId = libUserEF.Id,
-                Instrument = x.ToEF(),
-                InstruId = x.Id,
+                InstrumentId = x,
             }).ToList();
 
             return libUserEF;
