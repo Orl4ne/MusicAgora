@@ -52,9 +52,10 @@ namespace Library.DAL.Repositories
 
         public IEnumerable<InstrumentTO> GetAll()
         {
-            var list = libraryContext.Instruments.AsEnumerable()
-                 ?.Select(x => x.ToTransferObject())
-                 .ToList();
+            var list = libraryContext.Instruments.Include(x=>x.UserInstruments)
+                .AsEnumerable()
+                ?.Select(x => x.ToTransferObject())
+                .ToList();
             if (!list.Any())
             {
                 throw new ArgumentNullException("There is no Instrument in DB");

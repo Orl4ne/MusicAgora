@@ -44,17 +44,17 @@ namespace Library.DAL.Extensions
             return libUserEF;
         }
 
-        public static LibUserEF ToTrackedEF(this LibUserTO LibUser, LibUserEF LibUserTOModify)
+        public static LibUserEF ToTrackedEF(this LibUserTO LibUser, LibUserEF LibUserToModify)
         {
-            if (LibUserTOModify is null)
-                throw new ArgumentNullException(nameof(LibUserTOModify));
+            if (LibUserToModify is null)
+                throw new ArgumentNullException(nameof(LibUserToModify));
             if (LibUser is null)
                 throw new ArgumentNullException(nameof(LibUser));
 
-            //LibUserTOModify.Id = LibUser.Id;
-            //LibUserTOModify.Name = LibUser.Name;
+            LibUserToModify.Id = LibUser.Id;
+            LibUserToModify.IdentityUserId = LibUser.IdentityUserId;
 
-            return LibUserTOModify;
+            return LibUserToModify;
         }
     }
 }

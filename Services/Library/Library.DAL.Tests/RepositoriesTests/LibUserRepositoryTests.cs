@@ -6,24 +6,24 @@ using System.Text;
 namespace Library.DAL.Tests.RepositoriesTests
 {
     [TestClass]
-    public class SheetPartRepositoryTests
+    public class LibUserRepositoryTests
     {
         #region Add
         [TestMethod]
-        public void AddSheetPart_Successful()
+        public void AddLibUser_Successful()
         {
 
         }
 
 
         [TestMethod]
-        public void AddSheetPart_AddNull_ThrowException()
+        public void AddLibUser_AddNull_ThrowException()
         {
 
         }
 
         [TestMethod]
-        public void AddSheetPart_AddExistingSheetPart_DoNotInsertTwiceInDb()
+        public void AddLibUser_AddExistingSheetPart_DoNotInsertTwiceInDb()
         {
 
         }
@@ -31,13 +31,13 @@ namespace Library.DAL.Tests.RepositoriesTests
 
         #region Delete
         [TestMethod]
-        public void DeleteSheetPart_ProvidingNull_ThrowException()
+        public void DeleteLibUser_ProvidingNull_ThrowException()
         {
 
         }
 
         [TestMethod]
-        public void DeleteSheetPart_Successful()
+        public void DeleteLibUser_Successful()
         {
 
         }
@@ -46,13 +46,13 @@ namespace Library.DAL.Tests.RepositoriesTests
 
         #region GetById
         [TestMethod]
-        public void GetSheetPartById_Successful()
+        public void GetLibUsertById_Successful()
         {
 
         }
 
         [TestMethod]
-        public void GetSheetPartById_ProvidingNonExistingId_ThrowException()
+        public void GetLibUserById_ProvidingNonExistingId_ThrowException()
         {
 
         }
@@ -60,7 +60,7 @@ namespace Library.DAL.Tests.RepositoriesTests
 
         #region GetAll
         [TestMethod]
-        public void GetAllSheetParts_Successful()
+        public void GetAllLibUsers_Successful()
         {
 
         }
@@ -68,17 +68,16 @@ namespace Library.DAL.Tests.RepositoriesTests
 
         #region Update
         [TestMethod]
-        public void UpdateSheetPart_Successful()
+        public void UpdateLibUser_Successful()
         {
 
         }
 
         [TestMethod]
-        public void UpdateSheetPart_ProvidingNonExistingSheetPart_ThrowException()
+        public void UpdateLibUser_ProvidingNonExistingSheetPart_ThrowException()
         {
 
         }
         #endregion
-
     }
 }
