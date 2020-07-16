@@ -77,14 +77,12 @@ namespace Library.DAL.Tests.RepositoriesTests
                  .UseInMemoryDatabase(databaseName: MethodBase.GetCurrentMethod().Name)
                  .Options;
             using var context = new LibraryContext(options);
-            IInstrumentRepository instrument = new InstrumentRepository(context);
             IInstrumentRepository instrumentRepository = new InstrumentRepository(context);
 
-            var category = new InstrumentTO { Name = "Saxophone" };
-            context.SaveChanges();
+            var instrument = new InstrumentTO { Name = "Saxophone" };
 
             //Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => instrumentRepository.Delete(category));
+            Assert.ThrowsException<ArgumentException>(() => instrumentRepository.Delete(instrument));
         }
 
         [TestMethod]

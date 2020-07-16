@@ -84,7 +84,6 @@ namespace Library.DAL.Tests.RepositoriesTests
             ICategoryRepository categoryRepository = new CategoryRepository(context);
 
             var category = new CategoryTO { Name = "Musique de films" };
-            context.SaveChanges();
 
             //Act & Assert
             Assert.ThrowsException<ArgumentException>(() => categoryRepository.Delete(category));

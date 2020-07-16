@@ -32,7 +32,7 @@ namespace Library.DAL.Extensions
                 Id = LibUser.Id,
                 IdentityUserId = LibUser.IdentityUserId,
             };
-
+            
             libUserEF.UserInstruments = LibUser.InstrumentIds?.Select(x => new UserInstruEF
             {
                 LibUserId = libUserEF.Id,

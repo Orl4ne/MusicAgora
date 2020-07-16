@@ -19,9 +19,18 @@ namespace Library.DAL.Repositories
 
         public LibUserTO Add(LibUserTO entity)
         {
+            if (entity is null)
+            {
+                throw new ArgumentNullException();
+            }
+            if (entity.Id != 0)
+            {
+                return entity;
+            }
+
             var entityEF = entity.ToEF();
             var result = libraryContext.LibraryUsers.Add(entityEF);
-            libraryContext.SaveChanges();
+            //libraryContext.SaveChanges();
 
             return result.Entity.ToTransferObject();
         }
@@ -73,11 +82,11 @@ namespace Library.DAL.Repositories
             }
             if (entity.Id <= 0)
             {
-                throw new ArgumentException("Instrument To Update Invalid Id");
+                throw new ArgumentException("LibUser To Update Invalid Id");
             }
-            if (!libraryContext.Instruments.Any(x => x.Id == entity.Id))
+            if (!libraryContext.LibraryUsers.Any(x => x.Id == entity.Id))
             {
-                throw new KeyNotFoundException($"Update(InstrumentTO) Can't find instrument to update.");
+                throw new KeyNotFoundException($"Update(LibUser) Can't find LibUser to update.");
             }
 
             var editedEntity = libraryContext.LibraryUsers.FirstOrDefault(e => e.Id == entity.Id);
@@ -85,6 +94,7 @@ namespace Library.DAL.Repositories
             {
                 entity.ToTrackedEF(editedEntity);
             }
+            var tracking = libraryContext.LibraryUsers.Update(editedEntity);
             libraryContext.SaveChanges();
 
             return editedEntity.ToTransferObject();

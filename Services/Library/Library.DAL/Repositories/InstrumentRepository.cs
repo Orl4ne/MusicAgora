@@ -28,7 +28,7 @@ namespace Library.DAL.Repositories
             }
             var entityEF = entity.ToEF();
             var result = libraryContext.Instruments.Add(entityEF);
-            libraryContext.SaveChanges();
+            //libraryContext.SaveChanges();
 
             return result.Entity.ToTransferObject();
         }
