@@ -48,7 +48,7 @@ namespace Library.DAL.Tests.RepositoriesTests
             Assert.ThrowsException<ArgumentNullException>(() => instrumentRepository.Add(null));
         }
         [TestMethod]
-        public void AddInstrument_AddExistingCategory_DoNotInsertTwiceInDb()
+        public void AddInstrument_AddExistingInstrument_DoNotInsertTwiceInDb()
         {
             //Arrange
             var options = new DbContextOptionsBuilder<LibraryContext>()
@@ -59,7 +59,9 @@ namespace Library.DAL.Tests.RepositoriesTests
 
             //Act
             var instru = new InstrumentTO { Name = "Saxophone" };
+            var instru2 = new InstrumentTO {Id=2, Name = "Saxophone" };
             var result = instrumentRepository.Add(instru);
+            var result2 = instrumentRepository.Add(instru2);
             context.SaveChanges();
 
             //Assert

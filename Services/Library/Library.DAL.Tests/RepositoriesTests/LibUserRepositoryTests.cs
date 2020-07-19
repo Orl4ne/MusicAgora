@@ -27,6 +27,8 @@ namespace Library.DAL.Tests.RepositoriesTests
             //Act
             var libUser = new LibUserTO { IdentityUserId = 23, InstrumentIds = new List<int> { 1 } };
             var result = libUserRepository.Add(libUser);
+            var libUser2 = new LibUserTO { IdentityUserId = 2, InstrumentIds = new List<int> { 1 } };
+            var result2 = libUserRepository.Add(libUser2);
             context.SaveChanges();
 
             //Assert
@@ -205,13 +207,14 @@ namespace Library.DAL.Tests.RepositoriesTests
             context.SaveChanges();
 
             //Act
-            addedLibUser.IdentityUserId = 29;
+            var result = new List<int> { 1, 4, 2};
+            addedLibUser.InstrumentIds = new List<int> { 1, 4, 2};
             var test = libUserRepository.Update(addedLibUser);
             context.SaveChanges();
 
             //Assert
             Assert.AreEqual(3, libUserRepository.GetAll().Count());
-            Assert.AreEqual(29, test.IdentityUserId);
+            CollectionAssert.AreEqual(new List<int> { 1, 4, 2 }, test.InstrumentIds);
         }
 
         [TestMethod]

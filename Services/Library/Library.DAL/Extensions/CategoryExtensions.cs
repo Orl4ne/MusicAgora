@@ -32,17 +32,18 @@ namespace Library.DAL.Extensions
             };
         }
 
-        public static CategoryEF ToTrackedEF(this CategoryTO Category, CategoryEF CategoryToModify)
+        public static CategoryEF UpdateFromDetached(this CategoryEF AttachedEF, CategoryEF DetachedEF)
         {
-            if (CategoryToModify is null)
-                throw new ArgumentNullException(nameof(CategoryToModify));
-            if (Category is null)
-                throw new ArgumentNullException(nameof(Category));
-
-            CategoryToModify.Id = Category.Id;
-            CategoryToModify.Name = Category.Name;
-
-            return CategoryToModify;
+            if (AttachedEF is null)
+                throw new ArgumentNullException(nameof(AttachedEF));
+            if (DetachedEF is null)
+                throw new ArgumentNullException(nameof(DetachedEF));
+            if ((AttachedEF != default) && (DetachedEF != default))
+            {
+                AttachedEF.Id = DetachedEF.Id;
+                AttachedEF.Name = DetachedEF.Name;
+            }
+            return AttachedEF;
         }
 
     }

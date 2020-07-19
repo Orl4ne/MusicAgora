@@ -45,23 +45,24 @@ namespace Library.DAL.Extensions
             };
         }
 
-        public static SheetEF ToTrackedEF(this SheetTO Sheet, SheetEF SheetToModify)
+        public static SheetEF UpdateFromDetached(this SheetEF AttachedEF, SheetEF DetachedEF)
         {
-            if (SheetToModify is null)
-                throw new ArgumentNullException(nameof(SheetToModify));
-            if (Sheet is null)
-                throw new ArgumentNullException(nameof(Sheet));
-
-            SheetToModify.Id = Sheet.Id;
-            SheetToModify.Name = Sheet.Name;
-            SheetToModify.Arranger = Sheet.Arranger;
-            SheetToModify.Category = Sheet.Category.ToTrackedEF(SheetToModify.Category);
-            SheetToModify.Composer = Sheet.Composer;
-            SheetToModify.IsCurrent = Sheet.IsCurrent;
-            SheetToModify.IsGarde = Sheet.IsGarde;
-            SheetToModify.IsIndependance = Sheet.IsIndependance;
-
-            return SheetToModify;
+            if (AttachedEF is null)
+                throw new ArgumentNullException(nameof(AttachedEF));
+            if (DetachedEF is null)
+                throw new ArgumentNullException(nameof(DetachedEF));
+            if ((AttachedEF != default) && (DetachedEF != default))
+            {
+                AttachedEF.Id = DetachedEF.Id;
+                AttachedEF.Name = DetachedEF.Name;
+                AttachedEF.Arranger = DetachedEF.Arranger;
+                AttachedEF.Category = DetachedEF.Category;
+                AttachedEF.Composer = DetachedEF.Composer;
+                AttachedEF.IsCurrent = DetachedEF.IsCurrent;
+                AttachedEF.IsGarde = DetachedEF.IsGarde;
+                AttachedEF.IsIndependance = DetachedEF.IsIndependance;
+            }
+            return AttachedEF;
         }
     }
 }

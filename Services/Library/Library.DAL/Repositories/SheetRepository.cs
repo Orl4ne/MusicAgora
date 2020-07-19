@@ -93,11 +93,14 @@ namespace Library.DAL.Repositories
             var editedEntity = libraryContext.Sheets.FirstOrDefault(e => e.Id == entity.Id);
             if (editedEntity != default)
             {
-                entity.ToTrackedEF(editedEntity);
+                editedEntity.UpdateFromDetached(entity.ToEF());
             }
-            libraryContext.SaveChanges();
+            var tracking = libraryContext.Sheets.Update(editedEntity);
+            tracking.State = EntityState.Detached;
+            //libraryContext.SaveChanges();
 
-            return editedEntity.ToTransferObject();
+            //return editedEntity.ToTransferObject();
+            return tracking.Entity.ToTransferObject();
         }
     }
 }

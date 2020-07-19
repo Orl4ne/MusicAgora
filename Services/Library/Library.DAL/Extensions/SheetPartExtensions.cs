@@ -36,19 +36,20 @@ namespace Library.DAL.Extensions
             };
         }
 
-        public static SheetPartEF ToTrackedEF(this SheetPartTO SheetPart, SheetPartEF SheetPartToModify)
+        public static SheetPartEF UpdateFromDetached(this SheetPartEF AttachedEF, SheetPartEF DetachedEF)
         {
-            if (SheetPartToModify is null)
-                throw new ArgumentNullException(nameof(SheetPartToModify));
-            if (SheetPart is null)
-                throw new ArgumentNullException(nameof(SheetPart));
-
-            SheetPartToModify.Id = SheetPart.Id;
-            SheetPartToModify.Sheet = SheetPart.Sheet.ToTrackedEF(SheetPartToModify.Sheet);
-            SheetPartToModify.Instrument = SheetPart.Instrument.ToTrackedEF(SheetPartToModify.Instrument);
-            SheetPartToModify.Path = SheetPart.Path;
-
-            return SheetPartToModify;
+            if (AttachedEF is null)
+                throw new ArgumentNullException(nameof(AttachedEF));
+            if (DetachedEF is null)
+                throw new ArgumentNullException(nameof(DetachedEF));
+            if ((AttachedEF != default) && (DetachedEF != default))
+            {
+                AttachedEF.Id = DetachedEF.Id;
+                AttachedEF.Sheet = DetachedEF.Sheet;
+                AttachedEF.Instrument = DetachedEF.Instrument;
+                AttachedEF.Path = DetachedEF.Path;
+            }
+            return AttachedEF;
         }
     }
 }

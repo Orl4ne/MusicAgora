@@ -42,17 +42,24 @@ namespace Library.DAL.Extensions
             return libUserEF;
         }
 
-        public static LibUserEF ToTrackedEF(this LibUserTO LibUser, LibUserEF LibUserToModify)
+        public static LibUserEF UpdateFromDetached(this LibUserEF AttachedEF, LibUserEF DetachedEF)
         {
-            if (LibUserToModify is null)
-                throw new ArgumentNullException(nameof(LibUserToModify));
-            if (LibUser is null)
-                throw new ArgumentNullException(nameof(LibUser));
+            if (AttachedEF is null)
+                throw new ArgumentNullException(nameof(AttachedEF));
 
-            LibUserToModify.Id = LibUser.Id;
-            LibUserToModify.IdentityUserId = LibUser.IdentityUserId;
+            if (DetachedEF is null)
+                throw new ArgumentNullException(nameof(DetachedEF));
 
-            return LibUserToModify;
+            if (AttachedEF.Id != DetachedEF.Id)
+                throw new Exception("Cannot update ComponentEF entity as it is not the same.");
+
+            if ((AttachedEF != default) && (DetachedEF != default))
+            {
+                AttachedEF.Id = DetachedEF.Id;
+                AttachedEF.IdentityUserId = DetachedEF.IdentityUserId;
+                AttachedEF.UserInstruments = DetachedEF.UserInstruments;
+            }
+            return AttachedEF;
         }
     }
 }

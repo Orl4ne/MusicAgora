@@ -253,13 +253,13 @@ namespace Library.DAL.Tests.RepositoriesTests
             context.SaveChanges();
 
             //Act
-            addedSheet.Name = "Old Mozart";
+            addedSheet.Category = addedCategory2;
             var test = sheetRepository.Update(addedSheet);
             context.SaveChanges();
 
             //Assert
             Assert.AreEqual(2, sheetRepository.GetAll().Count());
-            Assert.AreEqual("Old Mozart", test.Name);
+            Assert.AreEqual("Musique de classique", test.Category.Name);
         }
 
         [TestMethod]

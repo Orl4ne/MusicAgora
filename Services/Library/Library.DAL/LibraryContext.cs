@@ -34,16 +34,15 @@ namespace Library.DAL
 
             modelBuilder.Entity<UserInstruEF>().HasKey(ui => new { ui.LibUserId, ui.InstrumentId });
 
-            //modelBuilder.Entity<UserInstruEF>()
-            //    .HasOne<LibUserEF>(ui => ui.LibUser)
-            //    .WithMany(i => i.UserInstruments)
-            //    .HasForeignKey(ui => ui.LibUserId);
+            modelBuilder.Entity<UserInstruEF>()
+                .HasOne<LibUserEF>(ui => ui.LibUser)
+                .WithMany(i => i.UserInstruments)
+                .HasForeignKey(ui => ui.LibUserId);
 
-
-            //modelBuilder.Entity<UserInstruEF>()
-            //    .HasOne<InstrumentEF>(ui => ui.Instrument)
-            //    .WithMany(u => u.UserInstruments)
-            //    .HasForeignKey(ui => ui.InstruId);
+            modelBuilder.Entity<UserInstruEF>()
+                .HasOne<InstrumentEF>(ui => ui.Instrument)
+                .WithMany(u => u.UserInstruments)
+                .HasForeignKey(ui => ui.InstrumentId);
         }
 
         public DbSet<CategoryEF> Categories { get; set; }
