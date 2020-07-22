@@ -30,13 +30,13 @@ namespace Library.BLL.UseCases
             var currentSheetParts = new List<SheetPartTO>();
             foreach (var sheet in currentSheets)
             {
-                var currentSP = unitOfWork.SheetPartRepository.GetAll().Where(s => s.Sheet == sheet).ToList();
+                var currentSP = unitOfWork.SheetPartRepository?.GetAll().Where(s => s.Sheet == sheet).ToList();
                 currentSheetParts.AddRange(currentSP);
             }
             var result = new List<SheetPartTO>();
             foreach (var inst in libUser.InstrumentIds)
             {
-                var currentSheetPartByInstru = currentSheetParts.Where(sp => sp.Instrument.Id == inst);
+                var currentSheetPartByInstru = currentSheetParts?.Where(sp => sp.Instrument.Id == inst);
                 result.AddRange(currentSheetPartByInstru);
             }
             return result;

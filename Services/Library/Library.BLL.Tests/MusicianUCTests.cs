@@ -71,7 +71,7 @@ namespace Library.BLL.Tests
             //mockUnitOfWork.Setup(u => u.LibUserRepository.GetAll())
             //   .Returns(MockLibUsers());
             mockUnitOfWork.Setup(u => u.LibUserRepository.GetByIdentityUserId(It.IsAny<int>()))
-                .Returns(new LibUserTO { Id = 1, IdentityUserId = 23, InstrumentIds = new List<int> { 1 } });
+                .Returns(new LibUserTO { Id = 2, IdentityUserId = 4, InstrumentIds = new List<int> { 2, 3 } });
             mockUnitOfWork.Setup(u => u.SheetPartRepository.GetAll())
                          .Returns(MockSheetParts());
 
@@ -83,7 +83,6 @@ namespace Library.BLL.Tests
             mockUnitOfWork.Verify(u => u.LibUserRepository.GetByIdentityUserId(4), Times.Once);
             mockUnitOfWork.Verify(u => u.SheetPartRepository.GetAll(), Times.AtLeast(1));
         }
-
         #endregion
     }
 }
