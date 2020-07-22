@@ -1,4 +1,5 @@
 ﻿using Library.DAL;
+using MusicAgora.Common.Library.Interfaces;
 using MusicAgora.Common.Library.Interfaces.UseCases;
 using MusicAgora.Common.Library.TransferObjects;
 using System;
@@ -10,10 +11,10 @@ namespace Library.BLL.UseCases
     public class MusicianUC : IMusicianUC
     {
         #region CTOR
-        private LibraryContext context;
-        public MusicianUC(LibraryContext libraryContext)
+        private readonly ILibraryUnitOfWOrk unitOfWork;
+        public MusicianUC(ILibraryUnitOfWOrk iLibraryUnitOfWork)
         {
-            context = libraryContext;
+            this.unitOfWork = iLibraryUnitOfWork ?? throw new System.ArgumentNullException(nameof(iLibraryUnitOfWork));
         }
         #endregion
         #region Get A Current SheetPart
@@ -23,7 +24,7 @@ namespace Library.BLL.UseCases
         }
         #endregion
 
-        public List<SheetPartTO> GetAllCurrentSheetParts(int UserId)
+        public List<SheetPartTO> GetAllMyCurrentSheetParts(int UserId)
         {
             throw new NotImplementedException();
         }

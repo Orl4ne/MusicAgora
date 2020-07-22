@@ -7,11 +7,8 @@ namespace MusicAgora.Common.Library.Interfaces.UseCases
 {
     public interface IMusicianUC
     {
-        //User CreateUserAccount(IUser user);
-        List<SheetPartTO> GetAllCurrentSheetParts(int UserId);
+        List<SheetPartTO> GetAllMyCurrentSheetParts(int UserId);
         SheetPartTO GetACurrentSheetPart(int UserId);
         bool UpdateMyAccount(int UserId);
-
-        
     }
 }

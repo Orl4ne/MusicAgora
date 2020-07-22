@@ -9,7 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Library.DAL.Tests.RepositoriesTests
+namespace Library.DAL.Tests
 {
     [TestClass]
     public class CategoryRepositoryTests
