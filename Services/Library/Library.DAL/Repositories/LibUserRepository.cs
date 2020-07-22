@@ -73,6 +73,14 @@ namespace Library.DAL.Repositories
             }
             return libraryContext.LibraryUsers.FirstOrDefault(x => x.Id == id).ToTransferObject();
         }
+        public LibUserTO GetByIdentityUserId(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException("LibUser not found, invalid Id");
+            }
+            return libraryContext.LibraryUsers.FirstOrDefault(x => x.IdentityUserId == id).ToTransferObject();
+        }
 
         public LibUserTO Update(LibUserTO entity)
         {

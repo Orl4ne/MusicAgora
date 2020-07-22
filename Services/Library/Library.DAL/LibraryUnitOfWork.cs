@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Library.DAL
 {
-    public class LibraryUnitOfWork : ILibraryUnitOfWOrk
+    public class LibraryUnitOfWork : ILibraryUnitOfWork
     {
         private readonly LibraryContext libraryContext;
         public LibraryUnitOfWork(LibraryContext context)

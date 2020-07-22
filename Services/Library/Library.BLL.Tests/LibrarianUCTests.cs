@@ -1,24 +1,17 @@
 ﻿using Library.BLL.UseCases;
-using Library.DAL;
-using Library.DAL.Entities;
-using Library.DAL.Extensions;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using MusicAgora.Common.Library.Interfaces;
-using MusicAgora.Common.Library.Interfaces.IRepositories;
 using MusicAgora.Common.Library.TransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 
 namespace Library.BLL.Tests
 {
     [TestClass]
-    public class MusicianUCTests
+    public class LibrarianUCTests
     {
         #region MocksMethods
         public List<InstrumentTO> MockInstruments()
@@ -58,7 +51,7 @@ namespace Library.BLL.Tests
             return new List<SheetPartTO> { sheetPart, sheetPart2, sheetPart3, sheetPart4, sheetPart5, sheetPart6, sheetPart7, sheetPart8, sheetPart9 };
 
         }
-        #endregion
+#endregion
         #region GetAllMyCurrentSheetParts
         [TestMethod]
         public void GetAllMyCurrentSheetPartsTests_Successful()
@@ -75,7 +68,7 @@ namespace Library.BLL.Tests
             mockUnitOfWork.Setup(u => u.SheetPartRepository.GetAll())
                          .Returns(MockSheetParts());
 
-            var sut = new MusicianUC(mockUnitOfWork.Object);
+            var sut = new LibrarianUC(mockUnitOfWork.Object);
             var result = sut.GetAllMyCurrentSheetParts(4);
 
             Assert.IsNotNull(result);

@@ -8,5 +8,6 @@ namespace MusicAgora.Common.Library.Interfaces.IRepositories
 {
     public interface ILibUserRepository: IRepository<LibUserTO, int>
     {
+        LibUserTO GetByIdentityUserId(int id);
     }
 }

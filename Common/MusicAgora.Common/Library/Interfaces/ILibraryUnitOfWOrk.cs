@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MusicAgora.Common.Library.Interfaces
 {
-    public interface ILibraryUnitOfWOrk : IUnitOfWork
+    public interface ILibraryUnitOfWork : IUnitOfWork
     {
         ICategoryRepository CategoryRepository { get; }
         IInstrumentRepository InstrumentRepository { get; }
