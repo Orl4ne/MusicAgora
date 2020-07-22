@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MusicAgora.Common.Library.Interfaces.UseCases
 {
-    public interface ILibrarianUC : IMusicianUC
+    public interface ILibrarianUC
     {
     }
 }

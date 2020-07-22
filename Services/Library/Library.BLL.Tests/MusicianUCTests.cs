@@ -12,8 +12,6 @@ using MusicAgora.Common.Library.TransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 
 namespace Library.BLL.Tests
 {
@@ -59,6 +57,7 @@ namespace Library.BLL.Tests
 
         }
         #endregion
+
         #region GetAllMyCurrentSheetParts
         [TestMethod]
         public void GetAllMyCurrentSheetPartsTests_Successful()
@@ -79,6 +78,8 @@ namespace Library.BLL.Tests
             var result = sut.GetAllMyCurrentSheetParts(4);
 
             Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.Count(x=>x.Instrument.Id == 1));
+            Assert.AreEqual(0, result.Count(x=>x.Sheet.Id == 1));
             mockUnitOfWork.Verify(u => u.SheetRepository.GetAll(), Times.Once);
             mockUnitOfWork.Verify(u => u.LibUserRepository.GetByIdentityUserId(4), Times.Once);
             mockUnitOfWork.Verify(u => u.SheetPartRepository.GetAll(), Times.AtLeast(1));
