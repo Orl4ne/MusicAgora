@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Library.BLL.UseCases
 {
-    public class LibrarianUC : MusicianUC, ILibrarianUC
+    public class LibrarianUC : ChiefUC, ILibrarianUC
     {
         #region CTOR
         private readonly ILibraryUnitOfWork unitOfWork;
@@ -16,9 +16,19 @@ namespace Library.BLL.UseCases
         {
             this.unitOfWork = iLibraryUnitOfWork ?? throw new System.ArgumentNullException(nameof(iLibraryUnitOfWork));
         }
+
+        public SheetTO CreateANewSheet(SheetTO Sheet)
+        {
+            throw new NotImplementedException();
+        }
+
+        public SheetPartTO UploadSheetPartInSheet(SheetPartTO SheetPart)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
-        
-       
+
+
     }
 }

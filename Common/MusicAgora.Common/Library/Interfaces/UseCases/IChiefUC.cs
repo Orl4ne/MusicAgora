@@ -5,9 +5,9 @@ using System.Text;
 
 namespace MusicAgora.Common.Library.Interfaces.UseCases
 {
-    public interface ILibrarianUC
+    public interface IChiefUC
     {
-        SheetTO CreateANewSheet(SheetTO Sheet);
-        SheetPartTO UploadSheetPartInSheet(SheetPartTO SheetPart);
+        List<SheetTO> GetAllSheets();
+        SheetTO SetAsCurrentSheet(int IdentityUserId, int SheetId);
     }
 }
