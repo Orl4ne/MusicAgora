@@ -9,5 +9,6 @@ namespace MusicAgora.Common.Library.Interfaces.UseCases
     {
         List<SheetTO> GetAllSheets();
         SheetTO SetAsCurrentSheet(int IdentityUserId, int SheetId);
+        List<SheetPartTO> GetAllSheetPartsBySheet(int SheetId);
     }
 }

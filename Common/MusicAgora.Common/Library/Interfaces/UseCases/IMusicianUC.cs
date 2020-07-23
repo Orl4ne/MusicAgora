@@ -7,6 +7,5 @@ namespace MusicAgora.Common.Library.Interfaces.UseCases
     {
         List<SheetPartTO> GetAllMyCurrentSheetParts(int IdentityUserId);
         SheetPartTO GetACurrentSheetPart(int IdentityUserId, int SheetPartId);
-
     }
 }

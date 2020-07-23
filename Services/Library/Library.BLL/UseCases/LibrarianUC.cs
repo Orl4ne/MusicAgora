@@ -16,6 +16,7 @@ namespace Library.BLL.UseCases
         {
             this.unitOfWork = iLibraryUnitOfWork ?? throw new System.ArgumentNullException(nameof(iLibraryUnitOfWork));
         }
+        #endregion
 
         public SheetTO CreateANewSheet(SheetTO Sheet)
         {
@@ -26,9 +27,5 @@ namespace Library.BLL.UseCases
         {
             throw new NotImplementedException();
         }
-        #endregion
-
-
-
     }
 }

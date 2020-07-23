@@ -15,7 +15,13 @@ namespace Library.BLL.UseCases
         {
             this.unitOfWork = iLibraryUnitOfWork ?? throw new System.ArgumentNullException(nameof(iLibraryUnitOfWork));
         }
+        #endregion
 
+        public List<SheetPartTO> GetAllSheetPartsBySheet(int SheetId)
+        {
+            throw new NotImplementedException();
+        }
+        
         public List<SheetTO> GetAllSheets()
         {
             throw new NotImplementedException();
@@ -25,6 +31,5 @@ namespace Library.BLL.UseCases
         {
             throw new NotImplementedException();
         }
-        #endregion
     }
 }

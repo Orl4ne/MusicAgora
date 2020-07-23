@@ -19,9 +19,11 @@ namespace Library.BLL.UseCases
             this.unitOfWork = iLibraryUnitOfWork ?? throw new System.ArgumentNullException(nameof(iLibraryUnitOfWork));
         }
         #endregion
-        #region 
 
-        #endregion
+        public SheetPartTO GetACurrentSheetPart(int IdentityUserId, int SheetPartId)
+        {
+            throw new NotImplementedException();
+        }
 
         public List<SheetPartTO> GetAllMyCurrentSheetParts(int IdentityUserId)
         {
