@@ -6,6 +6,6 @@ namespace MusicAgora.Common.Library.Interfaces.UseCases
     public interface IMusicianUC
     {
         List<SheetPartTO> GetAllMyCurrentSheetParts(int IdentityUserId);
-        SheetPartTO SeeASheetPartDetails(int IdentityUserId, int SheetPartId);
+        SheetPartTO SeeASheetPartDetails(int SheetPartId);
     }
 }

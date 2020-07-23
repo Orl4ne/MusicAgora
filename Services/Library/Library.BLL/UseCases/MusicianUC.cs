@@ -20,22 +20,26 @@ namespace Library.BLL.UseCases
         }
         #endregion
 
-        public SheetPartTO SeeASheetPartDetails(int IdentityUserId, int SheetPartId)
+        public SheetPartTO SeeASheetPartDetails(int SheetPartId)
         {
             return unitOfWork.SheetPartRepository.GetById(SheetPartId);
         }
 
         public List<SheetPartTO> GetAllMyCurrentSheetParts(int IdentityUserId)
         {
+            //Attaching LibUser 
             var libUser = unitOfWork.LibUserRepository.GetByIdentityUserId(IdentityUserId);
+            //Get All current sheets
             var currentSheets = unitOfWork.SheetRepository.GetAll().Where(s => s.IsCurrent == true);
             var currentSheetParts = new List<SheetPartTO>();
+            //Get All SheetParts of Current sheets
             foreach (var sheet in currentSheets)
             {
                 var currentSP = unitOfWork.SheetPartRepository?.GetAll().Where(s => s.Sheet == sheet).ToList();
                 currentSheetParts.AddRange(currentSP);
             }
             var result = new List<SheetPartTO>();
+            // Getting the SheetParts of the Instruments of the LibUser
             foreach (var inst in libUser.InstrumentIds)
             {
                 var currentSheetPartByInstru = currentSheetParts?.Where(sp => sp.Instrument.Id == inst);

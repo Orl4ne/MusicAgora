@@ -85,5 +85,21 @@ namespace Library.BLL.Tests
             mockUnitOfWork.Verify(u => u.SheetPartRepository.GetAll(), Times.AtLeast(1));
         }
         #endregion
+
+        #region SeeASheetPartDetails
+        [TestMethod]
+        public void SeeASheetPartDetails_successful()
+        {
+            var mockUnitOfWork = new Mock<ILibraryUnitOfWork>();
+            mockUnitOfWork.Setup(u => u.SheetPartRepository.GetById(It.IsAny<int>()))
+                         .Returns(new SheetPartTO { Id = 1, Path = $@"\Files\BestOf\Saxophone" });
+
+            var sut = new MusicianUC(mockUnitOfWork.Object);
+            var result = sut.SeeASheetPartDetails(1);
+
+            Assert.IsNotNull(result);
+            mockUnitOfWork.Verify(u => u.SheetPartRepository.GetById(1), Times.Once);
+        }
+        #endregion
     }
 }
