@@ -20,9 +20,9 @@ namespace Library.BLL.UseCases
         }
         #endregion
 
-        public SheetPartTO GetACurrentSheetPart(int IdentityUserId, int SheetPartId)
+        public SheetPartTO SeeASheetPartDetails(int IdentityUserId, int SheetPartId)
         {
-            throw new NotImplementedException();
+            return unitOfWork.SheetPartRepository.GetById(SheetPartId);
         }
 
         public List<SheetPartTO> GetAllMyCurrentSheetParts(int IdentityUserId)
