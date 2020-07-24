@@ -1,6 +1,7 @@
 ﻿using MusicAgora.Common.Library.TransferObjects;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace MusicAgora.Common.Library.Interfaces.UseCases
@@ -8,6 +9,6 @@ namespace MusicAgora.Common.Library.Interfaces.UseCases
     public interface ILibrarianUC
     {
         SheetTO CreateANewSheet(SheetTO Sheet);
-        SheetPartTO UploadSheetPartInSheet(SheetPartTO SheetPart);
+        SheetPartTO UploadSheetPartInSheet(SheetPartTO SheetPart, MemoryStream file);
     }
 }

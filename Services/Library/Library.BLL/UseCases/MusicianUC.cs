@@ -1,10 +1,12 @@
 ﻿using Library.DAL;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.Extensions.Configuration;
 using MusicAgora.Common.Library.Interfaces;
 using MusicAgora.Common.Library.Interfaces.UseCases;
 using MusicAgora.Common.Library.TransferObjects;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -14,9 +16,11 @@ namespace Library.BLL.UseCases
     {
         #region CTOR
         private readonly ILibraryUnitOfWork unitOfWork;
-        public MusicianUC(ILibraryUnitOfWork iLibraryUnitOfWork)
+        private readonly IConfiguration config;
+        public MusicianUC(ILibraryUnitOfWork iLibraryUnitOfWork, IConfiguration config)
         {
             this.unitOfWork = iLibraryUnitOfWork ?? throw new System.ArgumentNullException(nameof(iLibraryUnitOfWork));
+            this.config = config;
         }
         #endregion
 
@@ -48,5 +52,11 @@ namespace Library.BLL.UseCases
             return result;
         }
 
+        public string DowloadSheetPart(int SheetPartId)
+        {
+            var sheetPart = unitOfWork.SheetPartRepository.GetById(SheetPartId);
+            var path = sheetPart.Path;
+            return path;
+        }
     }
 }

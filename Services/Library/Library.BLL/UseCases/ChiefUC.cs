@@ -1,4 +1,5 @@
-﻿using MusicAgora.Common.Library.Interfaces;
+﻿using Microsoft.Extensions.Configuration;
+using MusicAgora.Common.Library.Interfaces;
 using MusicAgora.Common.Library.Interfaces.UseCases;
 using MusicAgora.Common.Library.TransferObjects;
 using System;
@@ -11,9 +12,12 @@ namespace Library.BLL.UseCases
     {
         #region CTOR
         private readonly ILibraryUnitOfWork unitOfWork;
-        public ChiefUC(ILibraryUnitOfWork iLibraryUnitOfWork) : base (iLibraryUnitOfWork)
+        private readonly IConfiguration config;
+
+        public ChiefUC(ILibraryUnitOfWork iLibraryUnitOfWork, IConfiguration config) : base (iLibraryUnitOfWork, config)
         {
             this.unitOfWork = iLibraryUnitOfWork ?? throw new System.ArgumentNullException(nameof(iLibraryUnitOfWork));
+            this.config = config;
         }
         #endregion
 

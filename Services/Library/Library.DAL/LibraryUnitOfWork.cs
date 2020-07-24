@@ -3,10 +3,12 @@ using MusicAgora.Common.Library.Interfaces;
 using MusicAgora.Common.Library.Interfaces.IRepositories;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Library.DAL
 {
+    [ExcludeFromCodeCoverage]
     public class LibraryUnitOfWork : ILibraryUnitOfWork
     {
         private readonly LibraryContext libraryContext;

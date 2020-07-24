@@ -1,12 +1,7 @@
-﻿using Library.BLL.UseCases;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using MusicAgora.Common.Library.Interfaces;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MusicAgora.Common.Library.TransferObjects;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Library.BLL.Tests
 {
@@ -52,31 +47,6 @@ namespace Library.BLL.Tests
 
         }
 #endregion
-        #region GetAllMyCurrentSheetParts
-        [TestMethod]
-        public void GetAllMyCurrentSheetPartsTests_Successful()
-        {
-            var mockUnitOfWork = new Mock<ILibraryUnitOfWork>();
-            //mockUnitOfWork.Setup(u => u.InstrumentRepository.GetAll())
-            //     .Returns(MockInstruments());
-            mockUnitOfWork.Setup(u => u.SheetRepository.GetAll())
-            .Returns(MockSheets());
-            //mockUnitOfWork.Setup(u => u.LibUserRepository.GetAll())
-            //   .Returns(MockLibUsers());
-            mockUnitOfWork.Setup(u => u.LibUserRepository.GetByIdentityUserId(It.IsAny<int>()))
-                .Returns(new LibUserTO { Id = 1, IdentityUserId = 23, InstrumentIds = new List<int> { 1 } });
-            mockUnitOfWork.Setup(u => u.SheetPartRepository.GetAll())
-                         .Returns(MockSheetParts());
 
-            var sut = new LibrarianUC(mockUnitOfWork.Object);
-            var result = sut.GetAllMyCurrentSheetParts(4);
-
-            Assert.IsNotNull(result);
-            mockUnitOfWork.Verify(u => u.SheetRepository.GetAll(), Times.Once);
-            mockUnitOfWork.Verify(u => u.LibUserRepository.GetByIdentityUserId(4), Times.Once);
-            mockUnitOfWork.Verify(u => u.SheetPartRepository.GetAll(), Times.AtLeast(1));
-        }
-
-        #endregion
     }
 }

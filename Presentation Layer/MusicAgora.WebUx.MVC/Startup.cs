@@ -39,12 +39,11 @@ namespace MusicAgora.WebUx.MVC
 
             // Configuring Contexts
             services.AddDbContext<IdentityContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("")));
+                options.UseSqlite(Configuration.GetConnectionString("IdentityConnection")));
 
             services.AddDbContext<LibraryContext>(options =>
                 options.UseSqlite(
-                    Configuration.GetConnectionString("")));
+                    Configuration.GetConnectionString("LibraryConnection")));
 
             services.AddControllersWithViews();
             services.AddRazorPages();

@@ -1,5 +1,6 @@
 ﻿using MusicAgora.Common.Library.TransferObjects;
 using System.Collections.Generic;
+using System.IO;
 
 namespace MusicAgora.Common.Library.Interfaces.UseCases
 {
@@ -7,5 +8,6 @@ namespace MusicAgora.Common.Library.Interfaces.UseCases
     {
         List<SheetPartTO> GetAllMyCurrentSheetParts(int IdentityUserId);
         SheetPartTO SeeASheetPartDetails(int SheetPartId);
+        MemoryStream DowloadSheetPart(int SheetPartId);
     }
 }
