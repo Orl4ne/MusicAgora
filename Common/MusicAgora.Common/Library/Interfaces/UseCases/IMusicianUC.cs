@@ -8,6 +8,6 @@ namespace MusicAgora.Common.Library.Interfaces.UseCases
     {
         List<SheetPartTO> GetAllMyCurrentSheetParts(int IdentityUserId);
         SheetPartTO SeeASheetPartDetails(int SheetPartId);
-        MemoryStream DowloadSheetPart(int SheetPartId);
+        string DowloadSheetPart(int SheetPartId);
     }
 }
