@@ -15,6 +15,7 @@ namespace Identity.DAL
             : base(options)
         {
         }
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (optionsBuilder is null)
@@ -31,6 +32,7 @@ namespace Identity.DAL
         {
             if (modelBuilder is null)
                 throw new ArgumentNullException(nameof(modelBuilder));
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

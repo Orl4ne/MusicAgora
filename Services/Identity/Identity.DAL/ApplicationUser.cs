@@ -17,7 +17,7 @@ namespace Identity.DAL
         public string LastName { get; set; }
         [Required]
         public AccessRight AccessRight { get; set; }
-        public List<int> InstrumentIds { get; set; }
+        public int LibraryUserId { get; set; }
         public bool IsIndependance { get; set; }
         public bool IsGarde { get; set; }
     }
