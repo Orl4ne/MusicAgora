@@ -15,6 +15,11 @@ using Microsoft.AspNetCore.Http;
 using Identity.DAL;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Library.DAL;
+using MusicAgora.Common.Library.Interfaces.IRepositories;
+using Library.DAL.Repositories;
+using MusicAgora.Common.Library.Interfaces;
+using MusicAgora.Common.Library.Interfaces.UseCases;
+using Library.BLL.UseCases;
 
 namespace MusicAgora.WebUx.MVC
 {
@@ -57,11 +62,19 @@ namespace MusicAgora.WebUx.MVC
                 options.User.RequireUniqueEmail = true;
                 options.SignIn.RequireConfirmedEmail = true;
             })
-                .AddDefaultUI()
-                .AddEntityFrameworkStores<IdentityContext>()
-                .AddDefaultTokenProviders();
+                    .AddRoleManager<RoleManager<AccessRight>>()
+                    .AddUserManager<UserManager<ApplicationUser>>()
+                    .AddSignInManager()
+                    .AddDefaultUI()
+                    .AddEntityFrameworkStores<IdentityContext>()
+                    .AddDefaultTokenProviders();
 
             //Put dependency injections here
+            services.AddSingleton<ILibraryUnitOfWork, LibraryUnitOfWork>();
+            services.AddSingleton<IChiefUC, ChiefUC>();
+            services.AddSingleton<ILibrarianUC, LibrarianUC>();
+            services.AddSingleton<IMusicianUC, MusicianUC>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
