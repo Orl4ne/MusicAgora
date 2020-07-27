@@ -70,10 +70,10 @@ namespace MusicAgora.WebUx.MVC
                     .AddDefaultTokenProviders();
 
             //Put dependency injections here
-            services.AddSingleton<ILibraryUnitOfWork, LibraryUnitOfWork>();
-            services.AddSingleton<IChiefUC, ChiefUC>();
-            services.AddSingleton<ILibrarianUC, LibrarianUC>();
-            services.AddSingleton<IMusicianUC, MusicianUC>();
+            services.AddTransient<ILibraryUnitOfWork, LibraryUnitOfWork>();
+            services.AddTransient<IChiefUC, ChiefUC>();
+            services.AddTransient<ILibrarianUC, LibrarianUC>();
+            services.AddTransient<IMusicianUC, MusicianUC>();
 
         }
 
