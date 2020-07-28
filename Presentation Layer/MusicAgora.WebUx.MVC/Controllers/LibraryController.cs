@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Identity.DAL;
 using Library.BLL.UseCases;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -34,8 +35,9 @@ namespace MusicAgora.WebUx.MVC.Controllers
             _librarianUC = librarianUC;
             _musicianUC = musicianUC;
         }
-        // GET: LibraryController
-        public ActionResult Index()
+        [HttpGet]
+        [Authorize]
+        public IActionResult Index()
         {
             return View();
         }

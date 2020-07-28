@@ -34,5 +34,7 @@ namespace Identity.DAL
                 throw new ArgumentNullException(nameof(modelBuilder));
             base.OnModelCreating(modelBuilder);
         }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<AccessRight> AccessRights { get; set; }
     }
 }

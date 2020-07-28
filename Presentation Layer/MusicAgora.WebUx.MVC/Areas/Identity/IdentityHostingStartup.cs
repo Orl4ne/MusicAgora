@@ -1,4 +1,5 @@
 ﻿using System;
+using Identity.DAL;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;

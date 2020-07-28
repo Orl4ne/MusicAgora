@@ -63,6 +63,7 @@ namespace MusicAgora.WebUx.MVC
                 options.SignIn.RequireConfirmedEmail = true;
             })
                     .AddRoleManager<RoleManager<AccessRight>>()
+                    .AddRoles<AccessRight>()
                     .AddUserManager<UserManager<ApplicationUser>>()
                     .AddSignInManager()
                     .AddDefaultUI()
