@@ -25,7 +25,13 @@ namespace MusicAgora.WebUx.MVC.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
 
 
-        public LibraryController(ILogger<HomeController> logger, ILibraryUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IChiefUC chiefUC, ILibrarianUC librarianUC, IMusicianUC musicianUC)
+        public LibraryController(ILogger<HomeController> logger, 
+                                ILibraryUnitOfWork unitOfWork, 
+                                UserManager<ApplicationUser> userManager, 
+                                SignInManager<ApplicationUser> signInManager, 
+                                IChiefUC chiefUC, 
+                                ILibrarianUC librarianUC, 
+                                IMusicianUC musicianUC)
         {
             _logger = logger;
             _libraryUnitOfWork = unitOfWork;

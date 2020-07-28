@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Library.BLL.UseCases;
 
 namespace MusicAgora.WebUx.MVC.Areas.Identity.Pages.Account
 {
@@ -65,17 +66,28 @@ namespace MusicAgora.WebUx.MVC.Areas.Identity.Pages.Account
 
             [Required]
             [StringLength(12, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
-            [Display(Name ="Name")]
-            public string Name { get; set; }
+            [Display(Name ="First Name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [StringLength(12, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
 
             [Required]
             [Display(Name="Role")]
-            public AccessRight SelectedRole { get; set; }
+            public int SelectedRole { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = " Garde Member ?")]
+            public bool IsGarde { get; set; }
+
+            [Display(Name = " Independance Member ?")]
+            public bool IsIndependance { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -91,7 +103,16 @@ namespace MusicAgora.WebUx.MVC.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.Name, AccessRight = Input.SelectedRole };
+                var AspNetRoles = _roleManager.Roles.ToList();
+                var user = new ApplicationUser { UserName = Input.FirstName, 
+                                                Email = Input.Email, 
+                                                FirstName = Input.FirstName, 
+                                                LastName = Input.LastName, 
+                                                IsIndependance = Input.IsIndependance, 
+                                                IsGarde=Input.IsGarde,
+                                                //AccessRight = AspNetRoles.FirstOrDefault(x => x.Id == Input.SelectedRole)
+                                                AccessRight = AspNetRoles.FirstOrDefault(x => x.Name == "Musician")
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
