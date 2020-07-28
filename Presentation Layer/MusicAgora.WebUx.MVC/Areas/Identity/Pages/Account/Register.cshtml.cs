@@ -104,7 +104,7 @@ namespace MusicAgora.WebUx.MVC.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var AspNetRoles = _roleManager.Roles.ToList();
-                var user = new ApplicationUser { UserName = Input.FirstName, 
+                var user = new ApplicationUser { UserName = Input.Email, 
                                                 Email = Input.Email, 
                                                 FirstName = Input.FirstName, 
                                                 LastName = Input.LastName, 

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace MusicAgora.WebUx.MVC.Models
 {
-    public class UserVM
+    public class GlobalUserVM
     {
-        public LibUserTO LibUser { get; set; }
         public ApplicationUser IdentityUser { get; set; }
+        public LibUserTO LibraryUser { get; set; }
     }
 }
