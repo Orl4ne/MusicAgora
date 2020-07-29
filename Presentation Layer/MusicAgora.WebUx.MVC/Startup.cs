@@ -61,8 +61,8 @@ namespace MusicAgora.WebUx.MVC
                 options.Password.RequireUppercase = true;
                 options.User.RequireUniqueEmail = true;
             })
-                    .AddRoleManager<RoleManager<AccessRight>>()
-                    //.AddRoles<AccessRight>()
+                    //.AddRoleManager<RoleManager<AccessRight>>()
+                    .AddRoles<AccessRight>()
                     .AddUserManager<UserManager<ApplicationUser>>()
                     .AddSignInManager()
                     .AddDefaultUI()
