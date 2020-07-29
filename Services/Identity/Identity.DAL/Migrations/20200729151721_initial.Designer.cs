@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Identity.DAL.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20200727144358_Initial")]
-    partial class Initial
+    [Migration("20200729151721_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,36 @@ namespace Identity.DAL.Migrations
                         .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "16bd81c3-7c59-4ae5-8783-9f228936f987",
+                            Name = "Musician",
+                            NormalizedName = "MUSICIAN"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "70603e1e-5232-4d40-83b8-2351bd79c575",
+                            Name = "Librarian",
+                            NormalizedName = "LIBRARIAN"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ConcurrencyStamp = "2723b0cd-3773-471c-af9c-dd1203ddf922",
+                            Name = "Chief",
+                            NormalizedName = "CHIEF"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ConcurrencyStamp = "8ef8cf97-faa7-43cf-9df4-ab0c865d48c2",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Identity.DAL.ApplicationUser", b =>
@@ -52,9 +82,6 @@ namespace Identity.DAL.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AccessRightId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -79,9 +106,6 @@ namespace Identity.DAL.Migrations
 
                     b.Property<string>("LastName")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("LibraryUserId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
@@ -117,8 +141,6 @@ namespace Identity.DAL.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccessRightId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -227,15 +249,6 @@ namespace Identity.DAL.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Identity.DAL.ApplicationUser", b =>
-                {
-                    b.HasOne("Identity.DAL.AccessRight", "AccessRight")
-                        .WithMany()
-                        .HasForeignKey("AccessRightId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

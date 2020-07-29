@@ -82,7 +82,7 @@ namespace MusicAgora.WebUx.MVC.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name="Role")]
-            public int SelectedRole { get; set; }
+            public string SelectedRole { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
@@ -116,13 +116,15 @@ namespace MusicAgora.WebUx.MVC.Areas.Identity.Pages.Account
                                                 LastName = Input.LastName, 
                                                 IsIndependance = Input.IsIndependance, 
                                                 IsGarde=Input.IsGarde,
-                                                //I commented this because it enable the role selection
-                                                //AccessRight = AspNetRoles.FirstOrDefault(x => x.Id == Input.SelectedRole) 
-                                                AccessRight = AspNetRoles.FirstOrDefault(x => x.Name == "Musician")
+                                                //AccessRight = new AccessRight { Name = Input.SelectedRole }
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    // Add the right role to that user:
+                    await _userManager.AddToRoleAsync(user, Input.SelectedRole);
+                    //await _userManager.AddToRoleAsync(user, "Musician");
+
                     // Creating LibUser when IdentityUser is created
                     var libUser = new LibUserTO { IdentityUserId = user.Id };
                     var done =_libraryUnitOfWork.LibUserRepository.Add(libUser);

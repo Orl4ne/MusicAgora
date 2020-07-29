@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Identity.DAL
 {
@@ -15,7 +13,7 @@ namespace Identity.DAL
             : base(options)
         {
         }
-        
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (optionsBuilder is null)
@@ -32,6 +30,23 @@ namespace Identity.DAL
         {
             if (modelBuilder is null)
                 throw new ArgumentNullException(nameof(modelBuilder));
+
+            var roles = new[]
+            {
+            new AccessRight("Musician"),
+            new AccessRight("Librarian"),
+            new AccessRight("Chief"),
+            new AccessRight("Admin")
+            };
+
+            for (int i = 0; i < roles.Length; i++)
+            {
+                // ROLE ID IS NEVER SUPPOSED TO BE 0
+                roles[i].Id = i + 1;
+                roles[i].NormalizedName = roles[i].Name.ToUpper();
+                modelBuilder.Entity<AccessRight>().HasData(roles[i]);
+            }
+
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
