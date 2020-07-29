@@ -16,6 +16,9 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Library.BLL.UseCases;
+using MusicAgora.Common.Library.Interfaces;
+using MusicAgora.Common.Library.TransferObjects;
+using System.Security.Claims;
 
 namespace MusicAgora.WebUx.MVC.Areas.Identity.Pages.Account
 {
@@ -27,11 +30,13 @@ namespace MusicAgora.WebUx.MVC.Areas.Identity.Pages.Account
         private readonly RoleManager<AccessRight> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ILibraryUnitOfWork _libraryUnitOfWork;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             RoleManager<AccessRight> roleManager,
+            ILibraryUnitOfWork unitOfWork,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
             
@@ -41,6 +46,7 @@ namespace MusicAgora.WebUx.MVC.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _roleManager = roleManager;
+            _libraryUnitOfWork = unitOfWork;
         }
 
         [BindProperty]
@@ -65,12 +71,12 @@ namespace MusicAgora.WebUx.MVC.Areas.Identity.Pages.Account
             public string Password { get; set; }
 
             [Required]
-            [StringLength(12, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
+            [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
             [Display(Name ="First Name")]
             public string FirstName { get; set; }
 
             [Required]
-            [StringLength(12, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
+            [StringLength(60, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
@@ -110,12 +116,17 @@ namespace MusicAgora.WebUx.MVC.Areas.Identity.Pages.Account
                                                 LastName = Input.LastName, 
                                                 IsIndependance = Input.IsIndependance, 
                                                 IsGarde=Input.IsGarde,
-                                                //AccessRight = AspNetRoles.FirstOrDefault(x => x.Id == Input.SelectedRole)
+                                                //I commented this because it enable the role selection
+                                                //AccessRight = AspNetRoles.FirstOrDefault(x => x.Id == Input.SelectedRole) 
                                                 AccessRight = AspNetRoles.FirstOrDefault(x => x.Name == "Musician")
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    // Creating LibUser when IdentityUser is created
+                    var libUser = new LibUserTO { IdentityUserId = user.Id };
+                    var done =_libraryUnitOfWork.LibUserRepository.Add(libUser);
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -135,6 +146,8 @@ namespace MusicAgora.WebUx.MVC.Areas.Identity.Pages.Account
                     }
                     else
                     {
+                        await _userManager.AddClaimAsync(user, new Claim("FirstName", user.FirstName));
+                        await _userManager.AddClaimAsync(user, new Claim("LastName", user.LastName));
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }

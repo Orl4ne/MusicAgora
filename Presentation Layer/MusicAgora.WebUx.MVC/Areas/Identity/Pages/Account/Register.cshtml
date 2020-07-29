@@ -37,7 +37,7 @@
                 <input type="checkbox" asp-for="Input.IsIndependance" class="custom-checkbox" />
             </div>
 
-
+            @* I Commented this bloc beaucause it shows the Role Selection like admin or musician. I used it to create my Admin account etc. *@
             @*<div class="form-group">
                 <label asp-for="Input.SelectedRole"></label>
                 <select asp-for="Input.SelectedRole" asp-items="@(new SelectList(Model.AspNetRoles, "Id", "Name"))" class="dropdown"></select>

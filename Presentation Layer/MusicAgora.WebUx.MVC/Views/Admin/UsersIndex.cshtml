@@ -6,18 +6,25 @@
 
 <h1>UsersIndex</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
-            <th></th>
+            <th>
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdentityUser.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdentityUser.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LibraryUser.Instruments)
+            </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |

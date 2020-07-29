@@ -42,11 +42,6 @@ namespace MusicAgora.WebUx.MVC.Controllers
             _musicianUC = musicianUC;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         [HttpGet]
         public IActionResult UsersIndex()
         {
@@ -58,7 +53,7 @@ namespace MusicAgora.WebUx.MVC.Controllers
                 var globalUserVM = new GlobalUserVM
                 {
                     IdentityUser = identityUser,
-                    LibraryUser = libraryUsers.First(x => x.Id == identityUser.Id)
+                    LibraryUser = libraryUsers.First(x => x.IdentityUserId == identityUser.Id)
                 };
                 globalUsers.Add(globalUserVM);
             }
