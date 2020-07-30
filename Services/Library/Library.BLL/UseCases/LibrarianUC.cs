@@ -33,7 +33,7 @@ namespace Library.BLL.UseCases
         public SheetPartTO UploadSheetPartInSheet(SheetPartTO SheetPart, MemoryStream file)
         {
             var root = config.GetValue<string>("DataPath");
-            var path = $@"{root}{SheetPart.Sheet.Name}\\{SheetPart.Sheet.Name}-{SheetPart.Instrument.Name}.pdf";
+            var path = $@"{root}{SheetPart.Sheet.Name}\\{SheetPart.Sheet.Name}-{SheetPart.Instrument.Name}-{SheetPart.Part}.pdf";
             try
             {
                 using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Library.DAL.Entities
 {
@@ -11,5 +12,6 @@ namespace Library.DAL.Entities
         public string Path { get; set; }
         [Required]
         public SheetEF Sheet { get; set; }
+        public string Part { get; set; }
     }
 }

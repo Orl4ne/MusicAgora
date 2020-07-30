@@ -19,6 +19,7 @@ namespace Library.DAL.Extensions
                 Path = SheetPart.Path,
                 Sheet = SheetPart.Sheet.ToTransferObject(),
                 Instrument = SheetPart.Instrument.ToTransferObject(),
+                Part = SheetPart.Part,
             }; 
         }
 
@@ -33,6 +34,7 @@ namespace Library.DAL.Extensions
                 Path = SheetPart.Path,
                 Sheet = SheetPart.Sheet.ToEF(),
                 Instrument = SheetPart.Instrument.ToEF(),
+                Part = SheetPart.Part,
             };
         }
 
@@ -48,6 +50,7 @@ namespace Library.DAL.Extensions
                 AttachedEF.Sheet = DetachedEF.Sheet;
                 AttachedEF.Instrument = DetachedEF.Instrument;
                 AttachedEF.Path = DetachedEF.Path;
+                AttachedEF.Part = DetachedEF.Part;
             }
             return AttachedEF;
         }
