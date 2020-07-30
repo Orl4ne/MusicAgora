@@ -97,7 +97,7 @@ namespace Library.DAL.Repositories
             }
             var tracking = libraryContext.Sheets.Update(editedEntity);
             tracking.State = EntityState.Detached;
-            //libraryContext.SaveChanges();
+            libraryContext.SaveChanges();
 
             //return editedEntity.ToTransferObject();
             return tracking.Entity.ToTransferObject();

@@ -10,6 +10,7 @@ namespace MusicAgora.WebUx.MVC.Models
     public class GlobalUserVM
     {
         public ApplicationUser IdentityUser { get; set; }
+        public List<string> Roles { get; set; }
         public LibUserTO LibraryUser { get; set; }
     }
 }

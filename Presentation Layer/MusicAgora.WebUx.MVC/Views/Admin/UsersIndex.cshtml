@@ -10,6 +10,16 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.IdentityUser.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdentityUser.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Roles)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LibraryUser.Instruments)
             </th>
         </tr>
     </thead>
@@ -21,6 +31,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdentityUser.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Roles)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LibraryUser.Instruments)

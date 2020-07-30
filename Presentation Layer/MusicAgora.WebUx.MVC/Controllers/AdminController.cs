@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MusicAgora.Common.Library.Interfaces;
+using MusicAgora.Common.Library.TransferObjects;
 using MusicAgora.WebUx.MVC.Models;
 
 namespace MusicAgora.WebUx.MVC.Controllers
@@ -22,8 +23,6 @@ namespace MusicAgora.WebUx.MVC.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<AccessRight> _roleManager;
-        //private readonly IdentityRole _identityRole;
-
 
         public AdminController(ILogger<HomeController> logger,
             ILibraryUnitOfWork unitOfWork,
@@ -37,7 +36,6 @@ namespace MusicAgora.WebUx.MVC.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
-            //_identityRole = identityRole;
         }
         [HttpGet]
         public IActionResult UsersIndex()
@@ -50,7 +48,8 @@ namespace MusicAgora.WebUx.MVC.Controllers
                 var globalUserVM = new GlobalUserVM
                 {
                     IdentityUser = identityUser,
-                    LibraryUser = libraryUsers.First(x => x.IdentityUserId == identityUser.Id)
+                    LibraryUser = libraryUsers.First(x => x.IdentityUserId == identityUser.Id),
+                    Roles = _userManager.GetRolesAsync(identityUser).Result.ToList(),
                 };
                 globalUsers.Add(globalUserVM);
             }
@@ -64,6 +63,27 @@ namespace MusicAgora.WebUx.MVC.Controllers
             return View(instruments);
         }
 
+        // GET: AskController/Create
+        [HttpGet]
+        public ActionResult CreateInstrument()
+        {
+            return View();
+        }
 
+        // POST: AskController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateInstrument(InstrumentTO instrument)
+        {
+            try
+            {
+                _libraryUnitOfWork.InstrumentRepository.Add(instrument);
+                return RedirectToAction(nameof(InstrumentsIndex));
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }

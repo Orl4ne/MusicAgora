@@ -28,7 +28,7 @@ namespace Library.DAL.Repositories
             }
             var entityEF = entity.ToEF();
             var result = libraryContext.Instruments.Add(entityEF);
-            //libraryContext.SaveChanges();
+            libraryContext.SaveChanges();
 
             return result.Entity.ToTransferObject();
         }
@@ -95,7 +95,7 @@ namespace Library.DAL.Repositories
             }
             var tracking = libraryContext.Instruments.Update(editedEntity);
             tracking.State = EntityState.Detached;
-            //libraryContext.SaveChanges();
+            libraryContext.SaveChanges();
 
             //return editedEntity.ToTransferObject();
             return tracking.Entity.ToTransferObject();
