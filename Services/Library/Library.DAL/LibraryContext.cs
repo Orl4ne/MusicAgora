@@ -43,6 +43,34 @@ namespace Library.DAL
                 .HasOne<InstrumentEF>(ui => ui.Instrument)
                 .WithMany(u => u.UserInstruments)
                 .HasForeignKey(ui => ui.InstrumentId);
+
+            var instruments = new[]
+           {
+            new InstrumentEF { Name = "Direction"},
+            new InstrumentEF { Name = "Flûte"},
+            new InstrumentEF { Name = "Trompette"},
+            new InstrumentEF { Name = "Saxophone Alto"},
+            new InstrumentEF { Name = "Saxophone Tenor"},
+            new InstrumentEF { Name = "Saxophone Soprano"},
+            new InstrumentEF { Name = "Saxophone Baryton"},
+            new InstrumentEF { Name = "Tuba"},
+            new InstrumentEF { Name = "Tuba Basse"},
+            new InstrumentEF { Name = "Trombone"},
+            new InstrumentEF { Name = "Clarinette Sib"},
+            new InstrumentEF { Name = "Clarinette Mib"},
+            new InstrumentEF { Name = "Piccolo"},
+            new InstrumentEF { Name = "Serpent"},
+            new InstrumentEF { Name = "Buccin"},
+            new InstrumentEF { Name = "Basse/Contrebasse Ut"},
+            new InstrumentEF { Name = "Percussions"},
+
+            };
+
+            for (int i = 0; i < instruments.Length; i++)
+            {
+                instruments[i].Id = i + 1;
+                modelBuilder.Entity<InstrumentEF>().HasData(instruments[i]);
+            }
         }
 
         public DbSet<CategoryEF> Categories { get; set; }

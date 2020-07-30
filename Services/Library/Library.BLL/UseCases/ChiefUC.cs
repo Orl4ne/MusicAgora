@@ -8,13 +8,13 @@ using System.Text;
 
 namespace Library.BLL.UseCases
 {
-    public class ChiefUC : MusicianUC, IChiefUC
+    public class ChiefUC : IChiefUC
     {
         #region CTOR
         private readonly ILibraryUnitOfWork unitOfWork;
         private readonly IConfiguration config;
 
-        public ChiefUC(ILibraryUnitOfWork iLibraryUnitOfWork, IConfiguration config) : base (iLibraryUnitOfWork, config)
+        public ChiefUC(ILibraryUnitOfWork iLibraryUnitOfWork, IConfiguration config) 
         {
             this.unitOfWork = iLibraryUnitOfWork ?? throw new System.ArgumentNullException(nameof(iLibraryUnitOfWork));
             this.config = config;

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.DAL.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20200727123750_Initial")]
+    [Migration("20200730083833_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,93 @@ namespace Library.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Instruments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Direction"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Flûte"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Trompette"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Saxophone Alto"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Saxophone Tenor"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Saxophone Soprano"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Saxophone Baryton"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Tuba"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Tuba Basse"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Trombone"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Clarinette Sib"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Clarinette Mib"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Piccolo"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Serpent"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Buccin"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "Basse/Contrebasse Ut"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "Percussions"
+                        });
                 });
 
             modelBuilder.Entity("Library.DAL.Entities.LibUserEF", b =>
@@ -103,6 +190,9 @@ namespace Library.DAL.Migrations
 
                     b.Property<int?>("InstrumentId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Part")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Path")
                         .HasColumnType("TEXT");

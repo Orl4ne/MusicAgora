@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Identity.DAL.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20200729151721_initial")]
-    partial class initial
+    [Migration("20200730083750_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,28 +48,28 @@ namespace Identity.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "16bd81c3-7c59-4ae5-8783-9f228936f987",
+                            ConcurrencyStamp = "9812c39e-8a7c-479b-bc7a-8a3bc42d16ae",
                             Name = "Musician",
                             NormalizedName = "MUSICIAN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "70603e1e-5232-4d40-83b8-2351bd79c575",
+                            ConcurrencyStamp = "0f22d81e-eaca-4047-8ce6-40101c3e5b09",
                             Name = "Librarian",
                             NormalizedName = "LIBRARIAN"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "2723b0cd-3773-471c-af9c-dd1203ddf922",
+                            ConcurrencyStamp = "f18e6007-d874-4867-8249-5080913ebbaf",
                             Name = "Chief",
                             NormalizedName = "CHIEF"
                         },
                         new
                         {
                             Id = 4,
-                            ConcurrencyStamp = "8ef8cf97-faa7-43cf-9df4-ab0c865d48c2",
+                            ConcurrencyStamp = "3c865291-590c-48b4-90cd-a4a0892baed7",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

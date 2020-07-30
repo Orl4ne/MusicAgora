@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Library.DAL.Migrations
 {
-    [ExcludeFromCodeCoverage]
     public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -104,7 +102,8 @@ namespace Library.DAL.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     InstrumentId = table.Column<int>(nullable: true),
                     Path = table.Column<string>(nullable: true),
-                    SheetId = table.Column<int>(nullable: false)
+                    SheetId = table.Column<int>(nullable: false),
+                    Part = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -122,6 +121,91 @@ namespace Library.DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "Direction" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 15, "Buccin" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 14, "Serpent" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 13, "Piccolo" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 12, "Clarinette Mib" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 11, "Clarinette Sib" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 10, "Trombone" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 16, "Basse/Contrebasse Ut" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 9, "Tuba Basse" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 7, "Saxophone Baryton" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 6, "Saxophone Soprano" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 5, "Saxophone Tenor" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 4, "Saxophone Alto" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 3, "Trompette" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 2, "Flûte" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 8, "Tuba" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 17, "Percussions" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_SheetParts_InstrumentId",

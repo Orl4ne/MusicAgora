@@ -9,13 +9,13 @@ using System.Reflection.Metadata;
 
 namespace Library.BLL.UseCases
 {
-    public class LibrarianUC : ChiefUC, ILibrarianUC
+    public class LibrarianUC : ILibrarianUC
     {
         #region CTOR
         private readonly ILibraryUnitOfWork unitOfWork;
         private readonly IConfiguration config;
 
-        public LibrarianUC(ILibraryUnitOfWork iLibraryUnitOfWork, IConfiguration config) : base (iLibraryUnitOfWork, config)
+        public LibrarianUC(ILibraryUnitOfWork iLibraryUnitOfWork, IConfiguration config) 
         {
             this.unitOfWork = iLibraryUnitOfWork ?? throw new System.ArgumentNullException(nameof(iLibraryUnitOfWork));
             this.config = config;
