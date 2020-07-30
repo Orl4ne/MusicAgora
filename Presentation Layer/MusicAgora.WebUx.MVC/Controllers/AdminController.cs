@@ -15,7 +15,7 @@ using MusicAgora.WebUx.MVC.Models;
 
 namespace MusicAgora.WebUx.MVC.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -37,53 +37,84 @@ namespace MusicAgora.WebUx.MVC.Controllers
             _signInManager = signInManager;
             _roleManager = roleManager;
         }
-        [HttpGet]
-        public IActionResult UsersIndex()
-        {
-            var identityUsers = _userManager.Users.ToList();
-            var libraryUsers = _libraryUnitOfWork.LibUserRepository.GetAll();
-            var globalUsers = new List<GlobalUserVM>();
-            foreach (var identityUser in identityUsers)
+
+        #region Users Actions
+            #region UsersIndex
+            [HttpGet]
+            public IActionResult UsersIndex()
             {
-                var globalUserVM = new GlobalUserVM
+                var identityUsers = _userManager.Users.ToList();
+                var libraryUsers = _libraryUnitOfWork.LibUserRepository.GetAll();
+                var globalUsers = new List<GlobalUserVM>();
+                foreach (var identityUser in identityUsers)
                 {
-                    IdentityUser = identityUser,
-                    LibraryUser = libraryUsers.First(x => x.IdentityUserId == identityUser.Id),
-                    Roles = _userManager.GetRolesAsync(identityUser).Result.ToList(),
-                };
-                globalUsers.Add(globalUserVM);
+                    var globalUserVM = new GlobalUserVM
+                    {
+                        IdentityUser = identityUser,
+                        LibraryUser = libraryUsers.First(x => x.IdentityUserId == identityUser.Id),
+                        Roles = _userManager.GetRolesAsync(identityUser).Result.ToList(),
+                    };
+                    globalUsers.Add(globalUserVM);
+                }
+                return View(globalUsers);
             }
-            return View(globalUsers);
-        }
+            #endregion
+        #endregion
 
-        [HttpGet]
-        public IActionResult InstrumentsIndex()
-        {
-            var instruments = _libraryUnitOfWork.InstrumentRepository.GetAll();
-            return View(instruments);
-        }
-
-        // GET: AskController/Create
-        [HttpGet]
-        public ActionResult CreateInstrument()
-        {
-            return View();
-        }
-
-        // POST: AskController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateInstrument(InstrumentTO instrument)
-        {
-            try
+    #region Instrument Actions
+            #region InstrumentsIndex
+            [HttpGet]
+            public IActionResult InstrumentsIndex()
             {
-                _libraryUnitOfWork.InstrumentRepository.Add(instrument);
-                return RedirectToAction(nameof(InstrumentsIndex));
+                var instruments = _libraryUnitOfWork.InstrumentRepository.GetAll();
+                return View(instruments);
             }
-            catch
+        #endregion
+            #region CreateInstrument
+            [HttpGet]
+            public ActionResult CreateInstrument()
             {
                 return View();
             }
-        }
+
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public ActionResult CreateInstrument(InstrumentTO instrument)
+            {
+                try
+                {
+                    _libraryUnitOfWork.InstrumentRepository.Add(instrument);
+                    return RedirectToAction(nameof(InstrumentsIndex));
+                }
+                catch
+                {
+                    return View();
+                }
+            }
+        #endregion
+            #region DeleteInstrument
+            [HttpGet]
+            public ActionResult DeleteInstrument(int id)
+            {
+                var instrument = _libraryUnitOfWork.InstrumentRepository.GetById(id);
+                return View(instrument);
+            }
+
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public ActionResult DeleteInstrument(int id, InstrumentTO instrument)
+            {
+                try
+                {
+                    _libraryUnitOfWork.InstrumentRepository.Delete(instrument);
+                    return RedirectToAction(nameof(InstrumentsIndex));
+                }
+                catch
+                {
+                    return View();
+                }
+            }
+        #endregion
+    #endregion
     }
 }

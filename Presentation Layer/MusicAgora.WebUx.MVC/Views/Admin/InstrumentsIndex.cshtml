@@ -4,7 +4,7 @@
     ViewData["Title"] = "InstrumentsIndex";
 }
 
-<h1>InstrumentsIndex</h1>
+<h1>Instruments Index</h1>
 
 <p>
     <a asp-action="CreateInstrument">Create New Instrument</a>
@@ -30,9 +30,9 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.ActionLink("Edit", "InstrumentEdit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "InstrumentDetails", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "InstrumentDelete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "EditInstrument", new { id = item.Id }) |
+                @Html.ActionLink("Details", "InstrumentDetails", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeleteInstrument", new { id = item.Id })
             </td>
         </tr>
 }
