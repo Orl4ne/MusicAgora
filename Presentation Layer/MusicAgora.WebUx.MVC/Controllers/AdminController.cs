@@ -38,83 +38,138 @@ namespace MusicAgora.WebUx.MVC.Controllers
             _roleManager = roleManager;
         }
 
-        #region Users Actions
-            #region UsersIndex
-            [HttpGet]
-            public IActionResult UsersIndex()
+        [HttpGet]
+        public IActionResult UsersIndex()
+        {
+            var identityUsers = _userManager.Users.ToList();
+            var libraryUsers = _libraryUnitOfWork.LibUserRepository.GetAll();
+            var globalUsers = new List<GlobalUserVM>();
+            foreach (var identityUser in identityUsers)
             {
-                var identityUsers = _userManager.Users.ToList();
-                var libraryUsers = _libraryUnitOfWork.LibUserRepository.GetAll();
-                var globalUsers = new List<GlobalUserVM>();
-                foreach (var identityUser in identityUsers)
+                var globalUserVM = new GlobalUserVM
                 {
-                    var globalUserVM = new GlobalUserVM
-                    {
-                        IdentityUser = identityUser,
-                        LibraryUser = libraryUsers.First(x => x.IdentityUserId == identityUser.Id),
-                        Roles = _userManager.GetRolesAsync(identityUser).Result.ToList(),
-                    };
-                    globalUsers.Add(globalUserVM);
-                }
-                return View(globalUsers);
+                    IdentityUser = identityUser,
+                    LibraryUser = libraryUsers.First(x => x.IdentityUserId == identityUser.Id),
+                    UserRoles = _userManager.GetRolesAsync(identityUser).Result.ToList(),
+                };
+                globalUsers.Add(globalUserVM);
             }
-            #endregion
-        #endregion
+            return View(globalUsers);
+        }
 
-    #region Instrument Actions
-            #region InstrumentsIndex
-            [HttpGet]
-            public IActionResult InstrumentsIndex()
+        [HttpGet]
+        public IActionResult ModifyUser(int id)
+        {
+            var identityUser = _userManager.FindByIdAsync(id.ToString()).Result;
+            var libraryUsers = _libraryUnitOfWork.LibUserRepository.GetAll();
+            var roles = _roleManager.Roles.ToList();
+            var globalUser = new GlobalUserVM
             {
-                var instruments = _libraryUnitOfWork.InstrumentRepository.GetAll();
-                return View(instruments);
+                IdentityUser = identityUser,
+                LibraryUser = libraryUsers.First(x => x.IdentityUserId == identityUser.Id),
+                UserRoles = _userManager.GetRolesAsync(identityUser).Result.ToList(),
+                Roles = roles
+            };
+            return View(globalUser);
+        }
+
+        [HttpPost]
+        public IActionResult ModifyUser(int id, GlobalUserVM globalUser)
+        {
+            try
+            {
+                //var identityUser = globalUser.IdentityUser;
+                var identityUser = _userManager.FindByIdAsync(id.ToString()).Result;
+                identityUser.Email = globalUser.IdentityUser.Email;
+                identityUser.FirstName = globalUser.IdentityUser.FirstName;
+                identityUser.LastName = globalUser.IdentityUser.LastName;
+                identityUser.IsGarde = globalUser.IdentityUser.IsGarde;
+                identityUser.IsIndependance = globalUser.IdentityUser.IsIndependance;
+
+                //var userRoles = globalUser.UserRoles;
+                // We need to get all roles from DB, don't trust anything from the client:
+                var roles = _roleManager.Roles.ToList();
+                var libUser = _libraryUnitOfWork.LibUserRepository.GetByIdentityUserId(id);
+                libUser.Instruments = globalUser.LibraryUser.Instruments;
+                libUser.InstrumentIds = globalUser.LibraryUser.InstrumentIds;
+
+                // Browse the roles to set or unset from SelectedRoles in View Model:
+                var selectedRoles = globalUser.SelectedRoles;
+                for (var i = 0; i < selectedRoles.Length; i++)
+                {
+                    // First: check if user has the current role in the loop:
+                    var hasRole = _userManager.IsInRoleAsync(identityUser, roles[i].Name).Result;
+                    if (selectedRoles[i] && !hasRole)
+                    {
+                        // User doesn't have the role yet, add it:
+                        var r1 = _userManager.AddToRoleAsync(identityUser, roles[i].Name);
+                    }
+                    else if (!selectedRoles[i] && hasRole)
+                    {
+                        // User has the role, but it was unchecked in model.
+                        // Remove the role from the user:
+                        var r2 = _userManager.RemoveFromRoleAsync(identityUser, roles[i].Name);
+                    }
+                }
+                var temp2 = _libraryUnitOfWork.LibUserRepository.Update(libUser);
+                var temp3 = _userManager.UpdateAsync(identityUser);
+                
+                return RedirectToAction(nameof(UsersIndex));
             }
-        #endregion
-            #region CreateInstrument
-            [HttpGet]
-            public ActionResult CreateInstrument()
+            catch (Exception)
             {
                 return View();
             }
+        }
+        [HttpGet]
+        public IActionResult InstrumentsIndex()
+        {
+            var instruments = _libraryUnitOfWork.InstrumentRepository.GetAll();
+            return View(instruments);
+        }
 
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            public ActionResult CreateInstrument(InstrumentTO instrument)
-            {
-                try
-                {
-                    _libraryUnitOfWork.InstrumentRepository.Add(instrument);
-                    return RedirectToAction(nameof(InstrumentsIndex));
-                }
-                catch
-                {
-                    return View();
-                }
-            }
-        #endregion
-            #region DeleteInstrument
-            [HttpGet]
-            public ActionResult DeleteInstrument(int id)
-            {
-                var instrument = _libraryUnitOfWork.InstrumentRepository.GetById(id);
-                return View(instrument);
-            }
+        [HttpGet]
+        public ActionResult CreateInstrument()
+        {
+            return View();
+        }
 
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            public ActionResult DeleteInstrument(int id, InstrumentTO instrument)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateInstrument(InstrumentTO instrument)
+        {
+            try
             {
-                try
-                {
-                    _libraryUnitOfWork.InstrumentRepository.Delete(instrument);
-                    return RedirectToAction(nameof(InstrumentsIndex));
-                }
-                catch
-                {
-                    return View();
-                }
+                _libraryUnitOfWork.InstrumentRepository.Add(instrument);
+                return RedirectToAction(nameof(InstrumentsIndex));
             }
-        #endregion
-    #endregion
+            catch
+            {
+                return View();
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult DeleteInstrument(int id)
+        {
+            var instrument = _libraryUnitOfWork.InstrumentRepository.GetById(id);
+            return View(instrument);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteInstrument(int id, InstrumentTO instrument)
+        {
+            try
+            {
+                _libraryUnitOfWork.InstrumentRepository.Delete(instrument);
+                return RedirectToAction(nameof(InstrumentsIndex));
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }

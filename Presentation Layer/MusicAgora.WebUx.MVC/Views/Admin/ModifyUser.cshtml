@@ -1,0 +1,73 @@
+﻿@model GlobalUserVM
+
+@{
+    ViewData["Title"] = "ModifyUser";
+}
+
+<h1>ModifyUser</h1>
+
+<h4>ApplicationUser</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ModifyUser">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdentityUser.FirstName" class="control-label"></label>
+                <input asp-for="IdentityUser.FirstName" class="form-control" />
+                <span asp-validation-for="IdentityUser.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdentityUser.LastName" class="control-label"></label>
+                <input asp-for="IdentityUser.LastName" class="form-control" />
+                <span asp-validation-for="IdentityUser.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IdentityUser.IsIndependance" /> @Html.DisplayNameFor(model => model.IdentityUser.IsIndependance)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IdentityUser.IsGarde" /> @Html.DisplayNameFor(model => model.IdentityUser.IsGarde)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdentityUser.Email" class="control-label"></label>
+                <input asp-for="IdentityUser.Email" class="form-control" />
+                <span asp-validation-for="IdentityUser.Email" class="text-danger"></span>
+            </div>
+
+            @*@foreach (var role in Model.Roles)
+        {
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Roles" /> @Html.DisplayNameFor(model => model.Roles)
+                </label>
+            </div>
+        }*@
+            @for (var i = 0; i < Model.Roles.Count; i++)
+            {
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="SelectedRoles[i]" /> @Model.Roles[i].Name
+                    </label>
+                </div>
+            }
+
+            <div class="form-group">
+                <label asp-for="Roles" class="control-label"></label>
+                <input asp-for="IdentityUser.Email" class="form-control" />
+                <span asp-validation-for="IdentityUser.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

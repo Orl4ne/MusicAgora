@@ -39,9 +39,9 @@
                 @Html.DisplayFor(modelItem => item.LibraryUser.Instruments)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "ModifyUser", new { id = item.IdentityUser.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IdentityUser.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdentityUser.Id })
             </td>
         </tr>
 }
