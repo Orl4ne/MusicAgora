@@ -33,10 +33,10 @@
                 @Html.DisplayFor(modelItem => item.IdentityUser.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Roles)
+                @String.Join(" - ", item.UserRoles)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LibraryUser.Instruments)
+                @String.Join(" - ", item.LibraryUser.Instruments.Select(instr => instr.Name))
             </td>
             <td>
                 @Html.ActionLink("Edit", "ModifyUser", new { id = item.IdentityUser.Id }) |

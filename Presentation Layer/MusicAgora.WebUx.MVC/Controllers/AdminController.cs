@@ -43,6 +43,15 @@ namespace MusicAgora.WebUx.MVC.Controllers
         {
             var identityUsers = _userManager.Users.OrderBy(x=>x.LastName).ToList();
             var libraryUsers = _libraryUnitOfWork.LibUserRepository.GetAll();
+            foreach (var libUser in libraryUsers)
+            {
+                libUser.Instruments = new List<InstrumentTO>();
+                foreach (var instruId in libUser.InstrumentIds)
+                {
+                    var instru = _libraryUnitOfWork.InstrumentRepository.GetById(instruId);
+                    libUser.Instruments.Add(instru);
+                }
+            }
             var globalUsers = new List<GlobalUserVM>();
             foreach (var identityUser in identityUsers)
             {
