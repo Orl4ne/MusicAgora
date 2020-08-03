@@ -207,14 +207,14 @@ namespace Library.DAL.Tests
             context.SaveChanges();
 
             //Act
-            var result = new List<int> { 1, 4, 2};
-            addedLibUser.InstrumentIds = new List<int> { 1, 4, 2};
+            var result = new List<int> { 4, 2};
+            addedLibUser.InstrumentIds = new List<int> { 4, 2};
             var test = libUserRepository.Update(addedLibUser);
             context.SaveChanges();
 
             //Assert
             Assert.AreEqual(3, libUserRepository.GetAll().Count());
-            CollectionAssert.AreEqual(new List<int> { 1, 4, 2 }, test.InstrumentIds);
+            CollectionAssert.AreEqual(new List<int> { 4, 2 }, test.InstrumentIds);
         }
 
         [TestMethod]

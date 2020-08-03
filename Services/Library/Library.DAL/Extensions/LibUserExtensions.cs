@@ -58,6 +58,7 @@ namespace Library.DAL.Extensions
                 AttachedEF.Id = DetachedEF.Id;
                 AttachedEF.IdentityUserId = DetachedEF.IdentityUserId;
                 AttachedEF.UserInstruments = DetachedEF.UserInstruments;
+                
             }
             return AttachedEF;
         }

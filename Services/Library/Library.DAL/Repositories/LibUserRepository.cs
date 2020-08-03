@@ -79,7 +79,7 @@ namespace Library.DAL.Repositories
             {
                 throw new ArgumentException("LibUser not found, invalid Id");
             }
-            return libraryContext.LibraryUsers.FirstOrDefault(x => x.IdentityUserId == id).ToTransferObject();
+            return libraryContext.LibraryUsers.Include(x=>x.UserInstruments).FirstOrDefault(x => x.IdentityUserId == id).ToTransferObject();
         }
 
         public LibUserTO Update(LibUserTO entity)
@@ -103,7 +103,7 @@ namespace Library.DAL.Repositories
                 editedEntity.UpdateFromDetached(entity.ToEF());
             }
             var tracking = libraryContext.LibraryUsers.Update(editedEntity);
-            tracking.State = EntityState.Detached;
+            tracking.State = EntityState.Modified;
             libraryContext.SaveChanges();
 
             //return editedEntity.ToTransferObject();

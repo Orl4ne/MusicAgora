@@ -12,10 +12,12 @@ namespace MusicAgora.WebUx.MVC.Models
     public class GlobalUserVM
     {
         public ApplicationUser IdentityUser { get; set; }
-        private List<AccessRight> _roles;
         public LibUserTO LibraryUser { get; set; }
+        public List<InstrumentTO> AllInstruments { get; set; }
+
         public bool[] SelectedRoles { get; set; }
 
+        private List<AccessRight> _roles;
         public List<AccessRight> Roles {
             get => _roles;
             set

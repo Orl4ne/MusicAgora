@@ -41,7 +41,7 @@ namespace MusicAgora.WebUx.MVC.Controllers
         [HttpGet]
         public IActionResult UsersIndex()
         {
-            var identityUsers = _userManager.Users.OrderBy(x=>x.LastName).ToList();
+            var identityUsers = _userManager.Users.OrderBy(x => x.LastName).ToList();
             var libraryUsers = _libraryUnitOfWork.LibUserRepository.GetAll();
             foreach (var libUser in libraryUsers)
             {
@@ -71,13 +71,31 @@ namespace MusicAgora.WebUx.MVC.Controllers
         {
             var identityUser = _userManager.FindByIdAsync(id.ToString()).Result;
             var libraryUsers = _libraryUnitOfWork.LibUserRepository.GetAll();
+            var libUser = libraryUsers.First(x => x.IdentityUserId == identityUser.Id);
+            libUser.Instruments = new List<InstrumentTO>();
+            foreach (var instruId in libUser.InstrumentIds)
+            {
+                var instru = _libraryUnitOfWork.InstrumentRepository.GetById(instruId);
+                libUser.Instruments.Add(instru);
+            }
+
+
+            var allInstruments = _libraryUnitOfWork.InstrumentRepository.GetAll().OrderBy(x=>x.Name).ToList();
+            foreach (var instr in allInstruments)
+            {
+                if (libUser.Instruments.Any(inst=>inst.Id == instr.Id))
+                {
+                    instr.IsSelected = true;
+                }
+            }
             var roles = _roleManager.Roles.ToList();
             var globalUser = new GlobalUserVM
             {
                 IdentityUser = identityUser,
-                LibraryUser = libraryUsers.First(x => x.IdentityUserId == identityUser.Id),
+                LibraryUser = libUser,
                 UserRoles = _userManager.GetRolesAsync(identityUser).Result.ToList(),
-                Roles = roles
+                Roles = roles,
+                AllInstruments = allInstruments,
             };
             return View(globalUser);
         }
@@ -97,8 +115,10 @@ namespace MusicAgora.WebUx.MVC.Controllers
                 // We need to get all roles from DB, don't trust anything from the client:
                 var roles = _roleManager.Roles.ToList();
                 var libUser = _libraryUnitOfWork.LibUserRepository.GetByIdentityUserId(id);
-                libUser.Instruments = globalUser.LibraryUser.Instruments;
-                libUser.InstrumentIds = globalUser.LibraryUser.InstrumentIds;
+                //libUser.Instruments = globalUser.LibraryUser.Instruments;
+                
+                libUser.Instruments = globalUser.AllInstruments.Where(inst => inst.IsSelected == true).ToList();
+                libUser.InstrumentIds = libUser.Instruments.Select(instru => instru.Id).ToList();
 
                 // Browse the roles to set or unset from SelectedRoles in View Model:
                 var selectedRoles = globalUser.SelectedRoles;
@@ -118,12 +138,16 @@ namespace MusicAgora.WebUx.MVC.Controllers
                         var r2 = _userManager.RemoveFromRoleAsync(identityUser, roles[i].Name);
                     }
                 }
+                // TEST INFERNAL
+                
+                // FIN TEST INFERNAL
+                //libUser.Instruments = null;
                 var temp2 = _libraryUnitOfWork.LibUserRepository.Update(libUser);
                 var temp3 = _userManager.UpdateAsync(identityUser);
-                
+
                 return RedirectToAction(nameof(UsersIndex));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return View();
             }
@@ -131,7 +155,7 @@ namespace MusicAgora.WebUx.MVC.Controllers
         [HttpGet]
         public IActionResult InstrumentsIndex()
         {
-            var instruments = _libraryUnitOfWork.InstrumentRepository.GetAll().OrderBy(x=>x.Name);
+            var instruments = _libraryUnitOfWork.InstrumentRepository.GetAll().OrderBy(x => x.Name);
             return View(instruments);
         }
 
