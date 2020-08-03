@@ -7,7 +7,7 @@
 <h1>@ViewData["Title"]</h1>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h4>Create a new account.</h4>
             <hr />
@@ -36,13 +36,27 @@
                 <label asp-for="Input.IsIndependance"></label>
                 <input type="checkbox" asp-for="Input.IsIndependance" class="custom-checkbox" />
             </div>
+            <div>
+                Which instrument(s) do you play ?
+                @for (int i = 0; i < Model.Instruments.Count; i++)
+                {
+                    <div class="form-group form-check-inline">
+                        <label>
+                            <input type="checkbox" asp-for="Instruments[i].IsSelected" />
+                            <input type="hidden" asp-for="Instruments[i].Id" />
+                            @Model.Instruments[i].Name
+                        </label>
+                    </div>
+                }
+            </div>
+
 
             @* I Commented this bloc beaucause it shows the Role Selection like admin or musician. I used it to create my Admin account etc. *@
-            <div class="form-group">
-                <label asp-for="Input.SelectedRole"></label>
-                <select asp-for="Input.SelectedRole" asp-items="@(new SelectList(Model.AspNetRoles, "Name"))" class="dropdown"></select>
-                <span asp-validation-for="Input.SelectedRole" class="text-danger"></span>
-            </div>
+            @*<div class="form-group">
+                    <label asp-for="Input.SelectedRole"></label>
+                    <select asp-for="Input.SelectedRole" asp-items="@(new SelectList(Model.AspNetRoles, "Name"))" class="dropdown"></select>
+                    <span asp-validation-for="Input.SelectedRole" class="text-danger"></span>
+                </div>*@
 
             <div class="form-group">
                 <label asp-for="Input.Password"></label>
@@ -57,36 +71,36 @@
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h4>Use another service to register.</h4>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+    @*<div class="col-md-6 col-md-offset-2">
+            <section>
+                <h4>Use another service to register.</h4>
+                <hr />
+                @{
+                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                    {
                         <div>
                             <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
+                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                for details on setting up this ASP.NET application to support logging in via external services.
                             </p>
                         </div>
-                    </form>
+                    }
+                    else
+                    {
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <div>
+                                <p>
+                                    @foreach (var provider in Model.ExternalLogins)
+                                    {
+                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    }
+                                </p>
+                            </div>
+                        </form>
+                    }
                 }
-            }
-        </section>
-    </div>
+            </section>
+        </div>*@
 </div>
 
 @section Scripts {

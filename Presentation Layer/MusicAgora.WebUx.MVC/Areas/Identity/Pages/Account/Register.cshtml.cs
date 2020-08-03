@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using MusicAgora.Common.Library.Interfaces;
 using MusicAgora.Common.Library.TransferObjects;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace MusicAgora.WebUx.MVC.Areas.Identity.Pages.Account
 {
@@ -49,10 +50,10 @@ namespace MusicAgora.WebUx.MVC.Areas.Identity.Pages.Account
 
         [BindProperty]
         public InputModel Input { get; set; }
-
         public string ReturnUrl { get; set; }
         public List<AccessRight> AspNetRoles { get; set; }
-
+        [BindProperty]
+        public List<InstrumentTO> Instruments { get; set; }
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         public class InputModel
@@ -78,9 +79,9 @@ namespace MusicAgora.WebUx.MVC.Areas.Identity.Pages.Account
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
-            [Required]
-            [Display(Name="Role")]
-            public string SelectedRole { get; set; }
+            //[Required]
+            //[Display(Name = "Role")]
+            //public string SelectedRole { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
@@ -99,32 +100,34 @@ namespace MusicAgora.WebUx.MVC.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             AspNetRoles = _roleManager.Roles.ToList();
+            Instruments = _libraryUnitOfWork.InstrumentRepository.GetAll().OrderBy(x=>x.Name).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            
             if (ModelState.IsValid)
             {
-                var AspNetRoles = _roleManager.Roles.ToList();
                 var user = new ApplicationUser { UserName = Input.Email, 
                                                 Email = Input.Email, 
                                                 FirstName = Input.FirstName, 
                                                 LastName = Input.LastName, 
                                                 IsIndependance = Input.IsIndependance, 
                                                 IsGarde=Input.IsGarde,
-                                                //AccessRight = new AccessRight { Name = Input.SelectedRole }
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     // Add the right role to that user:
-                    await _userManager.AddToRoleAsync(user, Input.SelectedRole);
-                    //await _userManager.AddToRoleAsync(user, "Musician");
+                    //await _userManager.AddToRoleAsync(user, Input.SelectedRole);
+                    await _userManager.AddToRoleAsync(user, "Musician");
 
                     // Creating LibUser when IdentityUser is created
-                    var libUser = new LibUserTO { IdentityUserId = user.Id };
+                    var instruments = Instruments.Where(x => x.IsSelected == true).ToList();
+                    var instrumentsIds = instruments.Select(x => x.Id).ToList();
+                    var libUser = new LibUserTO { IdentityUserId = user.Id, InstrumentIds=instrumentsIds};
                     var done =_libraryUnitOfWork.LibUserRepository.Add(libUser);
 
                     _logger.LogInformation("User created a new account with password.");

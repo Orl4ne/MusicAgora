@@ -38,14 +38,6 @@
                 <span asp-validation-for="IdentityUser.Email" class="text-danger"></span>
             </div>
 
-            @*@foreach (var role in Model.Roles)
-        {
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Roles" /> @Html.DisplayNameFor(model => model.Roles)
-                </label>
-            </div>
-        }*@
             @for (var i = 0; i < Model.Roles.Count; i++)
             {
                 <div class="form-group form-check">

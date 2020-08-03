@@ -2,7 +2,7 @@
 
 namespace Library.DAL.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -130,27 +130,67 @@ namespace Library.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Instruments",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 15, "Buccin" });
+                values: new object[] { 23, "Basse électrique/Contrebasse Ut" });
 
             migrationBuilder.InsertData(
                 table: "Instruments",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 14, "Serpent" });
+                values: new object[] { 22, "Buccin" });
 
             migrationBuilder.InsertData(
                 table: "Instruments",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 13, "Piccolo" });
+                values: new object[] { 21, "Serpent" });
 
             migrationBuilder.InsertData(
                 table: "Instruments",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 12, "Clarinette Mib" });
+                values: new object[] { 20, "Piccolo" });
 
             migrationBuilder.InsertData(
                 table: "Instruments",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 11, "Clarinette Sib" });
+                values: new object[] { 19, "Baryton/Euphonium" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 18, "Cornet" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 17, "Cor" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 16, "Basson" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 15, "Clarinette Basse" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 14, "Clarinette Mib" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 24, "Percussions" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 13, "Clarinette Sib" });
+
+            migrationBuilder.InsertData(
+                table: "Instruments",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 11, "Bugle" });
 
             migrationBuilder.InsertData(
                 table: "Instruments",
@@ -160,12 +200,12 @@ namespace Library.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Instruments",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 16, "Basse/Contrebasse Ut" });
+                values: new object[] { 9, "Tuba Basse" });
 
             migrationBuilder.InsertData(
                 table: "Instruments",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 9, "Tuba Basse" });
+                values: new object[] { 8, "Tuba" });
 
             migrationBuilder.InsertData(
                 table: "Instruments",
@@ -200,12 +240,12 @@ namespace Library.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Instruments",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 8, "Tuba" });
+                values: new object[] { 12, "Hautbois" });
 
             migrationBuilder.InsertData(
                 table: "Instruments",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 17, "Percussions" });
+                values: new object[] { 25, "Autre" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_SheetParts_InstrumentId",

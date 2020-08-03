@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.DAL.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20200730083833_Initial")]
-    partial class Initial
+    [Migration("20200803112746_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -99,37 +99,77 @@ namespace Library.DAL.Migrations
                         new
                         {
                             Id = 11,
-                            Name = "Clarinette Sib"
+                            Name = "Bugle"
                         },
                         new
                         {
                             Id = 12,
-                            Name = "Clarinette Mib"
+                            Name = "Hautbois"
                         },
                         new
                         {
                             Id = 13,
-                            Name = "Piccolo"
+                            Name = "Clarinette Sib"
                         },
                         new
                         {
                             Id = 14,
-                            Name = "Serpent"
+                            Name = "Clarinette Mib"
                         },
                         new
                         {
                             Id = 15,
-                            Name = "Buccin"
+                            Name = "Clarinette Basse"
                         },
                         new
                         {
                             Id = 16,
-                            Name = "Basse/Contrebasse Ut"
+                            Name = "Basson"
                         },
                         new
                         {
                             Id = 17,
+                            Name = "Cor"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "Cornet"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = "Baryton/Euphonium"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Name = "Piccolo"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Name = "Serpent"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Name = "Buccin"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Name = "Basse électrique/Contrebasse Ut"
+                        },
+                        new
+                        {
+                            Id = 24,
                             Name = "Percussions"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Name = "Autre"
                         });
                 });
 

@@ -46,28 +46,28 @@ namespace Identity.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "9812c39e-8a7c-479b-bc7a-8a3bc42d16ae",
+                            ConcurrencyStamp = "e903b17f-dbdf-4cc6-bc9f-2c01cdb26976",
                             Name = "Musician",
                             NormalizedName = "MUSICIAN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "0f22d81e-eaca-4047-8ce6-40101c3e5b09",
+                            ConcurrencyStamp = "6eee1190-7681-4822-a1c8-9a92ca6d68d1",
                             Name = "Librarian",
                             NormalizedName = "LIBRARIAN"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "f18e6007-d874-4867-8249-5080913ebbaf",
+                            ConcurrencyStamp = "183ab1e1-0edc-43a3-9802-9e1dea2ceffa",
                             Name = "Chief",
                             NormalizedName = "CHIEF"
                         },
                         new
                         {
                             Id = 4,
-                            ConcurrencyStamp = "3c865291-590c-48b4-90cd-a4a0892baed7",
+                            ConcurrencyStamp = "7f8606fd-b6ed-4442-a343-065bcc613d5e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

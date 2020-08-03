@@ -13,6 +13,9 @@ namespace MusicAgora.WebUx.MVC.Models
     {
         public ApplicationUser IdentityUser { get; set; }
         private List<AccessRight> _roles;
+        public LibUserTO LibraryUser { get; set; }
+        public bool[] SelectedRoles { get; set; }
+
         public List<AccessRight> Roles {
             get => _roles;
             set
@@ -25,7 +28,6 @@ namespace MusicAgora.WebUx.MVC.Models
 
         // Just for collecting checkbox post results.
         // bool arrays initialize with false values everywhere.
-        public bool[] SelectedRoles { get; set; }
         private List<String> _userRoles;
         public List<String> UserRoles {
             get => _userRoles; 
@@ -35,8 +37,6 @@ namespace MusicAgora.WebUx.MVC.Models
                 if (Roles != null) SetSelectedRoles();
             } 
         }
-        public LibUserTO LibraryUser { get; set; }
-
         private void SetSelectedRoles()
         {
             for (var i = 0; i < Roles.Count; i++)

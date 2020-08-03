@@ -45,25 +45,32 @@ namespace Library.DAL
                 .HasForeignKey(ui => ui.InstrumentId);
 
             var instruments = new[]
-           {
-            new InstrumentEF { Name = "Direction"},
-            new InstrumentEF { Name = "Flûte"},
-            new InstrumentEF { Name = "Trompette"},
-            new InstrumentEF { Name = "Saxophone Alto"},
-            new InstrumentEF { Name = "Saxophone Tenor"},
-            new InstrumentEF { Name = "Saxophone Soprano"},
-            new InstrumentEF { Name = "Saxophone Baryton"},
-            new InstrumentEF { Name = "Tuba"},
-            new InstrumentEF { Name = "Tuba Basse"},
-            new InstrumentEF { Name = "Trombone"},
-            new InstrumentEF { Name = "Clarinette Sib"},
-            new InstrumentEF { Name = "Clarinette Mib"},
-            new InstrumentEF { Name = "Piccolo"},
-            new InstrumentEF { Name = "Serpent"},
-            new InstrumentEF { Name = "Buccin"},
-            new InstrumentEF { Name = "Basse/Contrebasse Ut"},
-            new InstrumentEF { Name = "Percussions"},
-
+            {
+                new InstrumentEF { Name = "Direction"},
+                new InstrumentEF { Name = "Flûte"},
+                new InstrumentEF { Name = "Trompette"},
+                new InstrumentEF { Name = "Saxophone Alto"},
+                new InstrumentEF { Name = "Saxophone Tenor"},
+                new InstrumentEF { Name = "Saxophone Soprano"},
+                new InstrumentEF { Name = "Saxophone Baryton"},
+                new InstrumentEF { Name = "Tuba"},
+                new InstrumentEF { Name = "Tuba Basse"},
+                new InstrumentEF { Name = "Trombone"},
+                new InstrumentEF { Name = "Bugle"},
+                new InstrumentEF { Name = "Hautbois"},
+                new InstrumentEF { Name = "Clarinette Sib"},
+                new InstrumentEF { Name = "Clarinette Mib"},
+                new InstrumentEF { Name = "Clarinette Basse"},
+                new InstrumentEF { Name = "Basson"},
+                new InstrumentEF { Name = "Cor"},
+                new InstrumentEF { Name = "Cornet"},
+                new InstrumentEF { Name = "Baryton/Euphonium"},
+                new InstrumentEF { Name = "Piccolo"},
+                new InstrumentEF { Name = "Serpent"},
+                new InstrumentEF { Name = "Buccin"},
+                new InstrumentEF { Name = "Basse électrique/Contrebasse Ut"},
+                new InstrumentEF { Name = "Percussions"},
+                new InstrumentEF { Name = "Autre"},
             };
 
             for (int i = 0; i < instruments.Length; i++)
