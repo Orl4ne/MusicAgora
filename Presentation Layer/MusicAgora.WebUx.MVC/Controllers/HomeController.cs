@@ -34,7 +34,7 @@ namespace MusicAgora.WebUx.MVC.Controllers
             _roleManager = roleManager;
         }
 
-        public IActionResult Index()
+        public IActionResult HomeIndex()
         {
             var isSignedIn = _signInManager.IsSignedIn(User);
             ApplicationUser user;

@@ -40,8 +40,8 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "ModifyUser", new { id = item.IdentityUser.Id }) |
-                @Html.ActionLink("Details", "UserDetails", new { id = item.IdentityUser.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IdentityUser.Id })
+                @Html.ActionLink("Details", "UserDetails", new { id = item.IdentityUser.Id }) @*|*@
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.IdentityUser.Id })*@
             </td>
         </tr>
 }
