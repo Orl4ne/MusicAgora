@@ -78,12 +78,10 @@ namespace MusicAgora.WebUx.MVC.Controllers
                 var instru = _libraryUnitOfWork.InstrumentRepository.GetById(instruId);
                 libUser.Instruments.Add(instru);
             }
-
-
-            var allInstruments = _libraryUnitOfWork.InstrumentRepository.GetAll().OrderBy(x=>x.Name).ToList();
+            var allInstruments = _libraryUnitOfWork.InstrumentRepository.GetAll().OrderBy(x => x.Name).ToList();
             foreach (var instr in allInstruments)
             {
-                if (libUser.Instruments.Any(inst=>inst.Id == instr.Id))
+                if (libUser.Instruments.Any(inst => inst.Id == instr.Id))
                 {
                     instr.IsSelected = true;
                 }
@@ -116,7 +114,7 @@ namespace MusicAgora.WebUx.MVC.Controllers
                 var roles = _roleManager.Roles.ToList();
                 var libUser = _libraryUnitOfWork.LibUserRepository.GetByIdentityUserId(id);
                 //libUser.Instruments = globalUser.LibraryUser.Instruments;
-                
+
                 libUser.Instruments = globalUser.AllInstruments.Where(inst => inst.IsSelected == true).ToList();
                 libUser.InstrumentIds = libUser.Instruments.Select(instru => instru.Id).ToList();
 
@@ -139,7 +137,7 @@ namespace MusicAgora.WebUx.MVC.Controllers
                     }
                 }
                 // TEST INFERNAL
-                
+
                 // FIN TEST INFERNAL
                 //libUser.Instruments = null;
                 var temp2 = _libraryUnitOfWork.LibUserRepository.Update(libUser);
@@ -152,6 +150,37 @@ namespace MusicAgora.WebUx.MVC.Controllers
                 return View();
             }
         }
+        [HttpGet]
+        public IActionResult UserDetails(int id)
+        {
+            var identityUser = _userManager.FindByIdAsync(id.ToString()).Result;
+            var libraryUser = _libraryUnitOfWork.LibUserRepository.GetByIdentityUserId(id);
+            libraryUser.Instruments = new List<InstrumentTO>();
+            foreach (var instruId in libraryUser.InstrumentIds)
+            {
+                var instru = _libraryUnitOfWork.InstrumentRepository.GetById(instruId);
+                libraryUser.Instruments.Add(instru);
+            }
+            var allInstruments = _libraryUnitOfWork.InstrumentRepository.GetAll().OrderBy(x => x.Name).ToList();
+            foreach (var instr in allInstruments)
+            {
+                if (libraryUser.Instruments.Any(inst => inst.Id == instr.Id))
+                {
+                    instr.IsSelected = true;
+                }
+            }
+            var roles = _roleManager.Roles.ToList();
+            var globalUser = new GlobalUserVM
+            {
+                IdentityUser = identityUser,
+                LibraryUser = libraryUser,
+                UserRoles = _userManager.GetRolesAsync(identityUser).Result.ToList(),
+                Roles = roles,
+                AllInstruments = allInstruments,
+            };
+            return View(globalUser);
+        }
+
         [HttpGet]
         public IActionResult InstrumentsIndex()
         {
