@@ -147,7 +147,7 @@ namespace MusicAgora.WebUx.MVC.Controllers
 
                 return RedirectToAction(nameof(UsersIndex));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return View();
             }
