@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MusicAgora.Common.Library.TransferObjects.CategoryTO>
+
+@{
+    ViewData["Title"] = "AllCategories";
+}
+
+<h1>AllCategories</h1>
+
+<p>
+    <a asp-action="CreateNewCategory">Create New Category</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditCategory", new {  id=item.Id  }) |
+                @Html.ActionLink("Details", "CategoryDetails", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeleteCategory", new { id = item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

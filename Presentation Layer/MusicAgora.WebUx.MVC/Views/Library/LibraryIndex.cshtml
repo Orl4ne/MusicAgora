@@ -3,6 +3,30 @@
     ViewData["Title"] = "LibraryIndex";
 }
 
-<h1>Welcome to your musical library</h1>
-<div></div>
+
+<div class="text-center center-me not-too-big">
+    <h1>Welcome to your musical library</h1>
+
+    <div class="col-4 text-center">
+        @Html.ActionLink("See the current sheets", "AllCurrentSheets", "Library", new { id = Model.IdentityUser.Id, }, new { @class = "btn btn-large btn-success p-4" })
+    </div>
+
+    @if (User.IsInRole("Librarian"))
+    {
+<div class="row">
+    <div class="col-4 text-center">
+        @Html.ActionLink("Create New Sheet", "CreateSheet", "Library", new {  }, new { @class = "btn btn-large btn-warning p-4" })
+    </div>
+    <div class="col-4 text-center">
+        @Html.ActionLink("All Categories", "AllCategories", "Library", new {  }, new { @class = "btn btn-large btn-warning p-4" })
+    </div>
+    <div class="col-4 text-center">
+        @Html.ActionLink("Create New Category", "CreateNewCategory", "Library", new {  }, new { @class = "btn btn-large btn-warning p-4" })
+    </div>
+</div>
+    }
+</div>
+
+
+
 

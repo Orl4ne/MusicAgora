@@ -18,6 +18,7 @@ namespace MusicAgora.WebUx.MVC.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
+        #region CTOR and Dependancies
         private readonly ILogger<HomeController> _logger;
         private readonly ILibraryUnitOfWork _libraryUnitOfWork;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -37,6 +38,7 @@ namespace MusicAgora.WebUx.MVC.Controllers
             _signInManager = signInManager;
             _roleManager = roleManager;
         }
+        #endregion
 
         [HttpGet]
         public IActionResult UsersIndex()
@@ -65,7 +67,6 @@ namespace MusicAgora.WebUx.MVC.Controllers
             }
             return View(globalUsers);
         }
-
         [HttpGet]
         public IActionResult ModifyUser(int id)
         {
@@ -97,7 +98,6 @@ namespace MusicAgora.WebUx.MVC.Controllers
             };
             return View(globalUser);
         }
-
         [HttpPost]
         public IActionResult ModifyUser(int id, GlobalUserVM globalUser)
         {
@@ -180,6 +180,8 @@ namespace MusicAgora.WebUx.MVC.Controllers
             };
             return View(globalUser);
         }
+         
+
 
         [HttpGet]
         public IActionResult InstrumentsIndex()
@@ -187,13 +189,11 @@ namespace MusicAgora.WebUx.MVC.Controllers
             var instruments = _libraryUnitOfWork.InstrumentRepository.GetAll().OrderBy(x => x.Name);
             return View(instruments);
         }
-
         [HttpGet]
         public ActionResult CreateInstrument()
         {
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateInstrument(InstrumentTO instrument)
@@ -208,15 +208,12 @@ namespace MusicAgora.WebUx.MVC.Controllers
                 return View();
             }
         }
-
-
         [HttpGet]
         public ActionResult DeleteInstrument(int id)
         {
             var instrument = _libraryUnitOfWork.InstrumentRepository.GetById(id);
             return View(instrument);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteInstrument(int id, InstrumentTO instrument)

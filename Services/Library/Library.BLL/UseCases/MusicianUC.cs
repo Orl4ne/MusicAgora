@@ -58,5 +58,11 @@ namespace Library.BLL.UseCases
             var path = sheetPart.Path;
             return path;
         }
+
+        public List<SheetTO> SeeAllCurrentSheets(int IdentityUserId)
+        {
+            var result = unitOfWork.SheetRepository.GetAll().Where(x => x.IsCurrent == true);
+            return result.ToList();
+        }
     }
 }

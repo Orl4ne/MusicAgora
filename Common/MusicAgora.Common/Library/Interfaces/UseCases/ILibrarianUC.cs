@@ -10,5 +10,6 @@ namespace MusicAgora.Common.Library.Interfaces.UseCases
     {
         SheetTO CreateANewSheet(SheetTO Sheet);
         SheetPartTO UploadSheetPartInSheet(SheetPartTO SheetPart, MemoryStream file);
+        CategoryTO AddNewCategory(CategoryTO category);
     }
 }

@@ -20,6 +20,16 @@ namespace Library.BLL.UseCases
             this.unitOfWork = iLibraryUnitOfWork ?? throw new System.ArgumentNullException(nameof(iLibraryUnitOfWork));
             this.config = config;
         }
+
+        public CategoryTO AddNewCategory(CategoryTO category)
+        {
+            if (category == null || category.Name.Trim().Length<1 )
+            {
+                throw new ArgumentNullException();
+            };
+            var addedCategory = unitOfWork.CategoryRepository.Add(category);
+            return addedCategory;
+        }
         #endregion
 
         public SheetTO CreateANewSheet(SheetTO Sheet)
