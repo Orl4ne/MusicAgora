@@ -3,36 +3,38 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<body style="background-image:url(/img/MusicScore.jpg)">
+    <div class="text-center center-me not-too-big">
+        <h1 class="display-4">Welcome <small class="text-success" style="text-shadow: 0px 0px 1.5px #212529">to MusicAgora</small></h1>
+        <p class="lead">MusicAgora is a web application wich purpose is to help bands, marching bands, concert bands or orchestras to organize and share their sheets library with their members.</p>
+        @if (Model != null)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                <div class="row">
+                    <div class="col-4 text-center">
+                        @Html.ActionLink("Enter the library", "LibraryIndex", "Library", new { id = Model.Id }, new { @class = "btn btn-large btn-success p-4" })
+                    </div>
+                    <div class="col-4 text-center">
+                        @Html.ActionLink("User Manager", "UsersIndex", "Admin", new { id = Model.Id }, new { @class = "btn btn-large btn-primary p-4" })
+                    </div>
+                    <div class="col-4 text-center">
+                        @Html.ActionLink("Instruments Manager", "InstrumentsIndex", "Admin", new { id = Model.Id }, new { @class = "btn btn-large btn-primary p-4" })
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="text-center">
+                    @Html.ActionLink("Enter the library", "LibraryIndex", "Library", new { id = Model.Id }, new { @class = "btn btn-large btn-success p-4" })
+                </div>
+            }
+        }
+        @if (Model == null)
+        {
+            <p class="text-center text-danger font-weight-bold">Please log-in or register to access MusicAgora's functionalities</p>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome <small class="text-muted">to MusicAgora</small></h1>
-    <p class="lead">MusicAgora is a web application wich purpose is to help bands, marching bands, concert bands or orchestras to organize and share their sheets library with their members.</p>
-</div>
-@if (Model != null)
-{
-    if (User.IsInRole("Admin"))
-    {
-<div class="row">
-    <div class="col-4 text-center">
-        @Html.ActionLink("Enter the library", "LibraryIndex", "Library", new { id = Model.Id }, new { @class = "btn btn-large btn-success p-4" })
+        }
     </div>
-    <div class="col-4 text-center">
-        @Html.ActionLink("User Manager", "UsersIndex", "Admin", new { id = Model.Id }, new { @class = "btn btn-large btn-primary p-4" })
-    </div>
-    <div class="col-4 text-center">
-        @Html.ActionLink("Instruments Manager", "InstrumentsIndex", "Admin", new { id = Model.Id }, new { @class = "btn btn-large btn-primary p-4" })
-    </div>
-</div>
-    }
-    else
-    {
-        <div class="text-center">
-            @Html.ActionLink("Enter the library", "LibraryIndex", "Library", new { id = Model.Id }, new { @class = "btn btn-large btn-success p-4" })
-        </div>
-    }
-}
-@if (Model == null)
-{
-    <p class="text-center text-danger font-weight-bold">Please log-in or register to access MusicAgora's functionalities</p>
 
-}
+</body>

@@ -70,6 +70,18 @@ body {
     background-color: #fff
 }
 
+.center-me {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.not-too-big {
+    max-width: 1000px;
+}
+
 [tabindex="-1"]:focus:not(:focus-visible) {
     outline: 0 !important
 }
