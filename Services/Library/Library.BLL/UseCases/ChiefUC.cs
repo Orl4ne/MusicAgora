@@ -1,9 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.Extensions.Configuration;
 using MusicAgora.Common.Library.Interfaces;
 using MusicAgora.Common.Library.Interfaces.UseCases;
 using MusicAgora.Common.Library.TransferObjects;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Library.BLL.UseCases
@@ -21,19 +23,28 @@ namespace Library.BLL.UseCases
         }
         #endregion
 
-        public List<SheetPartTO> GetAllSheetPartsBySheet(int SheetId)
+        public SheetTO SetAsCurrentSheet(int SheetId)
         {
-            throw new NotImplementedException();
-        }
-        
-        public List<SheetTO> GetAllSheets()
-        {
-            throw new NotImplementedException();
+            var sheet = unitOfWork.SheetRepository.GetById(SheetId);
+            if (sheet.IsCurrent)
+            {
+                return sheet;
+            }
+            sheet.IsCurrent = true;
+            unitOfWork.SheetRepository.Update(sheet);
+            return sheet;
         }
 
-        public SheetTO SetAsCurrentSheet(int IdentityUserId, int SheetId)
+        public List<SheetPartTO> GetAllSheetPartsBySheet(int SheetId)
         {
-            throw new NotImplementedException();
+            var sheetParts = unitOfWork.SheetPartRepository.GetAll().Where(x=>x.Sheet.Id == SheetId);
+            return sheetParts.ToList();
+        }
+
+        public List<SheetTO> GetAllSheets()
+        {
+            var sheets = unitOfWork.SheetRepository.GetAll();
+            return sheets.ToList();
         }
     }
 }
