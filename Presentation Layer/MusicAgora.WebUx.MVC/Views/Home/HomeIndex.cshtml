@@ -14,7 +14,7 @@
     {
 <div class="row">
     <div class="col-4 text-center">
-        @Html.ActionLink("Enter the library", "LibraryIndex", "Library", new { id = Model.Id }, new { @class = "btn btn-large btn-primary p-4" })
+        @Html.ActionLink("Enter the library", "LibraryIndex", "Library", new { id = Model.Id }, new { @class = "btn btn-large btn-success p-4" })
     </div>
     <div class="col-4 text-center">
         @Html.ActionLink("User Manager", "UsersIndex", "Admin", new { id = Model.Id }, new { @class = "btn btn-large btn-primary p-4" })
@@ -27,12 +27,12 @@
     else
     {
         <div class="text-center">
-            @Html.ActionLink("Enter the library", "LibraryIndex", "Library", new { id = Model.Id }, new { @class = "btn btn-large btn-primary p-4" })
+            @Html.ActionLink("Enter the library", "LibraryIndex", "Library", new { id = Model.Id }, new { @class = "btn btn-large btn-success p-4" })
         </div>
     }
 }
 @if (Model == null)
 {
-    <p>Please sign in or register</p>
+    <p class="text-center text-danger font-weight-bold">Please log-in or register to access MusicAgora's functionalities</p>
 
 }

@@ -84,6 +84,7 @@ namespace MusicAgora.WebUx.MVC
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+                app.UseBrowserLink();
             }
             else
             {
@@ -94,6 +95,9 @@ namespace MusicAgora.WebUx.MVC
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            //should delette this for deployment
+            app.UseBrowserLink();
+
             app.UseRouting();
 
             app.UseAuthentication();
@@ -103,7 +107,7 @@ namespace MusicAgora.WebUx.MVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=HomeIndex}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
