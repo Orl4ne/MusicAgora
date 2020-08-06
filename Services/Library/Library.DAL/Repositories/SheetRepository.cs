@@ -73,7 +73,7 @@ namespace Library.DAL.Repositories
             {
                 throw new ArgumentException("Sheet not found, invalid Id");
             }
-            return libraryContext.Sheets.FirstOrDefault(x => x.Id == id).ToTransferObject();
+            return libraryContext.Sheets.Include(x=>x.Category).FirstOrDefault(x => x.Id == id).ToTransferObject();
         }
 
         public SheetTO Update(SheetTO entity)

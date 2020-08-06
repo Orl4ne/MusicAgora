@@ -43,10 +43,10 @@ namespace Library.BLL.UseCases
         public SheetPartTO UploadSheetPartInSheet(SheetPartTO SheetPart, MemoryStream file)
         {
             var root = config.GetValue<string>("DataPath");
-            var path = $@"{root}{SheetPart.Sheet.Name}\\{SheetPart.Sheet.Name}-{SheetPart.Instrument.Name}-{SheetPart.Part}.pdf";
+            var completePath = $@"{root}{SheetPart.Sheet.Name}\\{SheetPart.Sheet.Name}-{SheetPart.Instrument.Name}-{SheetPart.Part}.pdf";
             try
             {
-                using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream(completePath, FileMode.OpenOrCreate))
                 {
                     file.CopyTo(fs);
                     fs.Flush();
@@ -56,6 +56,7 @@ namespace Library.BLL.UseCases
             {
                 throw new Exception("Il y a eu une erreur lors de l'enregistrement du fichier");
             }
+            var path = $@"{SheetPart.Sheet.Name}\\{SheetPart.Sheet.Name}-{SheetPart.Instrument.Name}-{SheetPart.Part}.pdf";
             SheetPart.Path = path;
             unitOfWork.SheetPartRepository.Update(SheetPart);
             unitOfWork.SaveChanges();

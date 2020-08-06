@@ -71,7 +71,7 @@ namespace Library.DAL.Repositories
             {
                 throw new ArgumentException("LibUser not found, invalid Id");
             }
-            return libraryContext.LibraryUsers.FirstOrDefault(x => x.Id == id).ToTransferObject();
+            return libraryContext.LibraryUsers.Include(x=>x.UserInstruments).FirstOrDefault(x => x.Id == id).ToTransferObject();
         }
         public LibUserTO GetByIdentityUserId(int id)
         {

@@ -1,0 +1,55 @@
+﻿@model LibraryVM
+
+@{
+    ViewData["Title"] = "UploadSheetPartToSheet";
+}
+
+<h1>Upload SheetPart To Sheet</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UploadSheetPartToSheet">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Sheet"></label>
+                <select asp-for="SelectedSheet" asp-items="@(new SelectList( Model.AllSheets,"Name", "Name"))" class="dropdown"></select>
+                <span asp-validation-for="SelectedSheet" class="text-danger"></span>
+            </div>
+
+            <div>
+                <p>For which instrument(s) can play this score ?</p>
+                @for (int i = 0; i < Model.AllInstruments.Count; i++)
+                {
+                    <div class="form-group form-check-inline">
+                        <label>
+                            <input type="checkbox" asp-for="AllInstruments[i].IsSelected" />
+                            <input type="hidden" asp-for="AllInstruments[i].Id" />
+                            @Model.AllInstruments[i].Name
+                        </label>
+                    </div>
+                }
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SheetPart.Part" class="control-label"> Which specific part is this Score ? (ex: Flute1, Trumpet2, Marimba etc.)</label>
+                <input asp-for="SheetPart.Part" class="form-control" />
+                <span asp-validation-for="SheetPart.Part" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="file" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="LibraryIndex">Back to List</a>
+</div>
+

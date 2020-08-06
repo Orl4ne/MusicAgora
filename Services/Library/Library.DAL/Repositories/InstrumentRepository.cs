@@ -69,7 +69,7 @@ namespace Library.DAL.Repositories
             {
                 throw new ArgumentException("Instrument not found, invalid Id");
             }
-            return libraryContext.Instruments.FirstOrDefault(x => x.Id == id).ToTransferObject();
+            return libraryContext.Instruments.Include(x=>x.UserInstruments).FirstOrDefault(x => x.Id == id).ToTransferObject();
         }
 
 

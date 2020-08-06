@@ -96,16 +96,52 @@ namespace MusicAgora.WebUx.MVC.Controllers
             };
             return View(libraryVM);
         }
-
         [HttpPost]
         [Authorize(Roles = "Librarian")]
-        public IActionResult CreateSheet(int id, LibraryVM libraryVM)
+        public IActionResult CreateSheet(LibraryVM libraryVM)
         {
             var sheet = libraryVM.Sheet;
             var cat = _libraryUnitOfWork.CategoryRepository.GetAll().First(x => x.Name == libraryVM.SelectedCategory);
             sheet.Category = cat;
             _librarianUC.CreateANewSheet(sheet);
             return RedirectToAction("AllSheets");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Librarian")]
+        public IActionResult SheetDetails(int id)
+        {
+            var sheet = _libraryUnitOfWork.SheetRepository.GetById(id);
+
+            var sheetParts = _chiefUC?.GetAllSheetPartsBySheet(id);
+            var libraryVM = new LibraryVM
+            {
+                Sheet = sheet,
+                SheetPartsFromSheet = sheetParts,
+            };
+            return View(libraryVM);
+        }
+        #endregion
+
+        #region SheetParts Actions
+        [HttpGet]
+        [Authorize(Roles = "Librarian")]
+        public IActionResult UploadSheetPartToSheet()
+        {
+            var libraryVM = new LibraryVM
+            {
+                AllSheets = _libraryUnitOfWork.SheetRepository.GetAll().ToList(),
+                AllInstruments = _libraryUnitOfWork.InstrumentRepository.GetAll().ToList(),
+            };
+            return View(libraryVM);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Librarian")]
+        public IActionResult UploadSheetPartToSheet(LibraryVM libraryVM)
+        {
+            
+            return View();
         }
         #endregion
 

@@ -1,0 +1,75 @@
+﻿@model LibraryVM
+
+@{
+    ViewData["Title"] = "SheetDetails";
+}
+
+<h1>SheetDetails</h1>
+
+<div>
+    <h4>SheetPartTO</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sheet.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sheet.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sheet.Category)
+        </dt>
+        <ddt class="col-sm-10">
+            @Html.DisplayFor(model => model.Sheet.Category.Name)
+        </ddt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sheet.Composer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sheet.Composer)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sheet.Arranger)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sheet.Arranger)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sheet.IsCurrent)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sheet.IsCurrent)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sheet.IsGarde)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sheet.IsGarde)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sheet.IsIndependance)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sheet.IsIndependance)
+        </dd>
+        @foreach (var sheetPart in Model.SheetPartsFromSheet)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(x => sheetPart.Instrument)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(x => sheetPart.Instrument)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(x => sheetPart.Part)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(x => sheetPart.Part)
+            </dd>
+        }
+    </dl>
+</div>
+<div>
+    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
+    <a asp-action="AllSheets">Back to List</a>
+</div>
