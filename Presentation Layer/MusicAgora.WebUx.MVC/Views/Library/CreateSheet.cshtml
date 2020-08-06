@@ -1,46 +1,49 @@
-﻿@model MusicAgora.Common.Library.TransferObjects.SheetTO
+﻿@model LibraryVM
 
 @{
     ViewData["Title"] = "CreateSheet";
 }
 
-<h1>CreateSheet</h1>
-
-<h4>SheetTO</h4>
+<h1>Create Sheet</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="CreateSheet">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Sheet.Name" class="control-label"></label>
+                <input asp-for="Sheet.Name" class="form-control" />
+                <span asp-validation-for="Sheet.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedCategory"></label>
+                <select asp-for="SelectedCategory" asp-items="@(new SelectList( Model.AllCategories,"Name", "Name"))" class="dropdown"></select>
+                <span asp-validation-for="SelectedCategory" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsCurrent" /> @Html.DisplayNameFor(model => model.IsCurrent)
+                    <input class="form-check-input" asp-for="Sheet.IsCurrent" /> @Html.DisplayNameFor(model => model.Sheet.IsCurrent)
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="Composer" class="control-label"></label>
-                <input asp-for="Composer" class="form-control" />
-                <span asp-validation-for="Composer" class="text-danger"></span>
+                <label asp-for="Sheet.Composer" class="control-label"></label>
+                <input asp-for="Sheet.Composer" class="form-control" />
+                <span asp-validation-for="Sheet.Composer" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Arranger" class="control-label"></label>
-                <input asp-for="Arranger" class="form-control" />
-                <span asp-validation-for="Arranger" class="text-danger"></span>
+                <label asp-for="Sheet.Arranger" class="control-label"></label>
+                <input asp-for="Sheet.Arranger" class="form-control" />
+                <span asp-validation-for="Sheet.Arranger" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsIndependance" /> @Html.DisplayNameFor(model => model.IsIndependance)
+                    <input class="form-check-input" asp-for="Sheet.IsIndependance" /> @Html.DisplayNameFor(model => model.Sheet.IsIndependance)
                 </label>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsGarde" /> @Html.DisplayNameFor(model => model.IsGarde)
+                    <input class="form-check-input" asp-for="Sheet.IsGarde" /> @Html.DisplayNameFor(model => model.Sheet.IsGarde)
                 </label>
             </div>
             <div class="form-group">

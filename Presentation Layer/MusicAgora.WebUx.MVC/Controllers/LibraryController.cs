@@ -87,15 +87,23 @@ namespace MusicAgora.WebUx.MVC.Controllers
         [Authorize(Roles = "Librarian")]
         public IActionResult CreateSheet()
         {
-            return View();
+            var allCategories = _libraryUnitOfWork.CategoryRepository.GetAll().ToList();
+            var libraryVM = new LibraryVM
+            {
+                AllCategories = allCategories,
+            };
+            return View(libraryVM);
         }
 
         [HttpPost]
         [Authorize(Roles = "Librarian")]
-        public IActionResult CreateSheet(int id, SheetTO sheet)
+        public IActionResult CreateSheet(int id, LibraryVM libraryVM)
         {
+            var sheet = libraryVM.Sheet;
+            var cat = _libraryUnitOfWork.CategoryRepository.GetAll().First(x => x.Name == libraryVM.SelectedCategory);
+            sheet.Category = cat;
             _librarianUC.CreateANewSheet(sheet);
-            return RedirectToAction(nameof(AllSheets));
+            return RedirectToAction("AllSheets");
         }
 
         [HttpGet]
