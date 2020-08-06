@@ -67,6 +67,8 @@ namespace MusicAgora.WebUx.MVC.Controllers
             return RedirectToAction("HomeIndex", "Home");
         }
 
+
+        #region Sheets Actions
         [HttpGet]
         [Authorize]
         public IActionResult AllCurrentSheets(int id)
@@ -105,23 +107,9 @@ namespace MusicAgora.WebUx.MVC.Controllers
             _librarianUC.CreateANewSheet(sheet);
             return RedirectToAction("AllSheets");
         }
+        #endregion
 
-        [HttpGet]
-        [Authorize(Roles = "Librarian")]
-        public IActionResult CreateNewCategory()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "Librarian")]
-        public IActionResult CreateNewCategory(CategoryTO category)
-        {
-            var cat = _librarianUC.AddNewCategory(category);
-            // TODO popup that says that the catery is added.
-            return RedirectToAction(nameof(AllCategories));
-        }
-
+        #region Categories Actions
         [HttpGet]
         [Authorize(Roles = "Librarian")]
         public IActionResult AllCategories()
@@ -129,6 +117,52 @@ namespace MusicAgora.WebUx.MVC.Controllers
             var allCategories = _libraryUnitOfWork.CategoryRepository.GetAll();
             return View(allCategories);
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Librarian")]
+        public IActionResult CreateNewCategory()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Authorize(Roles = "Librarian")]
+        public IActionResult CreateNewCategory(CategoryTO category)
+        {
+            var cat = _librarianUC.AddNewCategory(category);
+            // TODO popup that says that the catery is added.
+            return RedirectToAction("AllCategories");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Librarian")]
+        public IActionResult EditCategory (int id)
+        {
+            var category = _libraryUnitOfWork.CategoryRepository.GetById(id);
+            return View(category);
+        }
+        [HttpPost]
+        [Authorize(Roles = "Librarian")]
+        public IActionResult EditCategory(int id, CategoryTO category)
+        {
+            _libraryUnitOfWork.CategoryRepository.Update(category);
+            return RedirectToAction("AllCategories");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Librarian")]
+        public IActionResult DeleteCategory(int id)
+        {
+            var category = _libraryUnitOfWork.CategoryRepository.GetById(id);
+            return View(category);
+        }
+        [HttpPost]
+        [Authorize(Roles = "Librarian")]
+        public IActionResult DeleteCategory(int id, CategoryTO category)
+        {
+            _libraryUnitOfWork.CategoryRepository.Delete(category);
+            return RedirectToAction("AllCategories");
+        }
+        #endregion
     }
 }
 
