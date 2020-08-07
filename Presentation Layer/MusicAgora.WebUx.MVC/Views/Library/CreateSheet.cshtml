@@ -7,18 +7,19 @@
 <h1>Create Sheet</h1>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="">
         <form asp-action="CreateSheet">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Sheet.Name" class="control-label"></label>
-                <input asp-for="Sheet.Name" class="form-control" />
+                <input asp-for="Sheet.Name" class="form-control col-md-6" />
                 <span asp-validation-for="Sheet.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SelectedCategory"></label>
                 <select asp-for="SelectedCategory" asp-items="@(new SelectList( Model.AllCategories,"Name", "Name"))" class="dropdown"></select>
                 <span asp-validation-for="SelectedCategory" class="text-danger"></span>
+                <a class="btn btn-success ml-2" asp-action="CreateNewCategory"> Create New Category</a>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -27,12 +28,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Sheet.Composer" class="control-label"></label>
-                <input asp-for="Sheet.Composer" class="form-control" />
+                <input asp-for="Sheet.Composer" class="form-control col-md-6" />
                 <span asp-validation-for="Sheet.Composer" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Sheet.Arranger" class="control-label"></label>
-                <input asp-for="Sheet.Arranger" class="form-control" />
+                <input asp-for="Sheet.Arranger" class="form-control col-md-6" />
                 <span asp-validation-for="Sheet.Arranger" class="text-danger"></span>
             </div>
 
@@ -54,6 +55,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="AllSheets">Back to all sheets list</a>
 </div>
 

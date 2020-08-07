@@ -4,11 +4,8 @@
     ViewData["Title"] = "AllCurrentSheets";
 }
 
-<h1>AllCurrentSheets</h1>
+<h1>Morceaux actuels</h1>
 
-@*<p>
-    <a asp-action="Create">Create New</a>
-</p>*@
 <table class="table">
     <thead>
         <tr>
@@ -55,7 +52,7 @@
                 @Html.DisplayFor(modelItem => item.IsGarde)
             </td>
             <td>
-                @Html.ActionLink("See my scores", "MySheetPartsOfThisSheet", new { id=item.Id }) 
+                @Html.ActionLink("See my scores", "MySheetPartsOfThisSheet", new { id=item.Id }, new { @class = "btn btn-success" }) 
                 @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>
