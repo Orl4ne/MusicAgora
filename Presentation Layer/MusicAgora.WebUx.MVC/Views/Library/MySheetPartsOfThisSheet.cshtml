@@ -15,17 +15,19 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Part)
-            </td>
-            <td>
-                @Html.ActionLink("Download", "DownloadSheetPart", new { id=item.Id }, new { @class= "btn btn-success" }) 
-                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Part)
+                </td>
+                <td>
+                    @Html.ActionLink("Download", "DownloadSheetPart", new { id = item.Id }, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<div>
+    <a asp-action="AllCurentSheets">Back to Sheets List</a>
+</div>
