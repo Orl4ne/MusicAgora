@@ -10,5 +10,6 @@ namespace MusicAgora.Common.Library.Interfaces.UseCases
         List<SheetPartTO> GetAllMyCurrentSheetParts(int IdentityUserId);
         SheetPartTO SeeASheetPartDetails(int SheetPartId);
         string DowloadSheetPart(int SheetPartId);
+        List<SheetPartTO> GetMySheetPartsForThisSheet(int IdentityUserId, int SheetId);
     }
 }

@@ -56,13 +56,32 @@ namespace Library.BLL.UseCases
         {
             var sheetPart = unitOfWork.SheetPartRepository.GetById(SheetPartId);
             var path = sheetPart.Path;
-            return path;
+            var root = config.GetValue<string>("DataPath");
+            var completePath = $@"{root}{path}";
+            return completePath;
         }
 
         public List<SheetTO> SeeAllCurrentSheets(int IdentityUserId)
         {
             var result = unitOfWork.SheetRepository.GetAll().Where(x => x.IsCurrent == true);
             return result.ToList();
+        }
+        public List<SheetPartTO> GetMySheetPartsForThisSheet(int IdentityUserId, int SheetId)
+        {
+            //Attaching LibUser 
+            var libUser = unitOfWork.LibUserRepository.GetByIdentityUserId(IdentityUserId);
+            //Get The Sheet
+            var sheet = unitOfWork.SheetRepository.GetById(SheetId);
+            //Get All SheetParts of sheet
+            var allSheetParts = unitOfWork.SheetPartRepository?.GetAll().Where(s => s.Sheet.Name == sheet.Name).ToList();
+            // Getting the SheetParts of the Instruments of the LibUser
+            var result = new List<SheetPartTO>();
+            foreach (var inst in libUser.InstrumentIds)
+            {
+                var sheetPart = allSheetParts?.Where(sp => sp.Instrument.Id == inst);
+                result.AddRange(sheetPart);
+            }
+            return result;
         }
     }
 }

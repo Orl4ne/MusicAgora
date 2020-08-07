@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Identity.DAL;
 using Library.BLL.UseCases;
@@ -140,8 +141,45 @@ namespace MusicAgora.WebUx.MVC.Controllers
         [Authorize(Roles = "Librarian")]
         public IActionResult UploadSheetPartToSheet(LibraryVM libraryVM)
         {
+            var selectedInstruments = libraryVM.AllInstruments.Where(inst => inst.IsSelected == true).ToList();
+            var sheet = _chiefUC.GetAllSheets().FirstOrDefault(x => x.Name == libraryVM.SelectedSheet);
             
-            return View();
+            var file = libraryVM.SheetPartFile;
+            var stream = file.OpenReadStream();
+
+            foreach (var selectedInstru in selectedInstruments)
+            {
+                var instru = _libraryUnitOfWork.InstrumentRepository.GetAll().FirstOrDefault(x=>x.Id == selectedInstru.Id);
+                var sheetPart = new SheetPartTO
+                {
+                    Instrument = instru,
+                    Part = libraryVM.SheetPart.Part,
+                    Sheet = sheet
+                };
+                var uploadedSheetPart = _librarianUC.UploadSheetPartInSheet(sheetPart, stream);
+            }
+            return RedirectToAction("LibraryIndex");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Musician")]
+        public FileResult DownloadSheetPart(int id)
+        {
+            var sheetPart = _libraryUnitOfWork.SheetPartRepository.GetById(id);
+            var completePath = _musicianUC.DowloadSheetPart(id);
+            var reg = new Regex("\\W");
+            var fileName = $@"{reg.Replace(sheetPart.Sheet.Name, "_")}-{reg.Replace(sheetPart.Part, "_")}.pdf";
+            byte[] fileBytes = System.IO.File.ReadAllBytes(completePath);
+            return File(fileBytes, "application/pdf", fileName);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Musician")]
+        public IActionResult MySheetPartsOfThisSheet(int id)
+        {
+            var user = _userManager.GetUserAsync(User).Result;
+            var result = _musicianUC.GetMySheetPartsForThisSheet(user.Id, id);
+            return View(result);
         }
         #endregion
 

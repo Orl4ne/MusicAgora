@@ -113,7 +113,6 @@ namespace MusicAgora.WebUx.MVC.Controllers
                 // We need to get all roles from DB, don't trust anything from the client:
                 var roles = _roleManager.Roles.ToList();
                 var libUser = _libraryUnitOfWork.LibUserRepository.GetByIdentityUserId(id);
-                //libUser.Instruments = globalUser.LibraryUser.Instruments;
 
                 libUser.Instruments = globalUser.AllInstruments.Where(inst => inst.IsSelected == true).ToList();
                 libUser.InstrumentIds = libUser.Instruments.Select(instru => instru.Id).ToList();

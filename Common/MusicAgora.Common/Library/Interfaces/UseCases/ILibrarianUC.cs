@@ -9,7 +9,7 @@ namespace MusicAgora.Common.Library.Interfaces.UseCases
     public interface ILibrarianUC
     {
         SheetTO CreateANewSheet(SheetTO Sheet);
-        SheetPartTO UploadSheetPartInSheet(SheetPartTO SheetPart, MemoryStream file);
+        SheetPartTO UploadSheetPartInSheet(SheetPartTO SheetPart, Stream file);
         CategoryTO AddNewCategory(CategoryTO category);
     }
 }

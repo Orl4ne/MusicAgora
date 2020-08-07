@@ -6,6 +6,7 @@ using MusicAgora.Common.Library.TransferObjects;
 using System;
 using System.IO;
 using System.Reflection.Metadata;
+using System.Text.RegularExpressions;
 
 namespace Library.BLL.UseCases
 {
@@ -15,7 +16,7 @@ namespace Library.BLL.UseCases
         private readonly ILibraryUnitOfWork unitOfWork;
         private readonly IConfiguration config;
 
-        public LibrarianUC(ILibraryUnitOfWork iLibraryUnitOfWork, IConfiguration config) 
+        public LibrarianUC(ILibraryUnitOfWork iLibraryUnitOfWork, IConfiguration config)
         {
             this.unitOfWork = iLibraryUnitOfWork ?? throw new System.ArgumentNullException(nameof(iLibraryUnitOfWork));
             this.config = config;
@@ -23,7 +24,7 @@ namespace Library.BLL.UseCases
 
         public CategoryTO AddNewCategory(CategoryTO category)
         {
-            if (category == null || category.Name.Trim().Length<1 )
+            if (category == null || category.Name.Trim().Length < 1)
             {
                 throw new ArgumentNullException();
             };
@@ -35,16 +36,19 @@ namespace Library.BLL.UseCases
         public SheetTO CreateANewSheet(SheetTO Sheet)
         {
             var root = config.GetValue<string>("DataPath");
-            var path = $"{root}{Sheet.Name}";
+            var reg = new Regex("\\W");
+            var path = $"{root}{reg.Replace(Sheet.Name, "_")}";
             Directory.CreateDirectory(path);
             return unitOfWork.SheetRepository.Add(Sheet);
         }
 
-        public SheetPartTO UploadSheetPartInSheet(SheetPartTO SheetPart, MemoryStream file)
+        public SheetPartTO UploadSheetPartInSheet(SheetPartTO SheetPart, Stream file)
         {
             var root = config.GetValue<string>("DataPath");
-            var completePath = $@"{root}{SheetPart.Sheet.Name}\\{SheetPart.Sheet.Name}-{SheetPart.Instrument.Name}-{SheetPart.Part}.pdf";
-            try
+            var reg = new Regex("\\W");
+            var path = $@"{reg.Replace(SheetPart.Sheet.Name, "_")}\\{reg.Replace(SheetPart.Sheet.Name, "_")}-{reg.Replace(SheetPart.Part, "_")}.pdf";
+            var completePath = $@"{root}{path}";
+            if (File.Exists(completePath) == false)
             {
                 using (FileStream fs = new FileStream(completePath, FileMode.OpenOrCreate))
                 {
@@ -52,14 +56,8 @@ namespace Library.BLL.UseCases
                     fs.Flush();
                 }
             }
-            catch
-            {
-                throw new Exception("Il y a eu une erreur lors de l'enregistrement du fichier");
-            }
-            var path = $@"{SheetPart.Sheet.Name}\\{SheetPart.Sheet.Name}-{SheetPart.Instrument.Name}-{SheetPart.Part}.pdf";
             SheetPart.Path = path;
-            unitOfWork.SheetPartRepository.Update(SheetPart);
-            unitOfWork.SaveChanges();
+            unitOfWork.SheetPartRepository.Add(SheetPart);
 
             return SheetPart;
         }

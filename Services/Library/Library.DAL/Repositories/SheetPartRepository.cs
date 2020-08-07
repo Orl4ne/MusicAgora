@@ -58,13 +58,14 @@ namespace Library.DAL.Repositories
         {
             var list = libraryContext.SheetParts
                 .Include(x => x.Sheet)
+                    .ThenInclude(x=>x.Category)
                 .Include(x => x.Instrument)
                 ?.Select(x => x.ToTransferObject())
                 .ToList();
-            //if (!list.Any())
-            //{
-            //    throw new ArgumentNullException("There is no SheetPart in DB");
-            //}
+            if (!list.Any())
+            {
+                throw new ArgumentNullException("There is no SheetPart in DB");
+            }
             return list;
         }
 
@@ -74,7 +75,11 @@ namespace Library.DAL.Repositories
             {
                 throw new ArgumentException("SheetPart not found, invalid Id");
             }
-            return libraryContext.SheetParts.Include(x=>x.Instrument).Include(x=>x.Sheet).FirstOrDefault(x => x.Id == id).ToTransferObject();
+            return libraryContext.SheetParts
+                .Include(x=>x.Instrument)
+                .Include(x=>x.Sheet)
+                    .ThenInclude(x => x.Category)
+                .FirstOrDefault(x => x.Id == id).ToTransferObject();
         }
 
         public SheetPartTO Update(SheetPartTO entity)

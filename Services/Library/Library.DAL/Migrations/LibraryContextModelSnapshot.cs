@@ -14,7 +14,7 @@ namespace Library.DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.4");
+                .HasAnnotation("ProductVersion", "3.1.6");
 
             modelBuilder.Entity("Library.DAL.Entities.CategoryEF", b =>
                 {
@@ -52,121 +52,76 @@ namespace Library.DAL.Migrations
                         new
                         {
                             Id = 2,
-                            Name = "Flûte"
+                            Name = "Flûte/Piccolo"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Trompette"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Saxophone Alto"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Saxophone Tenor"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Saxophone Soprano"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Saxophone Baryton"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Tuba"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Tuba Basse"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "Trombone"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Name = "Bugle"
-                        },
-                        new
-                        {
-                            Id = 12,
                             Name = "Hautbois"
                         },
                         new
                         {
-                            Id = 13,
-                            Name = "Clarinette Sib"
+                            Id = 4,
+                            Name = "Trompette/Cornet"
                         },
                         new
                         {
-                            Id = 14,
-                            Name = "Clarinette Mib"
+                            Id = 5,
+                            Name = "Bugle"
                         },
                         new
                         {
-                            Id = 15,
-                            Name = "Clarinette Basse"
+                            Id = 6,
+                            Name = "Clarinette"
                         },
                         new
                         {
-                            Id = 16,
-                            Name = "Basson"
+                            Id = 7,
+                            Name = "Saxophone"
                         },
                         new
                         {
-                            Id = 17,
+                            Id = 8,
                             Name = "Cor"
                         },
                         new
                         {
-                            Id = 18,
-                            Name = "Cornet"
-                        },
-                        new
-                        {
-                            Id = 19,
+                            Id = 9,
                             Name = "Baryton/Euphonium"
                         },
                         new
                         {
-                            Id = 20,
-                            Name = "Piccolo"
+                            Id = 10,
+                            Name = "Trombone/Buccin/Serpent"
                         },
                         new
                         {
-                            Id = 21,
-                            Name = "Serpent"
+                            Id = 11,
+                            Name = "Clarinette Basse"
                         },
                         new
                         {
-                            Id = 22,
-                            Name = "Buccin"
+                            Id = 12,
+                            Name = "Basson"
                         },
                         new
                         {
-                            Id = 23,
-                            Name = "Basse électrique/Contrebasse Ut"
+                            Id = 13,
+                            Name = "Tuba"
                         },
                         new
                         {
-                            Id = 24,
+                            Id = 14,
+                            Name = "Basse Ut"
+                        },
+                        new
+                        {
+                            Id = 15,
                             Name = "Percussions"
                         },
                         new
                         {
-                            Id = 25,
+                            Id = 16,
                             Name = "Autre"
                         });
                 });

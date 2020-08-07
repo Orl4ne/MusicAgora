@@ -14,7 +14,7 @@ namespace Identity.DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.4");
+                .HasAnnotation("ProductVersion", "3.1.6");
 
             modelBuilder.Entity("Identity.DAL.AccessRight", b =>
                 {
@@ -46,28 +46,28 @@ namespace Identity.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "e903b17f-dbdf-4cc6-bc9f-2c01cdb26976",
+                            ConcurrencyStamp = "1c8aa6df-dbbc-40c9-a066-43a8a324842c",
                             Name = "Musician",
                             NormalizedName = "MUSICIAN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "6eee1190-7681-4822-a1c8-9a92ca6d68d1",
+                            ConcurrencyStamp = "89a7bf9b-7679-40b8-816a-b477fe9bca22",
                             Name = "Librarian",
                             NormalizedName = "LIBRARIAN"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "183ab1e1-0edc-43a3-9802-9e1dea2ceffa",
+                            ConcurrencyStamp = "89eace5c-95cf-4fe6-b09a-26f6ce67f18e",
                             Name = "Chief",
                             NormalizedName = "CHIEF"
                         },
                         new
                         {
                             Id = 4,
-                            ConcurrencyStamp = "7f8606fd-b6ed-4442-a343-065bcc613d5e",
+                            ConcurrencyStamp = "f4f2d73e-e806-421a-a40f-966e1fe53d4d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
